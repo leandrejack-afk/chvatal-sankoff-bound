@@ -1,0 +1,9 @@
+data/
+*.bin
+lcs_upper
+lcs_upper_big
+lcs_compact
+lcs_compact_f32
+verify_cert
+verify_cert_stream
+__pycache__/
