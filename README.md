@@ -45,7 +45,8 @@ h = 8.
    h = 2, …, 8 (7, 98, 1020, 10160, 89960, 780368, 6419109) and the same λ(z) to all nine printed
    digits at his values of z, hence the same bounds (0.845855 … 0.826280).
 3. **Every transition re-derived.** `review/fullcheck.c`, a separate implementation of
-   Figure 7 written by an independent reviewer, re-derived all 1,748,450,204 transitions of the
+   Figure 7 written separately in a fresh review pass (not by an independent person; it is part
+   of my own checking), re-derived all 1,748,450,204 transitions of the
    h = 9 table and all 15,209,626,046 transitions of the h = 10 table, with no mismatch.
 4. **Covering property, directly.** For random binary string pairs the canonical decomposition,
    computed by the full dynamic program, is a list of minimal match pairs followed by a null
@@ -61,7 +62,7 @@ h = 8.
    every worker thread (with a self-test), and compute λ_cert = max_s (A_z v)_s / v_s using
    weights rounded upward from 80-digit values. `certify.py` then evaluates
    2 log(2z)/log λ_cert in interval arithmetic and rounds up to six decimals. It re-certifies
-   Lueker's h = 5, …, 8 bounds. The reviewer's single-threaded `review/myverify.c` gives the
+   Lueker's h = 5, …, 8 bounds. The review pass's single-threaded `review/myverify.c` gives the
    same λ_cert bit for bit, and a version that does not depend on the rounding mode at all
    (round to nearest, then inflate by (1 − 2⁻⁵³)⁻³⁶) gives λ ≤ 0.38553270543451351 at h = 10,
    whose bound 0.824119783256… (`review/finalbound.py`, 60-digit arithmetic) is still below
