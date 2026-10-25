@@ -1,0 +1,13 @@
+# fullcheck (review/fullcheck.c), every state
+$ fullcheck trans_h9.bin
+h=9 N=51425006 key[1]=3ffff start-state=3ffff OK
+checked 1748450204 transitions (stride 1): mismatches=0 accepted=790078170 keys-with-high-bits=0
+real 181.89
+user 1046.77
+sys 6.21
+$ fullcheck trans_h10.bin
+h=10 N=400253317 key[1]=fffff start-state=fffff OK
+checked 15209626046 transitions (stride 1): mismatches=0 accepted=6574257580 keys-with-high-bits=0
+real 1518.97
+user 9193.33
+sys 71.10

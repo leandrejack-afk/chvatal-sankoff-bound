@@ -1,0 +1,6 @@
+# redcontrols_cover.py: broken automata must fail the covering test
+left before up, k=3 h=4: caught after 9 pairs
+left before up, k=4 h=3: caught after 17 pairs
+dx reversed, k=3 h=4: caught after 1 pairs
+dx reversed, k=4 h=3: caught after 2 pairs
+4 of 4 red controls fired

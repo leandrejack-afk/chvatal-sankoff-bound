@@ -1,0 +1,21 @@
+# kcover.py: canonical decompositions never rejected (3000 pairs per case)
+$ kcover.py 2 4 3000
+k=2 h=4: 3000 pairs, 41859 canonical steps (2475 truncated inputs), no rejection
+$ kcover.py 3 2 3000
+k=3 h=2: 3000 pairs, 35875 canonical steps (6695 truncated inputs), no rejection
+$ kcover.py 3 3 3000
+k=3 h=3: 3000 pairs, 35875 canonical steps (4618 truncated inputs), no rejection
+$ kcover.py 3 4 3000
+k=3 h=4: 3000 pairs, 35875 canonical steps (3486 truncated inputs), no rejection
+$ kcover.py 3 5 3000
+k=3 h=5: 3000 pairs, 35875 canonical steps (2705 truncated inputs), no rejection
+$ kcover.py 3 6 3000
+k=3 h=6: 3000 pairs, 35875 canonical steps (2101 truncated inputs), no rejection
+$ kcover.py 4 2 3000
+k=4 h=2: 3000 pairs, 31521 canonical steps (7608 truncated inputs), no rejection
+$ kcover.py 4 3 3000
+k=4 h=3: 3000 pairs, 31521 canonical steps (5318 truncated inputs), no rejection
+$ kcover.py 4 4 3000
+k=4 h=4: 3000 pairs, 31521 canonical steps (4034 truncated inputs), no rejection
+$ kcover.py 4 5 3000
+k=4 h=5: 3000 pairs, 31521 canonical steps (3181 truncated inputs), no rejection

@@ -1,0 +1,13 @@
+# indep_check.py: unreduced automaton from kref.py, spectral radius vs certificates
+$ indep_check.py 3 2 0.1442
+k=3 h=2 z=0.1442: raw states 57 (relabelling orbits 10), rho in [0.111829496208190, 0.111829496208194], bound 0.7649711929
+$ indep_check.py 3 3 0.1652
+k=3 h=3 z=0.1652: raw states 1482 (relabelling orbits 249), rho in [0.155666007442484, 0.155666007442493], bound 0.7548065297
+$ indep_check.py 3 4 0.1821
+k=3 h=4 z=0.1821: raw states 30648 (relabelling orbits 5116), rho in [0.198535251234363, 0.198535251234380], bound 0.7478862742
+$ indep_check.py 4 2 0.1147
+k=4 h=2 z=0.1147: raw states 148 (relabelling orbits 10), rho in [0.110575330818149, 0.110575330818151], bound 0.7076478463
+$ indep_check.py 4 3 0.1285
+k=4 h=3 z=0.1285: raw states 6208 (relabelling orbits 309), rho in [0.148063382624468, 0.148063382624483], bound 0.6968502637
+$ indep_check.py 2 6 0.2980
+k=2 h=6 z=0.298: raw states 179920 (relabelling orbits 89960), rho in [0.287155608668560, 0.287155608668589], bound 0.8295291273

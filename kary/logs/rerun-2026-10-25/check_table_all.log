@@ -1,0 +1,34 @@
+# check_table.py: every transition recomputed with kref.py (all states)
+$ check_table.py 2 2 data
+k=2 h=2: states 7, inputs kary.c 6, by definition 6
+checked 7 states, 36 accepted transitions: 0 mismatching states
+$ check_table.py 2 3 data
+k=2 h=3: states 98, inputs kary.c 10, by definition 10
+checked 98 states, 707 accepted transitions: 0 mismatching states
+$ check_table.py 2 4 data
+k=2 h=4: states 1020, inputs kary.c 14, by definition 14
+checked 1020 states, 9165 accepted transitions: 0 mismatching states
+$ check_table.py 2 5 data
+k=2 h=5: states 10160, inputs kary.c 18, by definition 18
+checked 10160 states, 106114 accepted transitions: 0 mismatching states
+$ check_table.py 3 2 data
+k=3 h=2: states 10, inputs kary.c 21, by definition 21
+checked 10 states, 181 accepted transitions: 0 mismatching states
+$ check_table.py 3 3 data
+k=3 h=3: states 249, inputs kary.c 63, by definition 63
+checked 249 states, 10592 accepted transitions: 0 mismatching states
+$ check_table.py 3 4 data
+k=3 h=4: states 5116, inputs kary.c 141, by definition 141
+checked 5116 states, 395020 accepted transitions: 0 mismatching states
+$ check_table.py 3 5 data
+k=3 h=5: states 98041, inputs kary.c 279, by definition 279
+checked 98041 states, 12481994 accepted transitions: 0 mismatching states
+$ check_table.py 4 2 data
+k=4 h=2: states 10, inputs kary.c 52, by definition 52
+checked 10 states, 461 accepted transitions: 0 mismatching states
+$ check_table.py 4 3 data
+k=4 h=3: states 309, inputs kary.c 292, by definition 292
+checked 309 states, 60995 accepted transitions: 0 mismatching states
+$ check_table.py 4 4 data
+k=4 h=4: states 9427, inputs kary.c 1108, by definition 1108
+checked 9427 states, 5400599 accepted transitions: 0 mismatching states

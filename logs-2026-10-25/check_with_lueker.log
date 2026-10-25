@@ -1,0 +1,5 @@
+# Lueker's unmodified State/DPTable classes vs our tables (review/CheckWithLueker.java)
+$ java -Xmx7g CheckWithLueker trans_h9.bin 200000 2026
+h=9 N=51425006 sampled states=200000 transitions checked=6800000 accepted=3075888 mismatches vs Lueker State.transition=0
+$ java -Xmx7g CheckWithLueker trans_h10.bin 200000 2026
+h=10 N=400253317 sampled states=200000 transitions checked=7600000 accepted=3285727 mismatches vs Lueker State.transition=0

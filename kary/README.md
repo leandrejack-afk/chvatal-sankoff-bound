@@ -65,8 +65,9 @@ bound on the spectral radius).
    self-test, checks that every entry of v is positive, and reports λ_cert and a lower bound
    on the spectral radius; they agree to at least 12 digits in every row.
 8. `review/` is a separate implementation written in a fresh review pass from Lueker's
-   paper, before reading the code above: its own state encoding, transition function,
-   class grouping and weights (`rvk.c`, `rv_*.py`). It reproduces every state count,
+   paper and the summary of results (the table above and the weight formula), before
+   reading the code above: its own state encoding, transition function, class grouping
+   and weights (`rvk.c`, `rv_*.py`). It reproduces every state count,
    accepted-transition count and bound in the table, matches both headline tables state
    by state, re-runs the certificates, and gives exact rational certificates for h = 2
    (`review/log_h2cert.txt`: rational z, λ and v with A_z v ≤ λ v checked in exact
@@ -77,7 +78,9 @@ than the exact rational (review/log_theirweights.txt checks every rounded weight
 the exact rational), and `kverify` does not cross-check the weight types stored in the
 table header against `wtypes_*.txt` (they agree where checked).
 
-These computations have not yet been repeated by anyone else.
+All of this code, the review implementation included, was written with the help of the same
+large language model, and these computations have not yet been repeated by anyone else.
+Logs of the checks rerun on 25 October 2026 are in `logs/rerun-2026-10-25/`.
 
 ## Reproducing
 
