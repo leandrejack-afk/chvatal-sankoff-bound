@@ -22,20 +22,48 @@ arithmetic and rounded up.
 | 14 | 0.476198 | 0.476210 | **0.468662** | 350,182 | 0.0452 |
 | 15 | 0.464619 | 0.464765 | **0.457492** | 508,635 | 0.0426 |
 
-The reduced automaton has 10 states for h = 2 and 316 states for h = 3, for every k ≥ 5.
-With h = 2 the bound beats Dančík's for k ≤ 13 only. Full output: `logs/certify_h2.log`,
-`logs/certify_h3.log`, `logs/certify_h3_k10.log` to `logs/certify_h3_k15.log`.
+The reduced automaton has 10 states for h = 2 and 316 states for h = 3, for every k from 5
+to 15. With h = 2 the bound beats Dančík's for k ≤ 13 only. The same program gives exact
+certificates for three and four letters at h = 2 and 3 (0.764972 and 0.754807 for k = 3,
+0.707648 and 0.696851 for k = 4), the same values as the directed-rounding verifier in `../`.
+
+## Certificates
+
+`certs/cert_k{k}_h{h}.txt` (k = 3 to 15, h = 2 and 3) holds each certificate: k, h, z, the
+list of states (letter-renaming representatives of `../review/rv_machine.py`), the vector v
+with every entry an exact double written in hexadecimal, the exact rationals λ and μ, λ
+rounded up and μ rounded down to 17 decimals, the bound rounded up, and the certified value.
+
+`check_cert.py` checks a certificate file from the file alone. For every listed state and
+every input class it computes the transition with `rv_machine.delta`, takes the representative
+of the target and looks it up in the list, so it checks that the list contains the start
+state and is closed under the transitions; it then recomputes every ratio in exact
+arithmetic, checks that the largest and smallest are the λ and μ in the file, and checks the
+bound in interval arithmetic. It does not use the automaton build of `certify_exact.py`. All
+26 files pass (`logs/check_cert.log`); changing z, the certified value, a state or an entry
+of v that moves an extreme ratio makes it fail.
+
+```
+python3 check_cert.py certs/cert_k15_h3.txt 8    # 8 worker processes; about 10 minutes
+```
+
+The certificates and `logs/certify_small.log`, `logs/certify_big.log` come from the run of
+25 October 2026 (`rerun_all.sh`) at the values of z found earlier; a first run the same
+day gave the same exact λ, μ and v for all 26. The older logs `logs/certify_h2.log` and
+`logs/certify_h3*.log` are the runs that chose z by golden-section search; they print λ and
+μ rounded to the nearest 15 decimals, so the signs < and ≥ there can be off in the last
+digit. The exact values in `certs/` give the same bounds.
 
 ## Checks
 
 - The automaton and weights come from the review implementation `../review/rv_machine.py`.
   `cross_check.py` compares it with the reference implementation `../kref.py`, which finds
   the input classes from the definition of a minimal match pair: the classes agree for every
-  k and h used, and every transition agrees for h = 2 (k = 5..13) and h = 3 (k = 5, 6), and
+  k and h used, and every transition agrees for h = 2 (k = 5..15) and h = 3 (k = 5, 6), and
   on random samples of 60, 60, 60, 30 and 20 states for h = 3, k = 7..11
   (`logs/cross_check.log`).
 - `cross_check_fast.py` (k = 12..15, h = 3) uses the fact that the 316 states are the same
-  for every k ≥ 5: it samples states from the k = 5 automaton and checks that both
+  for every k from 5 to 15: it samples states from the k = 5 automaton and checks that both
   implementations give the same transitions and never leave that set
   (`logs/cross_fast_k12.log` to `logs/cross_fast_k15.log`).
 - `../kcover.py`: canonical decompositions of random strings are never rejected
@@ -51,6 +79,6 @@ help of a large language model.
 ```
 cd kary/larger
 python3 certify_exact.py 5 3 0.1063     # needs numpy and mpmath; seconds
-python3 certify_exact.py 15 3 0.0426    # about half an hour
+python3 certify_exact.py 15 3 0.0426    # half an hour to an hour on a laptop
 python3 certify_exact.py 13 2 0.0462    # h = 2: instant
 ```

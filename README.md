@@ -1,4 +1,4 @@
-# An improved upper bound on the binary Chvátal–Sankoff constant
+# Upper bounds on the Chvátal–Sankoff constants
 
 **Update, 25 October 2026.**
 
@@ -9,8 +9,8 @@
   h = 5 gave 0.739975 and 0.683622. Code, certificates and checks are in
   [`kary/`](kary/README.md).
 - **Five to fifteen letters.** With h = 3 it also improves Dančík's bound for every
-  alphabet size from 5 to 15, by 0.007 to 0.011, with exact rational certificates; see
-  [`kary/larger/`](kary/larger/README.md).
+  alphabet size from 5 to 15, by 0.007 to 0.011, with exact rational certificates and a
+  short program that checks them; see [`kary/larger/`](kary/larger/README.md).
 - **Binary.** The h = 9 and h = 10 bounds below have been reproduced by Carlos Toledo and by
   Jeetu SK with their own programs (teorth/optimizationproblems pull request 249), and
   T. S. Tomar has proved them in Lean 4 and extended the computation to h = 13, giving

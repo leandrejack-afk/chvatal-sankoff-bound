@@ -1,0 +1,77 @@
+k=15 h=3 z=0.0426 states=316 classes=508635 accepted=141499452 lambda<=0.141161105235053 (exact) mu>=0.141161105235052 bound<=0.457491672301 best_at_z>=0.457491672300 CERTIFIED gamma_15 <= 0.457492  dancik=0.464619 BEATS  (build 3141s, total 3141s, iters 16)
+     3150.04 real      2414.93 user        67.95 sys
+          3544252416  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+            14219542  page reclaims
+                 431  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 174  voluntary context switches
+             3063624  involuntary context switches
+      18128793569389  instructions retired
+       4892228229761  cycles elapsed
+         14972579192  peak memory footprint
+k=14 h=3 z=0.0452 states=316 classes=350182 accepted=96489024 lambda<=0.141876103688902 (exact) mu>=0.141876103688901 bound<=0.468661001718 best_at_z>=0.468661001717 CERTIFIED gamma_14 <= 0.468662  dancik=0.476198 BEATS  (build 1784s, total 1784s, iters 16)
+     1789.46 real      1579.05 user        23.87 sys
+          4122148864  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             5774904  page reclaims
+                 221  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 370  voluntary context switches
+             1132600  involuntary context switches
+      12338361795527  instructions retired
+       3217938147765  cycles elapsed
+         10226556848  peak memory footprint
+k=13 h=3 z=0.0480 states=316 classes=234013 accepted=63769138 lambda<=0.140634558420997 (exact) mu>=0.140634558420996 bound<=0.480839300186 best_at_z>=0.480839300185 CERTIFIED gamma_13 <= 0.480840  dancik=0.488800 BEATS  (build 1135s, total 1135s, iters 18)
+     1137.97 real      1011.81 user         5.30 sys
+          5420662784  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             1061017  page reclaims
+                 166  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 335  voluntary context switches
+              349474  involuntary context switches
+       8162543119988  instructions retired
+       2080111228046  cycles elapsed
+          6865065240  peak memory footprint
+k=12 h=3 z=0.0514 states=316 classes=151020 accepted=40624494 lambda<=0.141490243265407 (exact) mu>=0.141490243265406 bound<=0.494200356646 best_at_z>=0.494200356645 CERTIFIED gamma_12 <= 0.494201  dancik=0.502591 BEATS  (build 588s, total 588s, iters 18)
+      589.06 real       546.74 user         1.64 sys
+          4361863168  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              267450  page reclaims
+                 102  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 376  voluntary context switches
+              122362  involuntary context switches
+       5219308036150  instructions retired
+       1213537269171  cycles elapsed
+          4352691704  peak memory footprint
+ALL-DONE

@@ -27,6 +27,14 @@ DANCIK = {3: "0.765803", 4: "0.708236", 5: "0.664428", 6: "0.629316", 7: "0.6001
           13: "0.488800", 14: "0.476198", 15: "0.464619"}
 
 
+def dec(x, d, rnd):
+    """The rational x as a decimal with d places, rounded by rnd (math.ceil or math.floor)."""
+    n = rnd(x * 10**d)
+    sign, n = ("-", -n) if n < 0 else ("", n)
+    s = str(n).rjust(d + 1, "0")
+    return f"{sign}{s[:-d]}.{s[-d:]}"
+
+
 def main():
     k, h, zs = int(sys.argv[1]), int(sys.argv[2]), sys.argv[3]
     t0 = time.time()
@@ -101,9 +109,21 @@ def main():
     up = Fraction(math.ceil(hi * 10**6), 10**6)
     assert up >= hi
     d = Fraction(DANCIK.get(k, "1"))
+    import os
+    os.makedirs("certs", exist_ok=True)
+    with open(f"certs/cert_k{k}_h{h}.txt", "w") as fo:   # the certificate itself
+        fo.write(f"# Exact certificate for Lueker's M_h: k={k} h={h}\n")
+        fo.write(f"# states are rv_machine.canon representatives; v entries are exact doubles (hex)\n")
+        fo.write(f"# lambda and mu are exact; the decimal lines are rounded up (upper) or down (lower)\n")
+        fo.write(f"k {k}\nh {h}\nz {zs}\nstates {n}\n")
+        fo.write(f"lambda {lam.numerator}/{lam.denominator}\nmu {mu.numerator}/{mu.denominator}\n")
+        fo.write(f"lambda_upper {dec(lam, 17, math.ceil)}\nmu_lower {dec(mu, 17, math.floor)}\n"
+                 f"bound_upper {dec(hi, 15, math.ceil)}\ncertified {float(up):.6f}\n")
+        for q, x in zip(states, V):
+            fo.write(f"v {q!r} {float(x).hex()}\n")
     print(f"k={k} h={h} z={zs} states={n} classes={len(cl)} accepted={accepted} "
-          f"lambda<{float(lam):.15f} (exact) mu>={float(mu):.15f} "
-          f"bound={float(hi):.12f} best_at_z={float(exact(Bmu.a)):.12f} "
+          f"lambda<={dec(lam, 15, math.ceil)} (exact) mu>={dec(mu, 15, math.floor)} "
+          f"bound<={dec(hi, 12, math.ceil)} best_at_z>={dec(exact(Bmu.a), 12, math.floor)} "
           f"CERTIFIED gamma_{k} <= {float(up):.6f}  dancik={DANCIK.get(k)} "
           f"{'BEATS' if up < d else 'does not beat'}  "
           f"(build {t_build:.0f}s, total {time.time() - t0:.0f}s, iters {it + 1})", flush=True)

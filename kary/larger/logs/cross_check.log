@@ -14,3 +14,5 @@ k=8 h=3: 15688 classes (same as by definition), 316 states, checked 60 states an
 k=9 h=3: 30537 classes (same as by definition), 316 states, checked 60 states and 1388684 accepted transitions against kref: 0 mismatching states (210s)
 k=10 h=3: 55090 classes (same as by definition), 316 states, checked 30 states and 1339483 accepted transitions against kref: 0 mismatching states (276s)
 k=11 h=3: 93511 classes (same as by definition), 316 states, checked 20 states and 1557632 accepted transitions against kref: 0 mismatching states (434s)
+k=14 h=2: 2562 classes (same as by definition), 10 states, checked 10 states and 24711 accepted transitions against kref: 0 mismatching states (1s)
+k=15 h=2: 3165 classes (same as by definition), 10 states, checked 10 states and 30601 accepted transitions against kref: 0 mismatching states (1s)
