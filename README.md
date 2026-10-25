@@ -64,9 +64,11 @@ h = 8.
    2 log(2z)/log λ_cert in interval arithmetic and rounds up to six decimals. It re-certifies
    Lueker's h = 5, …, 8 bounds. The review pass's single-threaded `review/myverify.c` gives the
    same λ_cert bit for bit, and a version that does not depend on the rounding mode at all
-   (round to nearest, then inflate by (1 − 2⁻⁵³)⁻³⁶) gives λ ≤ 0.38553270543451351 at h = 10,
-   whose bound 0.824119783256… (`review/finalbound.py`, 60-digit arithmetic) is still below
-   0.824120.
+   (round to nearest, then inflate by (1 − 2⁻⁵³)^−(4h−1), which covers the at most 4h − 1
+   roundings in each quotient) gives λ ≤ 0.38553270543451379 at h = 10, whose bound
+   0.824119783256… (`review/finalbound.py`, 60-digit arithmetic) is still below 0.824120.
+   (Until October 2026 this check used the exponent 36, which is enough for h = 9 but not for
+   h = 10; the corrected run changes λ only in the 15th digit.)
 
 ## Reproducing
 

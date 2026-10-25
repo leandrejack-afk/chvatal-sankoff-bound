@@ -1,8 +1,8 @@
 /* Reviewer tool: independent recomputation of lambda_cert = max_s (A_z v)_s / v_s.
  * Single-threaded (no GCD), streaming the table with F_NOCACHE.
  *  (1) upward rounding set in THIS thread, same summation order as verify_cert -> lam_up
- *  (2) round-to-nearest, then a-priori inflation by (1-u)^-36, u = 2^-53 -> lam_apriori
- *      (each term passes through 1 product and <= 34 sums, plus 1 division)
+ *  (2) round-to-nearest, then a-priori inflation by (1-u)^-(4H-1), u = 2^-53 -> lam_apriori
+ *      (each term passes through 1 product and <= 4H-3 sums, plus 1 division)
  * Also reports: min v, max v, argmax state, count of v <= 0 / non-finite, any target > N,
  * and whether any row has a zero l=0 entry.  Weights read as hex floats.
  * usage: myverify <trans> <eigen> <weights> */
@@ -63,10 +63,10 @@ int main(int argc, char **argv) {
     printf("targets > N: %ld   rows with l=0 rejected: %ld\n", badidx, zero_l0);
     printf("lam_up      = %a (%.17g) at state %llu\n", lam_up, lam_up, (unsigned long long)arg_up);
     printf("lam_nearest = %a (%.17g) at state %llu\n", lam_rn, lam_rn, (unsigned long long)arg_rn);
-    /* a-priori: lam_rn / (1-u)^36, computed upward */
+    /* a-priori: lam_rn / (1-u)^(4H-1), computed upward */
     fesetround(FE_UPWARD);
     double f = 1.0, onemu = 1.0 - 0x1p-53;   /* exact */
-    for (int i = 0; i < 36; i++) f = f / onemu;
+    for (int i = 0; i < 4 * H - 1; i++) f = f / onemu;
     double lam_ap = lam_rn * f;
     fesetround(FE_TONEAREST);
     printf("lam_apriori = %a (%.17g)  [factor %a]\n", lam_ap, lam_ap, f);
