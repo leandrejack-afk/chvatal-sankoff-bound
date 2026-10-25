@@ -1,0 +1,8 @@
+undamaged file: accepted, as it should be (case0.txt: k=3 h=3 z=0.1652 states=249 classes=63 accepted=10592, closed, v>0; lambda and mu equal the file's exact valu)
+z changed from 0.1652 to 0.1653: rejected, as it should be (AssertionError: largest ratio differs from the file's lambda)
+certified value lowered to 0.754806: rejected, as it should be (AssertionError: certified value below the bound)
+one state removed: rejected, as it should be (AssertionError: 39 transitions leave the listed states)
+one state with letters 0 and 1 swapped: rejected, as it should be (AssertionError: a listed state is not a representative)
+one entry of v multiplied by 0.999: rejected, as it should be (AssertionError: largest ratio differs from the file's lambda)
+lambda in the file changed in its last digit: rejected, as it should be (AssertionError: largest ratio differs from the file's lambda)
+7 cases, 0 wrong

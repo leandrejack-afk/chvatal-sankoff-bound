@@ -40,8 +40,10 @@ of the target and looks it up in the list, so it checks that the list contains t
 state and is closed under the transitions; it then recomputes every ratio in exact
 arithmetic, checks that the largest and smallest are the λ and μ in the file, and checks the
 bound in interval arithmetic. It does not use the automaton build of `certify_exact.py`. All
-26 files pass (`logs/check_cert.log`); changing z, the certified value, a state or an entry
-of v that moves an extreme ratio makes it fail.
+26 files pass (`logs/check_cert.log`). `tamper_test.py` makes six damaged copies of one
+certificate (z changed, the certified value lowered, a state removed, a state not in
+representative form, an entry of v changed, λ changed) and checks that each is rejected and
+the undamaged file accepted (`logs/tamper_test.log`).
 
 ```
 python3 check_cert.py certs/cert_k15_h3.txt 8    # 8 worker processes; about 10 minutes

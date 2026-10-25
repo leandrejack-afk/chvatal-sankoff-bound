@@ -180,7 +180,8 @@ clang -O3 -ffp-model=strict -o rvcmp_big rvcmp_big.c -lpthread
 kbig-runs/compare_full.sh 3 7; kbig-runs/compare_full.sh 4 6   # check 2, logs in big/logs/
 ```
 
-The certified vectors (232 MB and 68 MB) are not in the repository; `certificates/SHA256_kbig.txt`
+The certified vectors `kvec_k3_h7.bin` and `kvec_k4_h6.bin` (232 MB and 68 MB) are too large for
+the repository and are attached to the release `ipl-2026`; `certificates/SHA256_kbig.txt`
 has the SHA-256 sums of the two tables, the two vectors and the weight files. The eigen phase
 is deterministic for a given binary, and the exact values lie more than 5 × 10⁻⁷ below the
 printed bounds, so a vector computed with another compiler gives the same six decimals.

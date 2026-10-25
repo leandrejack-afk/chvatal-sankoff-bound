@@ -21,6 +21,14 @@ VERDICT (certificate k = 4, h = 6, gamma_4 <= 0.679701): SAFE, CONDITIONAL on th
   "phase P exit 0", compare 2,125,824 (q1), 2,125,729 (q2) and 2,124,800 (q3) states, and the four
   quarters' transitions add up to 27,720,529,578 (the build's accepted count); q0 had 6,920,046,139.
   Until then, do not call the k = 4 bound certified in public text.
+CLOSING NOTE (added on 2026-10-25 at 18:15 Guyana time, after this review, by the session that wrote
+  the paper, from the logs in kary/logs/kbig-2026-10-25/): the condition above is met.
+  rvcmp_k4_h6_q1.log, rvcmp_k4_h6_q2.log and rvcmp_k4_h6_q3.log each end with "RESULT: no difference"
+  and "phase P exit 0", compare 2,125,824, 2,125,729 and 2,124,800 states, and report 0 stored states
+  sharing an orbit, 0 not in canonical form, start state index 0 and 0 targets missing. With q0 the
+  four quarters cover 8,502,177 states (= N) and 6,920,046,139 + 6,906,842,840 + 6,941,794,300 +
+  6,951,846,299 = 27,720,529,578 transitions, the build's accepted count (rvcmp_totals.txt). The
+  k = 4 certificate is therefore SAFE without condition.
 
 ## Work log (newest last)
 
@@ -516,3 +524,14 @@ Every (3,7) log and the (4,6) q0 log also report 0 stored states sharing an orbi
 canonical form, start state index 0, and 0 targets missing. q1 to q3 of (4,6) run side by side since
 16:58 (big/compare_parallel.sh 4 6 1 2 3, separate logs, each appending its exit status); the
 team lead will read them.
+
+## Closing note (18:15, added after the review)
+
+The three remaining (4,6) comparisons finished at about 17:43 with no difference:
+
+| table | quarter | states compared | expected | transitions | RESULT | exit |
+|---|---|---|---|---|---|---|
+| (4,6) | q1 | 2,125,824 | 2,125,824 | 6,906,842,840 | no difference | 0 |
+| (4,6) | q2 | 2,125,729 | 2,125,729 | 6,941,794,300 | no difference | 0 |
+| (4,6) | q3 | 2,124,800 | 2,124,800 | 6,951,846,299 | no difference | 0 |
+| (4,6) | sum | 8,502,177 | N = 8,502,177 | 27,720,529,578 | build: 27,720,529,578 | |

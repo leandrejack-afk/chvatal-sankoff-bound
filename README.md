@@ -9,7 +9,7 @@
   h = 5 gave 0.739975 and 0.683622. Code, certificates and checks are in
   [`kary/`](kary/README.md).
 - **Five to fifteen letters.** With h = 3 it also improves Dančík's bound for every
-  alphabet size from 5 to 15, by 0.007 to 0.011, with exact rational certificates and a
+  alphabet size from 5 to 15, by 0.0071 to 0.0113, with exact rational certificates and a
   short program that checks them; see [`kary/larger/`](kary/larger/README.md).
 - **Binary.** The h = 9 and h = 10 bounds below have been reproduced by Carlos Toledo and by
   Jeetu SK with their own programs (teorth/optimizationproblems pull request 249), and
@@ -114,7 +114,8 @@ VERIFIER=./verify_cert_stream python3 src/certify.py 10 data
 The tables are deterministic; their SHA-256 sums are in `certificates/SHA256SUMS.txt`. Any
 positive vector gives a valid certificate (the power iteration only has to make it good), so the
 vectors are not needed to check the claim; their checksums are listed for reference, and they
-are available on request (0.4 GB and 3.2 GB). `certificates/` also holds the upward-rounded
+are attached to the release `ipl-2026` (0.4 GB and 3.2 GB; `eigen_h10.bin` comes in two parts,
+joined with `cat eigen_h10.bin.part1 eigen_h10.bin.part2 > eigen_h10.bin`). `certificates/` also holds the upward-rounded
 weights and the full output of `certify.py` for both runs.
 
 ## References

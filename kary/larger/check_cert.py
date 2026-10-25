@@ -124,8 +124,9 @@ def main():
     iv.dps = 60
     ivf = lambda f: iv.mpf(f.numerator) / iv.mpf(f.denominator)
     B = 2 * iv.log(k * ivf(z)) / iv.log(ivf(lam))
-    m, e = mpmath.mpf(B.b).man_exp
-    hi = Fraction(m) * Fraction(2) ** e
+    sign, man, exp, bc = B._mpi_[1]               # the upper end of B, read exactly
+    assert sign == 0 and man > 0
+    hi = Fraction(int(man)) * Fraction(2) ** exp
     assert hi <= certified, "certified value below the bound"
     print(f"{os.path.basename(path)}: k={k} h={h} z={head['z']} states={n} classes={ncl} "
           f"accepted={accepted}, closed, v>0; lambda and mu equal the file's exact values; "
