@@ -1,0 +1,6 @@
+k=3 h=4 identical: 9e5d386481d0ae06 k=3 h=4 inputs=141 accepting states=5116 accepted transitions=395020 records=366370 |   records whose target was not yet known at the parallel lookup: 47772
+k=3 h=5 identical: 7f51c895ada0df7b k=3 h=5 inputs=279 accepting states=98041 accepted transitions=12481994 records=12039641 |   records whose target was not yet known at the parallel lookup: 1007288
+k=4 h=3 identical: 5ccda1c2f5781886 k=4 h=3 inputs=292 accepting states=309 accepted transitions=60995 records=22916 |   records whose target was not yet known at the parallel lookup: 2923
+k=4 h=4 identical: 767f5dde8cda7b5b k=4 h=4 inputs=1108 accepting states=9427 accepted transitions=5400599 records=2914880 |   records whose target was not yet known at the parallel lookup: 260264
+k=3 h=6 identical: 0f0c291d3ec83262 k=3 h=6 inputs=525 accepting states=1711682 accepted transitions=350867245 records=344419015 |   records whose target was not yet known at the parallel lookup: 15057583
+KBIG_QOS=user nice -n 10 ./review-big/repro_rv_qos.sh "3 4" "3 5" "4 3" "4 4"  223.12s user 3.51s system 264% cpu 1:25.58 total

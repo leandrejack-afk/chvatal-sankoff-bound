@@ -1,0 +1,6 @@
+k=3 h=4 N=5116 R=366370: header, records, offsets, keys identical: True
+k=3 h=5 N=98041 R=12039641: header, records, offsets, keys identical: True
+k=3 h=6 N=1711682 R=344419015: header, records, offsets, keys identical: True
+k=4 h=4 N=9427 R=2914880: header, records, offsets, keys identical: True
+k=4 h=5 N=290442 R=274862010: header, records, offsets, keys identical: True
+k=2 h=8 N=6419109 R=91508397: header, records, offsets, keys identical: True

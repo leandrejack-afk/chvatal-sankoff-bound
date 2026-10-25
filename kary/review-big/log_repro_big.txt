@@ -1,0 +1,4 @@
+k=3 h=6 identical: 0f0c291d3ec83262 k=3 h=6 inputs=525 accepting states=1711682 accepted transitions=350867245 records=344419015 |   records whose target was not yet known at the parallel lookup: 15057583
+k=4 h=5 identical: fd7e1b4a53ad7ff9 k=4 h=5 inputs=3460 accepting states=290442 accepted transitions=409634897 records=274862010 |   records whose target was not yet known at the parallel lookup: 7086695
+k=2 h=8 identical: 8a52058fbd27d299 k=2 h=8 inputs=30 accepting states=6419109 accepted transitions=91508397 records=91508397 |   records whose target was not yet known at the parallel lookup: 9567538
+nice -n 10 ./review-big/repro_rv.sh "3 6" "4 5" "2 8"  508.59s user 13.35s system 99% cpu 8:46.53 total

@@ -1,0 +1,49 @@
+== certificate beside the table
+wrote big/k4h6/weights_k4_h6.txt: 28 weight types at z = 0.157
+k=4 h=6 N=8502177 records=21142620884 z=0x1.4189374bc6a7fp-3 (0.157)
+lambda_cert=0x1.047f14d17bdedp-2 (0.25439102676952424)
+rho_lower=0x1.047f14cf05242p-2 (0.25439102662611301)
+bound interval: [0.679700467578359, 0.679700467578359]
+best possible at this z (from rho_lower): [0.679700467298, 0.679700467298]
+CERTIFIED: gamma_4 <= 0.679701   (k=4, h=6, z=0.157, lambda_cert=0.25439102676952424)
+== kbcertify.py re-run
+wrote kary/review-big/c46/weights_k4_h6.txt: 28 weight types at z = 0.157
+k=4 h=6 N=8502177 records=21142620884 z=0x1.4189374bc6a7fp-3 (0.157)
+lambda_cert=0x1.047f14d17bdedp-2 (0.25439102676952424)
+rho_lower=0x1.047f14cf05242p-2 (0.25439102662611301)
+bound interval: [0.679700467578359, 0.679700467578359]
+best possible at this z (from rho_lower): [0.679700467298, 0.679700467298]
+CERTIFIED: gamma_4 <= 0.679701   (k=4, h=6, z=0.157, lambda_cert=0.25439102676952424)
+== weights equal: yes
+== rvb_verify
+k=4 h=6 N=8502177 R=21142620884 NW=28 z=0x1.4189374bc6a7fp-3 threads=6
+states covered 8502177, records summed 21142620884, bad records 0, empty rows 0, tiny operands 0
+state 0 is the start state: yes
+vector min 0x1.744793d166f69p-4 max 0x1p+0
+lambda_emu=0x1.047f14d17bdedp-2 (0.25439102676952424) at state 8454887
+rho_emu=0x1.047f14cf05242p-2 (0.25439102662611301)
+nearest_max_up_weights=0x1.047f14d17bddap-2 nmax=7481
+nearest_min_down_weights=0x1.047f14cf0526ap-2
+OK
+z = 0.157 (0x1.4189374bc6a7fp-3), k = 4
+lambda_emu      = 0x1.047f14d17bdedp-2 = 0.25439102676952424
+lambda_apriori  = qn_max (1-u)^-(nmax+2), nmax = 7481: 0.2543910267697345 (lambda_apriori / lambda_emu - 1 = 8.266e-13)
+bound from lambda_emu:     [0.679700467578359, 0.679700467578359] -> certified 0.679701
+bound from lambda_apriori: [0.67970046757877, 0.67970046757877] -> certified 0.679701
+bound at rho_emu (no certificate at this z can go below): [0.679700467298, 0.679700467298]
+same 6-decimal bound by both routes: True
+kbcertify lambda_cert 0x1.047f14d17bdedp-2 equals lambda_emu: True
+kbcertify printed 0.679701; exact decimal >= interval upper end: True; equals this script's value: True
+== rv_theirweights
+k=4 h=6 z=0x1.4189374bc6a7fp-3: 28 weight types, kary up >= exact >= kary down and adjacent: 28/28
+== sha256 (sha256nc: F_NOCACHE reads, same digest as shasum -a 256)
+549ef26d620e906f073eec9f594b8552738634faebf92777264fe916d9b9bc4f  kary/big/k4h6/kbig_k4_h6.bin
+4ee380850c2d940226bcc6547f69ec5f5b983eb11fb09cf8c1fde320af28a19e  kary/big/k4h6/kvec_k4_h6.bin
+09b8c2d2295cec4fb46ff7534570c34e18c53f39594715242c19adde4c2a5d2d  kary/big/k4h6/weights_k4_h6.txt
+e39ba391b1d584ac07fc578ab8a559d8e5b988aae260d2ddb4d2a57538f05fb3  kary/big/k4h6/wtypes_k4_h6.txt
+== against kary/big/k4h6/SHA256_k4_h6.txt
+549ef26d620e906f073eec9f594b8552738634faebf92777264fe916d9b9bc4f  kbig_k4_h6.bin
+4ee380850c2d940226bcc6547f69ec5f5b983eb11fb09cf8c1fde320af28a19e  kvec_k4_h6.bin
+09b8c2d2295cec4fb46ff7534570c34e18c53f39594715242c19adde4c2a5d2d  weights_k4_h6.txt
+e39ba391b1d584ac07fc578ab8a559d8e5b988aae260d2ddb4d2a57538f05fb3  wtypes_k4_h6.txt
+./review-big/check_cert.sh 4 6  1055.88s user 86.98s system 74% cpu 25:38.88 total

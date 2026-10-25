@@ -1,0 +1,15 @@
+repro/kbig_k3_h5.bin phase 0: compared 24576 of 98041, exit 0, RESULT: no difference
+repro/kbig_k3_h5.bin phase 1: compared 24576 of 98041, exit 0, RESULT: no difference
+repro/kbig_k3_h5.bin phase 2: compared 24576 of 98041, exit 0, RESULT: no difference
+repro/kbig_k3_h5.bin phase 3: compared 24313 of 98041, exit 0, RESULT: no difference
+  sum of the four quarters: 98041 (N = 98041)
+repro/kbig_k4_h4.bin phase 0: compared 3072 of 9427, exit 0, RESULT: no difference
+repro/kbig_k4_h4.bin phase 1: compared 2259 of 9427, exit 0, RESULT: no difference
+repro/kbig_k4_h4.bin phase 2: compared 2048 of 9427, exit 0, RESULT: no difference
+repro/kbig_k4_h4.bin phase 3: compared 2048 of 9427, exit 0, RESULT: no difference
+  sum of the four quarters: 9427 (N = 9427)
+k3h4_drop_record/kbig_k3_h4.bin phase 0: compared 2044 of 5116, exit 0, RESULT: no difference
+k3h4_drop_record/kbig_k3_h4.bin phase 1: compared 1024 of 5116, exit 0, RESULT: no difference
+k3h4_drop_record/kbig_k3_h4.bin phase 2: compared 1024 of 5116, exit 1, RESULT: DIFFERENCES FOUND
+k3h4_drop_record/kbig_k3_h4.bin phase 3: compared 1024 of 5116, exit 0, RESULT: no difference
+  sum of the four quarters: 5116 (N = 5116)

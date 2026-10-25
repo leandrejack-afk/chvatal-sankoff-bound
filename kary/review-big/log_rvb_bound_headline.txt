@@ -1,0 +1,20 @@
+== k=3 h=6
+z = 0.2048 (0x1.a36e2eb1c432dp-3), k = 3
+lambda_emu      = 0x1.127d82e6e2c72p-2 = 0.26805691274848364
+lambda_apriori  = qn_max (1-u)^-(nmax+2), nmax = 514: 0.2680569127484989 (lambda_apriori / lambda_emu - 1 = 5.687e-14)
+bound from lambda_emu:     [0.739974770450576, 0.739974770450576] -> certified 0.739975
+bound from lambda_apriori: [0.739974770450608, 0.739974770450608] -> certified 0.739975
+bound at rho_emu (no certificate at this z can go below): [0.73997477045, 0.73997477045]
+same 6-decimal bound by both routes: True
+kbcertify lambda_cert 0x1.127d82e6e2c72p-2 equals lambda_emu: True
+kbcertify printed 0.739975; exact decimal >= interval upper end: True; equals this script's value: True
+== k=4 h=5
+z = 0.1496 (0x1.32617c1bda512p-3), k = 4
+lambda_emu      = 0x1.c7edf121aebe8p-3 = 0.22262180694619293
+lambda_apriori  = qn_max (1-u)^-(nmax+2), nmax = 2426: 0.22262180694624664 (lambda_apriori / lambda_emu - 1 = 2.413e-13)
+bound from lambda_emu:     [0.683621630392186, 0.683621630392186] -> certified 0.683622
+bound from lambda_apriori: [0.683621630392296, 0.683621630392296] -> certified 0.683622
+bound at rho_emu (no certificate at this z can go below): [0.683621630392, 0.683621630392]
+same 6-decimal bound by both routes: True
+kbcertify lambda_cert 0x1.c7edf121aebe8p-3 equals lambda_emu: True
+kbcertify printed 0.683622; exact decimal >= interval upper end: True; equals this script's value: True

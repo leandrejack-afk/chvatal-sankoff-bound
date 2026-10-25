@@ -1,0 +1,2 @@
+k=3 h=7: 4000 pairs, 46478 canonical steps (2333 truncated inputs), no rejection
+k=4 h=6: 4000 pairs, 41575 canonical steps (3311 truncated inputs), no rejection

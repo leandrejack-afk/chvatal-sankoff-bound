@@ -1,0 +1,307 @@
+/* rvcmp_big.c: review/rvcmp.c for kbig's table files (kbig_k<k>_h<h>.bin), with three
+ * mechanical changes and nothing else: (a) the file layout ("KBIG": records right after the
+ * header, then offsets, then keys); (b) their_wt_of_class has room for 16384 classes
+ * (k = 4, h = 6 has 9,748); (c) RVCMP_STRIDE=m compares only every m-th block of 1024
+ * states (block index = RVCMP_PHASE mod m), for a sample of a table too big to compare whole.
+ * Records are read from page-aligned file offsets into a page-aligned buffer, so that F_NOCACHE
+ * really bypasses the page cache (an unaligned read is cached, and a 170 GB table read through
+ * the cache pushes everything else into the memory compressor).
+ * Also (review-big/REVIEW.md, finding 2): the comparison exits 1 and prints "RESULT: DIFFERENCES
+ * FOUND" when a state differs, a target is missing, two stored states share an orbit, a stored
+ * state is not in relabelled form or the start state is not state 0.
+ *
+ * Original description:
+ * rvcmp.c: compare kary's stored table (ktab_k<k>_h<h>.bin) entry by entry with the
+ * referee's own delta (rvcore.h, from rvk.c), and optionally certify kary's vector on the
+ * referee's own matrix.
+ *
+ *   rvcmp K H THEIR_KTAB [THEIR_KVEC REF_WEIGHTS_BY_THEIR_TYPE]
+ *
+ * 1. Every stored state is converted to the referee's packing and canonicalised with the
+ *    referee's (interleaved) relabelling; the map must be injective (one stored state per
+ *    orbit).
+ * 2. For every stored state, all classes are run through the referee's delta; each accepted
+ *    target is located among the stored states by orbit, and the multiset of
+ *    (target index, kary weight type) must equal the stored records exactly.
+ * 3. With a vector and weights: max_s (A v)_s / v_s with FE_UPWARD and min with FE_DOWNWARD,
+ *    summing over the referee's own transitions (not over kary's records).
+ * clang -O3 -ffp-model=strict -o rvcmp rvcmp.c -lpthread
+ */
+#include "review/rvcore.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+
+typedef struct { int32_t size, ta, tb, na, nb; } WType;
+typedef struct { uint32_t tgt; uint16_t wt; uint16_t cnt; } Rec;
+
+static WType wt[256];
+static int NW;
+static int their_wt_of_class[1 << 14];
+static uint64_t N, R, *off, *their;
+static int fd;
+static uint64_t recbase;
+
+static uint64_t conv_their(uint64_t key) {
+    uint64_t M1 = (1ULL << H) - 1, M2 = (1ULL << (2 * H)) - 1;
+    uint64_t x = (key >> (4 * H)) & M2, y = (key >> (2 * H)) & M2, dx = (key >> H) & M1, dy = key & M1;
+    uint64_t r = 0;
+    for (int i = 1; i <= H; i++) {
+        r |= ((x >> (2 * (H - i))) & 3) << (2 * (i - 1));
+        r |= ((y >> (2 * (H - i))) & 3) << (2 * H + 2 * (i - 1));
+    }
+    for (int t = 0; t < H; t++) {
+        r |= ((dx >> (H - 1 - t)) & 1) << (4 * H + t);
+        r |= ((dy >> (H - 1 - t)) & 1) << (5 * H + t);
+    }
+    return r;
+}
+
+/* their relabelling: first occurrence in x, then y (to check stored states are their canonical reps) */
+static uint64_t their_canon(uint64_t key) {
+    uint64_t M1 = (1ULL << H) - 1, M2 = (1ULL << (2 * H)) - 1;
+    uint64_t x = (key >> (4 * H)) & M2, y = (key >> (2 * H)) & M2;
+    int mp[4] = {-1, -1, -1, -1}, nl = 0, xs[MAXH], ys[MAXH];
+    for (int i = 1; i <= H; i++) { xs[i - 1] = (x >> (2 * (H - i))) & 3; ys[i - 1] = (y >> (2 * (H - i))) & 3; }
+    uint64_t nx = 0, ny = 0;
+    for (int i = 0; i < H; i++) { if (mp[xs[i]] < 0) mp[xs[i]] = nl++; nx = (nx << 2) | mp[xs[i]]; }
+    for (int i = 0; i < H; i++) { if (mp[ys[i]] < 0) mp[ys[i]] = nl++; ny = (ny << 2) | mp[ys[i]]; }
+    return (nx << (4 * H)) | (ny << (2 * H)) | (key & ((1ULL << (2 * H)) - 1)) | (((key >> H) & M1) << H);
+}
+
+static uint64_t *hk;
+static uint32_t *hv;
+static uint64_t hm;
+static inline uint64_t mix(uint64_t x) {
+    x += 0x9e3779b97f4a7c15ULL;
+    x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
+    x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
+    return x ^ (x >> 31);
+}
+static int64_t hget(uint64_t s) {
+    for (uint64_t p = mix(s) & hm;; p = (p + 1) & hm) {
+        if (hk[p] == 0) return -1;
+        if (hk[p] == s + 1) return hv[p];
+    }
+}
+static int hput(uint64_t s, uint32_t v) {
+    for (uint64_t p = mix(s) & hm;; p = (p + 1) & hm) {
+        if (hk[p] == 0) { hk[p] = s + 1; hv[p] = v; return 1; }
+        if (hk[p] == s + 1) return 0;
+    }
+}
+
+#define CH 1024
+static uint64_t c0, c1;
+static Rec *rbuf;
+static uint64_t rbase;
+static long mism[64], acc[64], notfound[64];
+static int cmp_u64(const void *a, const void *b) {
+    uint64_t x = *(const uint64_t *)a, y = *(const uint64_t *)b;
+    return x < y ? -1 : x > y;
+}
+static void *work_cmp(void *arg) {
+    long tid = (long)arg;
+    uint64_t *mine = malloc(sizeof(uint64_t) * NC), *theirs = malloc(sizeof(uint64_t) * NC * 2);
+    for (uint64_t s = c0 + tid; s < c1; s += NTHR) {
+        uint64_t q = conv_their(their[s]), t;
+        int nm = 0;
+        for (int ci = 0; ci < NC; ci++) {
+            if (!delta(q, &cls[ci], &t)) continue;
+            int64_t ti = hget(canon(t));
+            if (ti < 0) { notfound[tid]++; continue; }
+            mine[nm++] = ((uint64_t)ti << 16) | (uint64_t)their_wt_of_class[ci];
+        }
+        acc[tid] += nm;
+        qsort(mine, nm, 8, cmp_u64);
+        /* run-length encode mine into (key, cnt) and compare with their records */
+        int nt = 0;
+        for (uint64_t r = off[s]; r < off[s + 1]; r++) {
+            Rec *rc = &rbuf[r - rbase];
+            theirs[nt++] = (((uint64_t)rc->tgt << 16) | rc->wt) << 16 | rc->cnt;
+        }
+        qsort(theirs, nt, 8, cmp_u64);
+        int j = 0, bad = 0;
+        for (int i = 0; i < nm;) {
+            int e = i;
+            while (e < nm && mine[e] == mine[i]) e++;
+            uint64_t want = (mine[i] << 16) | (uint64_t)(e - i);
+            if (j >= nt || theirs[j] != want) bad = 1;
+            j++;
+            i = e;
+        }
+        if (j != nt) bad = 1;
+        mism[tid] += bad;
+    }
+    free(mine);
+    free(theirs);
+    return NULL;
+}
+
+/* certification of their vector on the referee's own transitions */
+static double *v, wup[256], wdn[256];
+static double phi[64], plo[64];
+static int sfail;
+static void *work_cert(void *arg) {
+    long tid = (long)arg;
+    uint64_t lo = N * tid / NTHR, hi = N * (tid + 1) / NTHR;
+    volatile double one = 1.0, tiny = 0x1p-60;
+    double mx = 0, mn = INFINITY;
+    for (int pass = 0; pass < 2; pass++) {
+        fesetround(pass == 0 ? FE_UPWARD : FE_DOWNWARD);
+        if (pass == 0 && !(one + tiny > one && one - tiny == one)) sfail = 1;
+        if (pass == 1 && !(one - tiny < one && one + tiny == one)) sfail = 1;
+        const double *w = pass == 0 ? wup : wdn;
+        for (uint64_t s = lo; s < hi; s++) {
+            uint64_t q = conv_their(their[s]), t;
+            double sum = 0;
+            for (int ci = 0; ci < NC; ci++) {
+                if (!delta(q, &cls[ci], &t)) continue;
+                int64_t ti = hget(canon(t));
+                if (ti < 0) { sfail = 2; continue; }
+                sum += w[their_wt_of_class[ci]] * v[ti];
+            }
+            double r = sum / v[s];
+            if (pass == 0 && r > mx) mx = r;
+            if (pass == 1 && r < mn) mn = r;
+        }
+    }
+    fesetround(FE_TONEAREST);
+    phi[tid] = mx;
+    plo[tid] = mn;
+    return NULL;
+}
+
+int main(int argc, char **argv) {
+    K = atoi(argv[1]);
+    H = atoi(argv[2]);
+    SYM = 1;
+    if (getenv("RVK_THREADS")) NTHR = atoi(getenv("RVK_THREADS"));
+    enum_classes();
+    fd = open(argv[3], O_RDONLY);
+    if (fd < 0) { perror(argv[3]); return 1; }
+    fcntl(fd, F_NOCACHE, 1);
+    char magic[4];
+    int32_t hk2[2], hi2[2];
+    uint64_t hn[2];
+    pread(fd, magic, 4, 0);
+    pread(fd, hk2, 8, 4);
+    pread(fd, hn, 16, 12);
+    pread(fd, hi2, 8, 28);
+    if (memcmp(magic, "KBIG", 4) || hk2[0] != K || hk2[1] != H) { fprintf(stderr, "bad header\n"); return 1; }
+    N = hn[0]; R = hn[1]; NW = hi2[1];
+    if (hi2[0] != NC) { printf("CLASS COUNT DIFFERS: theirs %d mine %d\n", hi2[0], NC); return 1; }
+    if (NC > (1 << 14)) { printf("too many classes\n"); return 1; }
+    pread(fd, wt, sizeof(WType) * NW, 36);
+    recbase = 36 + sizeof(WType) * NW;
+    uint64_t offpos = recbase + R * sizeof(Rec);
+    off = malloc((N + 1) * 8);
+    if ((uint64_t)pread(fd, off, (N + 1) * 8, offpos) != (N + 1) * 8) { printf("short offsets\n"); return 1; }
+    their = malloc(N * 8);
+    if ((uint64_t)pread(fd, their, N * 8, offpos + (N + 1) * 8) != N * 8) { printf("short keys\n"); return 1; }
+    printf("their table: k=%d h=%d N=%llu R=%llu classes=%d weight types=%d\n", K, H,
+           (unsigned long long)N, (unsigned long long)R, NC, NW);
+    /* their weight type of each of my classes */
+    for (int ci = 0; ci < NC; ci++) {
+        int ma = 0, mb = 0;
+        for (int t = 0; t < cls[ci].la - 1; t++) ma |= 1 << cls[ci].a[t];
+        for (int t = 0; t < cls[ci].lb - 1; t++) mb |= 1 << cls[ci].b[t];
+        WType d = {cls[ci].la + cls[ci].lb, cls[ci].la == H, cls[ci].lb == H, __builtin_popcount(ma), __builtin_popcount(mb)};
+        if (!d.ta && !d.tb) d.na = d.nb = 0;
+        else if (d.ta && !d.tb) d.na = 0;
+        else if (!d.ta && d.tb) d.nb = 0;
+        their_wt_of_class[ci] = -1;
+        for (int i = 0; i < NW; i++)
+            if (!memcmp(&wt[i], &d, sizeof d)) their_wt_of_class[ci] = i;
+        if (their_wt_of_class[ci] < 0) { printf("weight type of class %d not in their table\n", ci); return 1; }
+    }
+    /* orbit map */
+    hm = 1;
+    while (hm < 4 * N) hm <<= 1;
+    hk = calloc(hm, 8);
+    hv = malloc(hm * 4);
+    hm -= 1;
+    long dup = 0, noncanon = 0;
+    for (uint64_t s = 0; s < N; s++) {
+        if (their_canon(their[s]) != their[s]) noncanon++;
+        if (!hput(canon(conv_their(their[s])), (uint32_t)s)) dup++;
+    }
+    uint64_t s0 = 0;
+    for (int t = 0; t < H; t++) s0 |= 1ULL << (4 * H + t) | 1ULL << (5 * H + t);
+    printf("orbit map: %ld stored states share an orbit with another, %ld not in kary's own canonical form; "
+           "start state index %lld\n", dup, noncanon, (long long)hget(canon(s0)));
+    if (argc > 4 && !strcmp(argv[4], "--states")) {
+        /* compare with the referee's own BFS state list (my canonical form) */
+        FILE *f = fopen(argv[5], "rb");
+        uint64_t x, n = 0, miss = 0;
+        while (fread(&x, 8, 1, f) == 1) { n++; if (hget(x) < 0) miss++; }
+        printf("referee state list: %llu states, %llu not among kary's orbits\n", (unsigned long long)n, (unsigned long long)miss);
+        return 0;
+    }
+    double t0 = now();
+    if (argc <= 4) {
+        pthread_t th[64];
+        long totm = 0, tota = 0, totn = 0;
+        uint64_t stride = getenv("RVCMP_STRIDE") ? strtoull(getenv("RVCMP_STRIDE"), NULL, 10) : 1;
+        uint64_t phase = getenv("RVCMP_PHASE") ? strtoull(getenv("RVCMP_PHASE"), NULL, 10) : 0;
+        uint64_t ncmp = 0;
+        if (stride == 0) stride = 1;
+        struct stat sb;
+        if (fstat(fd, &sb)) { printf("fstat failed\n"); return 1; }
+        uint64_t fsize = (uint64_t)sb.st_size, rawcap = 0;
+        char *raw = NULL;
+        for (uint64_t lo = 0; lo < N; lo += CH) {
+            if ((lo / CH) % stride != phase % stride) continue;
+            c0 = lo;
+            c1 = lo + CH < N ? lo + CH : N;
+            rbase = off[c0];
+            uint64_t nr = off[c1] - off[c0];
+            uint64_t first = recbase + rbase * sizeof(Rec), last = first + nr * sizeof(Rec);
+            uint64_t a0 = first & ~(uint64_t)16383, a1 = (last + 16383) & ~(uint64_t)16383;
+            if (a1 > fsize) a1 = fsize;
+            if (a1 - a0 > rawcap) {
+                free(raw);
+                rawcap = a1 - a0;
+                if (posix_memalign((void **)&raw, 16384, rawcap)) { printf("out of memory\n"); return 1; }
+            }
+            for (uint64_t done = 0; done < a1 - a0;) {
+                ssize_t got = pread(fd, raw + done, a1 - a0 - done, (off_t)(a0 + done));
+                if (got <= 0) { printf("short read\n"); return 1; }
+                done += (uint64_t)got;
+            }
+            rbuf = (Rec *)(raw + (first - a0));
+            for (long t = 0; t < NTHR; t++) pthread_create(&th[t], NULL, work_cmp, (void *)t);
+            for (long t = 0; t < NTHR; t++) pthread_join(th[t], NULL);
+            ncmp += c1 - c0;
+        }
+        for (int t = 0; t < NTHR; t++) { totm += mism[t]; tota += acc[t]; totn += notfound[t]; }
+        printf("compared %llu of %llu states (every %llu-th block of %d, phase %llu): %ld states with differing records, "
+               "%ld accepted transitions (mine), %ld targets not among kbig's states (%.0fs)\n",
+               (unsigned long long)ncmp, (unsigned long long)N, (unsigned long long)stride, CH,
+               (unsigned long long)(phase % stride), totm, tota, totn, now() - t0);
+        int ok = !totm && !totn && !dup && !noncanon && hget(canon(s0)) == 0;
+        printf("%s\n", ok ? "RESULT: no difference" : "RESULT: DIFFERENCES FOUND");
+        return ok ? 0 : 1;
+    }
+    /* certify their vector on my transitions */
+    FILE *fv = fopen(argv[4], "rb");
+    int32_t ek[2]; uint64_t en; double z;
+    fread(ek, 8, 1, fv); fread(&en, 8, 1, fv); fread(&z, 8, 1, fv);
+    if (en != N) { printf("vector size mismatch\n"); return 1; }
+    v = malloc(N * 8);
+    fread(v, 8, N, fv);
+    fclose(fv);
+    for (uint64_t s = 0; s < N; s++) if (!(v[s] > 0) || !isfinite(v[s])) { printf("v not positive\n"); return 1; }
+    FILE *fw = fopen(argv[5], "r");
+    for (int i = 0; i < NW; i++) if (fscanf(fw, "%la %la", &wdn[i], &wup[i]) != 2) { printf("weights short\n"); return 1; }
+    fclose(fw);
+    pthread_t th[64];
+    for (long t = 0; t < NTHR; t++) pthread_create(&th[t], NULL, work_cert, (void *)t);
+    for (long t = 0; t < NTHR; t++) pthread_join(th[t], NULL);
+    double hi = 0, lo = INFINITY;
+    for (int t = 0; t < NTHR; t++) { if (phi[t] > hi) hi = phi[t]; if (plo[t] < lo) lo = plo[t]; }
+    if (sfail) { printf("SELF-TEST OR LOOKUP FAILURE %d\n", sfail); return 3; }
+    printf("their vector on referee transitions, z=%a: max ratio (up) %a = %.17g, min ratio (down) %a = %.17g (%.0fs)\n",
+           z, hi, hi, lo, lo, now() - t0);
+    return 0;
+}

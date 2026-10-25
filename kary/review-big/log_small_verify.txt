@@ -1,0 +1,105 @@
+== k=3 h=2
+  kverify (data/certify): lambda_cert=0x1.ca0db9cf13ee8p-4 (0.11182949620819793)
+  kverify (data/certify): rho_lower=0x1.ca0db9cf13a79p-4 (0.11182949620818218)
+  kverify (data/certify): best possible at this z (from rho_lower): [0.764971192854, 0.764971192854]
+  kverify (data/certify): CERTIFIED: gamma_3 <= 0.764972   (k=3, h=2, z=0.1442, lambda_cert=0.11182949620819793)
+  kbverify: streamed 1 chunks
+  kbverify: lambda_cert=0x1.ca0db9cf13ee8p-4 (0.11182949620819793)
+  kbverify: rho_lower=0x1.ca0db9cf13a79p-4 (0.11182949620818218)
+  rvb_verify: states covered 10, records summed 108, bad records 0, empty rows 0, tiny operands 0
+  rvb_verify: state 0 is the start state: yes
+  rvb_verify: lambda_emu=0x1.ca0db9cf13ee8p-4 (0.11182949620819793) at state 1
+  rvb_verify: rho_emu=0x1.ca0db9cf13a79p-4 (0.11182949620818218)
+  rvb_verify: nearest_max_up_weights=0x1.ca0db9cf13ee4p-4 nmax=12
+  rvb_verify: nearest_min_down_weights=0x1.ca0db9cf13a7ep-4
+  rvb_verify: OK
+== k=3 h=3
+  kverify (data/certify): lambda_cert=0x1.3ecdd1d883eb4p-3 (0.15566600744249615)
+  kverify (data/certify): rho_lower=0x1.3ecdd1d883a08p-3 (0.15566600744246295)
+  kverify (data/certify): best possible at this z (from rho_lower): [0.75480652975, 0.75480652975]
+  kverify (data/certify): CERTIFIED: gamma_3 <= 0.754807   (k=3, h=3, z=0.1652, lambda_cert=0.15566600744249615)
+  kbverify: streamed 1 chunks
+  kbverify: lambda_cert=0x1.3ecdd1d883eb4p-3 (0.15566600744249615)
+  kbverify: rho_lower=0x1.3ecdd1d883a08p-3 (0.15566600744246295)
+  rvb_verify: states covered 249, records summed 8866, bad records 0, empty rows 0, tiny operands 0
+  rvb_verify: state 0 is the start state: yes
+  rvb_verify: lambda_emu=0x1.3ecdd1d883eb4p-3 (0.15566600744249615) at state 0
+  rvb_verify: rho_emu=0x1.3ecdd1d883a08p-3 (0.15566600744246295)
+  rvb_verify: nearest_max_up_weights=0x1.3ecdd1d883eacp-3 nmax=52
+  rvb_verify: nearest_min_down_weights=0x1.3ecdd1d883a0ap-3
+  rvb_verify: OK
+== k=3 h=4
+  kverify (data/certify): lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795)
+  kverify (data/certify): rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212)
+  kverify (data/certify): best possible at this z (from rho_lower): [0.747886274229, 0.747886274229]
+  kverify (data/certify): CERTIFIED: gamma_3 <= 0.747887   (k=3, h=4, z=0.1821, lambda_cert=0.19853525123438795)
+  kbverify: streamed 1 chunks
+  kbverify: lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795)
+  kbverify: rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212)
+  rvb_verify: states covered 5116, records summed 366370, bad records 0, empty rows 0, tiny operands 0
+  rvb_verify: state 0 is the start state: yes
+  rvb_verify: lambda_emu=0x1.9699a6593d1cbp-3 (0.19853525123438795) at state 14
+  rvb_verify: rho_emu=0x1.9699a6593c71fp-3 (0.19853525123431212)
+  rvb_verify: nearest_max_up_weights=0x1.9699a6593d1aep-3 nmax=130
+  rvb_verify: nearest_min_down_weights=0x1.9699a6593c721p-3
+  rvb_verify: OK
+== k=3 h=5
+  kverify (data/certify): lambda_cert=0x1.e29d481fee95bp-3 (0.23565155360649723)
+  kverify (data/certify): rho_lower=0x1.e29d481fed35bp-3 (0.23565155360634091)
+  kverify (data/certify): best possible at this z (from rho_lower): [0.74328105062, 0.74328105062]
+  kverify (data/certify): CERTIFIED: gamma_3 <= 0.743282   (k=3, h=5, z=0.1948, lambda_cert=0.23565155360649723)
+  kbverify: streamed 1 chunks
+  kbverify: lambda_cert=0x1.e29d481fee95bp-3 (0.23565155360649723)
+  kbverify: rho_lower=0x1.e29d481fed35bp-3 (0.23565155360634091)
+  rvb_verify: states covered 98041, records summed 12039641, bad records 0, empty rows 0, tiny operands 0
+  rvb_verify: state 0 is the start state: yes
+  rvb_verify: lambda_emu=0x1.e29d481fee95bp-3 (0.23565155360649723) at state 96778
+  rvb_verify: rho_emu=0x1.e29d481fed35bp-3 (0.23565155360634091)
+  rvb_verify: nearest_max_up_weights=0x1.e29d481fee955p-3 nmax=268
+  rvb_verify: nearest_min_down_weights=0x1.e29d481fed367p-3
+  rvb_verify: OK
+== k=4 h=2
+  kverify (data/certify): lambda_cert=0x1.c4eaa359bbd76p-4 (0.11057533081815571)
+  kverify (data/certify): rho_lower=0x1.c4eaa359bb92cp-4 (0.11057533081814047)
+  kverify (data/certify): best possible at this z (from rho_lower): [0.707647846258, 0.707647846258]
+  kverify (data/certify): CERTIFIED: gamma_4 <= 0.707648   (k=4, h=2, z=0.1147, lambda_cert=0.11057533081815571)
+  kbverify: streamed 1 chunks
+  kbverify: lambda_cert=0x1.c4eaa359bbd76p-4 (0.11057533081815571)
+  kbverify: rho_lower=0x1.c4eaa359bb92cp-4 (0.11057533081814047)
+  rvb_verify: states covered 10, records summed 119, bad records 0, empty rows 0, tiny operands 0
+  rvb_verify: state 0 is the start state: yes
+  rvb_verify: lambda_emu=0x1.c4eaa359bbd76p-4 (0.11057533081815571) at state 0
+  rvb_verify: rho_emu=0x1.c4eaa359bb92cp-4 (0.11057533081814047)
+  rvb_verify: nearest_max_up_weights=0x1.c4eaa359bbd71p-4 nmax=15
+  rvb_verify: nearest_min_down_weights=0x1.c4eaa359bb936p-4
+  rvb_verify: OK
+== k=4 h=3
+  kverify (data/certify): lambda_cert=0x1.2f3bdad0dbce3p-3 (0.14806338262449179)
+  kverify (data/certify): rho_lower=0x1.2f3bdad0db7edp-3 (0.14806338262445654)
+  kverify (data/certify): best possible at this z (from rho_lower): [0.696850263672, 0.696850263672]
+  kverify (data/certify): CERTIFIED: gamma_4 <= 0.696851   (k=4, h=3, z=0.1285, lambda_cert=0.14806338262449179)
+  kbverify: streamed 1 chunks
+  kbverify: lambda_cert=0x1.2f3bdad0dbce3p-3 (0.14806338262449179)
+  kbverify: rho_lower=0x1.2f3bdad0db7edp-3 (0.14806338262445654)
+  rvb_verify: states covered 309, records summed 22916, bad records 0, empty rows 0, tiny operands 0
+  rvb_verify: state 0 is the start state: yes
+  rvb_verify: lambda_emu=0x1.2f3bdad0dbce3p-3 (0.14806338262449179) at state 15
+  rvb_verify: rho_emu=0x1.2f3bdad0db7edp-3 (0.14806338262445654)
+  rvb_verify: nearest_max_up_weights=0x1.2f3bdad0dbccep-3 nmax=120
+  rvb_verify: nearest_min_down_weights=0x1.2f3bdad0db8p-3
+  rvb_verify: OK
+== k=4 h=4
+  kverify (data/certify): lambda_cert=0x1.7e299e71d3917p-3 (0.18660281929846498)
+  kverify (data/certify): rho_lower=0x1.7e299e71d305fp-3 (0.18660281929840303)
+  kverify (data/certify): best possible at this z (from rho_lower): [0.689063957962, 0.689063957962]
+  kverify (data/certify): CERTIFIED: gamma_4 <= 0.689064   (k=4, h=4, z=0.1402, lambda_cert=0.18660281929846498)
+  kbverify: streamed 1 chunks
+  kbverify: lambda_cert=0x1.7e299e71d3917p-3 (0.18660281929846498)
+  kbverify: rho_lower=0x1.7e299e71d305fp-3 (0.18660281929840303)
+  rvb_verify: states covered 9427, records summed 2914880, bad records 0, empty rows 0, tiny operands 0
+  rvb_verify: state 0 is the start state: yes
+  rvb_verify: lambda_emu=0x1.7e299e71d3917p-3 (0.18660281929846498) at state 775
+  rvb_verify: rho_emu=0x1.7e299e71d305fp-3 (0.18660281929840303)
+  rvb_verify: nearest_max_up_weights=0x1.7e299e71d38f9p-3 nmax=635
+  rvb_verify: nearest_min_down_weights=0x1.7e299e71d30a3p-3
+  rvb_verify: OK

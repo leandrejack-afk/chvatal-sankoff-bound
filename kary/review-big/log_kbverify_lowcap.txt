@@ -1,0 +1,14 @@
+k=3 h=4 CAP=700: streamed 554 chunks lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212) 
+k=3 h=4 CAP=1000: streamed 383 chunks lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212) 
+k=3 h=4 CAP=4099: streamed 91 chunks lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212) 
+k=4 h=4 CAP=700: streamed 5656 chunks lambda_cert=0x1.7e299e71d3917p-3 (0.18660281929846498) rho_lower=0x1.7e299e71d305fp-3 (0.18660281929840303) 
+k=4 h=4 CAP=1000: streamed 3544 chunks lambda_cert=0x1.7e299e71d3917p-3 (0.18660281929846498) rho_lower=0x1.7e299e71d305fp-3 (0.18660281929840303) 
+k=4 h=4 CAP=4099: streamed 743 chunks lambda_cert=0x1.7e299e71d3917p-3 (0.18660281929846498) rho_lower=0x1.7e299e71d305fp-3 (0.18660281929840303) 
+k=3 h=5 CAP=700: streamed 19189 chunks lambda_cert=0x1.e29d481fee95bp-3 (0.23565155360649723) rho_lower=0x1.e29d481fed35bp-3 (0.23565155360634091) 
+k=3 h=5 CAP=1000: streamed 12991 chunks lambda_cert=0x1.e29d481fee95bp-3 (0.23565155360649723) rho_lower=0x1.e29d481fed35bp-3 (0.23565155360634091) 
+k=3 h=5 CAP=4099: streamed 2991 chunks lambda_cert=0x1.e29d481fee95bp-3 (0.23565155360649723) rho_lower=0x1.e29d481fed35bp-3 (0.23565155360634091) 
+k=4 h=3 CAP=700: streamed 35 chunks lambda_cert=0x1.2f3bdad0dbce3p-3 (0.14806338262449179) rho_lower=0x1.2f3bdad0db7edp-3 (0.14806338262445654) 
+k=4 h=3 CAP=1000: streamed 24 chunks lambda_cert=0x1.2f3bdad0dbce3p-3 (0.14806338262449179) rho_lower=0x1.2f3bdad0db7edp-3 (0.14806338262445654) 
+k=4 h=3 CAP=4099: streamed 6 chunks lambda_cert=0x1.2f3bdad0dbce3p-3 (0.14806338262449179) rho_lower=0x1.2f3bdad0db7edp-3 (0.14806338262445654) 
+CAP=100 at (4,4) (a state has 635 records): state 0 has too many records
+exit=2

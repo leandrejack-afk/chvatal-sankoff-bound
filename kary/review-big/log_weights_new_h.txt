@@ -1,0 +1,10 @@
+=== k=3 h=7
+classes by definition: 975; kbig weight types: 24; same set: True
+787143 minimal match pairs of size <= 18: 0 classes whose counts differ from the closed form (every type has >= 1 nonzero coefficients checked)
+wrote kary/review-big/wt/k3h7/weights_k3_h7.txt: 24 weight types at z = 0.2126
+k=3 h=7 z=0x1.b367a0f9096bcp-3: 24 weight types, kary up >= exact >= kary down and adjacent: 24/24
+=== k=4 h=6
+classes by definition: 9748; kbig weight types: 28; same set: True
+6571684 minimal match pairs of size <= 14: 0 classes whose counts differ from the closed form (every type has >= 1 nonzero coefficients checked)
+wrote kary/review-big/wt/k4h6/weights_k4_h6.txt: 28 weight types at z = 0.1575
+k=4 h=6 z=0x1.428f5c28f5c29p-3: 28 weight types, kary up >= exact >= kary down and adjacent: 28/28

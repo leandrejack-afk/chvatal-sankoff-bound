@@ -1,0 +1,52 @@
+=== k3h4_control: unmodified copy
+  kbverify exit 0: lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) | rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212)
+  check_table_big (all 5116 states) exit 0: checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 0 mismatching states
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 0 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_trunc: file 8 bytes short
+  kbverify exit 2: table file size does not match its header
+  check_table_big (all 5116 states) exit 1:     mm = mmap.mmap(fid.fileno(), bytes, access=acc, offset=start) | ValueError: mmap length is greater than file size
+  rvcmp_big (stride 1) exit 1: short keys
+=== k3h4_tgt_oob: record 187669: tgt = N
+  kbverify exit 2: bad record 187669
+  check_table_big (all 5116 states) exit 1: AssertionError
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 1 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_wt_other: record 187669 (state 2558): weight type 2 -> 3
+  kbverify exit 0: lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) | rho_lower=0x1.947b7ade406e3p-3 (0.19750114432104401)
+  check_table_big (all 5116 states) exit 1: MISMATCH at state 2558 ((0, 1, 2, 0), (0, 0, 2, 0), (0, 0, 0, 1), (1, 0, 1, 1)) | checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 1 mismatching states
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 1 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_tgt_other: record 187669 (state 2558): target 72 -> 73
+  kbverify exit 0: lambda_cert=0x1.969b510227255p-3 (0.19853843009777231) | rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212)
+  check_table_big (all 5116 states) exit 1: MISMATCH at state 2558 ((0, 1, 2, 0), (0, 0, 2, 0), (0, 0, 0, 1), (1, 0, 1, 1)) | checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 1 mismatching states
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 1 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_cnt_dec: record 183236: multiplicity minus 1
+  kbverify exit 0: lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) | rho_lower=0x1.9698eedf5bb9bp-3 (0.19853388423095172)
+  check_table_big (all 5116 states) exit 1: MISMATCH at state 2499 ((0, 1, 0, 1), (0, 0, 1, 1), (1, 1, 0, 1), (1, 0, 1, 1)) | checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 1 mismatching states
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 1 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_off_shift: off[2559] - 1: one record moves from state 2558 to state 2559
+  kbverify exit 0: lambda_cert=0x1.ed95a74c39cb2p-3 (0.24100809766171022) | rho_lower=0x1.4cf11595d9249p-3 (0.16256920684385737)
+  check_table_big (all 5116 states) exit 1: MISMATCH at state 2558 ((0, 1, 2, 0), (0, 0, 2, 0), (0, 0, 0, 1), (1, 0, 1, 1)) | MISMATCH at state 2559 ((0, 1, 2, 0), (0, 2, 2, 0), (0, 0, 0, 1), (0, 1, 0, 1)) | checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 2 mismatching states
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 2 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_off_nonmono: off[2558], off[2559] made decreasing
+  kbverify exit 2: offsets not monotone
+  check_table_big (all 5116 states) exit 1: MISMATCH at state 2557 ((0, 1, 1, 0), (2, 2, 1, 0), (1, 0, 0, 1), (0, 1, 1, 1)) | MISMATCH at state 2558 ((0, 1, 2, 0), (0, 0, 2, 0), (0, 0, 0, 1), (1, 0, 1, 1)) | MISMATCH at state 2559 ((0, 1, 2, 0), (0, 2, 2, 0), (0, 0, 0, 1), (0, 1, 0, 1)) | checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 3 mismatching states
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 3 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_key0: keys[0] := keys[1]
+  kbverify exit 0: lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) | rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212)
+  check_table_big (all 5116 states) exit 1:     assert int(keys[0]) == kref.pack(h, kref.start(h)), "state 0 is not the start state" | AssertionError: state 0 is not the start state
+  rvcmp_big (stride 1) exit 0: orbit map: 1 stored states share an orbit with another, 0 not in kary's own canonical form; start state index -1 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 25 states with differing records, 394986 accepted transitions (mine), 9 targets not among kbig's states (0s)
+=== k3h4_hdr_wtype: header weight type NW-1: size + 1
+  kbverify exit 2: weight type 11 in the table differs from kary/review-big/redctl/k3h4_hdr_wtype/wtypes_k3_h4.txt
+  check_table_big (all 5116 states) exit 1: MISMATCH at state 0 ((0, 0, 0, 0), (0, 0, 0, 0), (1, 1, 1, 1), (1, 1, 1, 1)) | MISMATCH at state 1 ((0, 0, 0, 0), (0, 0, 1, 0), (1, 1, 1, 1), (1, 1, 0, 1)) | MISMATCH at state 2 ((0, 0, 0, 0), (0, 1, 1, 0), (1, 1, 1, 1), (1, 0, 0, 1)) | checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 4751 mismatching states
+  rvcmp_big (stride 1) exit 1: weight type of class 36 not in their table
+=== k3h4_drop_record: record 187669 (state 2558) deleted, header and offsets made consistent
+  kbverify exit 0: lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) | rho_lower=0x1.93a1df0195452p-3 (0.19708608840542979)
+  check_table_big (all 5116 states) exit 1: MISMATCH at state 2558 ((0, 1, 2, 0), (0, 0, 2, 0), (0, 0, 0, 1), (1, 0, 1, 1)) | checked 5116 states (5116 random, seed 5, plus the first and last 200), 395020 accepted transitions: 1 mismatching states
+  rvcmp_big (stride 1) exit 0: orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0 | compared 5116 of 5116 states (every 1-th block of 1024, phase 0): 1 states with differing records, 395020 accepted transitions (mine), 0 targets not among kbig's states (0s)
+=== k3h4_vec_zero: v[2558] = 0
+  kbverify exit 2: v[2558] not positive
+=== k3h4_vec_nan: v[2558] = NaN
+  kbverify exit 2: v[2558] not positive
+=== k3h4_vec_long: vector file 8 bytes long
+  kbverify exit 1: vector file too long
+=== k3h4_wtypes_extra: wtypes file has one extra line
+  kbverify exit 2: kary/review-big/redctl/k3h4_wtypes_extra/wtypes_k3_h4.txt has more weight types than the table

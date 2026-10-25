@@ -1,0 +1,10 @@
+k=3 h=7 q0: 7241728 states, 2379806092 transitions, differing 0, missing 0
+k=3 h=7 q1: 7241728 states, 2377445667 transitions, differing 0, missing 0
+k=3 h=7 q2: 7241728 states, 2376055748 transitions, differing 0, missing 0
+k=3 h=7 q3: 7241587 states, 2386708579 transitions, differing 0, missing 0
+k=3 h=7: quarters cover 28966771 states (N = 28966771) and 9520016086 transitions (build: 9520016086); all clean: True; complete: True
+k=4 h=6 q0: 2125824 states, 6920046139 transitions, differing 0, missing 0
+k=4 h=6 q1: 2125824 states, 6906842840 transitions, differing 0, missing 0
+k=4 h=6 q2: 2125729 states, 6941794300 transitions, differing 0, missing 0
+k=4 h=6 q3: 2124800 states, 6951846299 transitions, differing 0, missing 0
+k=4 h=6: quarters cover 8502177 states (N = 8502177) and 27720529578 transitions (build: 27720529578); all clean: True; complete: True

@@ -1,0 +1,4 @@
+d = 0.739975: nearest double 0x1.7ade00d1b7176p-1 is above d by 4.938e-17
+interval upper end exceeds d by 1.000e-30
+old step prints 0.739975: exact decimal >= upper end? False
+new step prints 0.739976: exact decimal >= upper end? True

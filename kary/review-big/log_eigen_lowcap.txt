@@ -1,0 +1,3 @@
+CAP=100003: chunks=121 77 passes; vectors identical to the 1-chunk run: yes
+CAP=2500000: chunks=5 77 passes; vectors identical to the 1-chunk run: yes
+CAP=4100000: chunks=3 77 passes; vectors identical to the 1-chunk run: yes

@@ -1,0 +1,7 @@
+eig35: fixed kbcertify output identical to the earlier run
+eig35_interp: fixed kbcertify output identical to the earlier run
+c36: DIFFERENT
+1c1
+< wrote kary/review-big/c36/weights_k3_h6.txt: 20 weight types at z = 0.2048
+---
+> wrote review-big/c36/weights_k3_h6.txt: 20 weight types at z = 0.2048

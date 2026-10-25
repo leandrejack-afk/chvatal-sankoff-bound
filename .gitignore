@@ -15,3 +15,9 @@ kary/review/rvcmp
 kary/__pycache__/
 kary/review/__pycache__/
 !kary/vectors/*.bin
+kary/kbig
+kary/kbverify
+kary/rvcmp_big
+kary/sha256nc
+kary/big/
+kary/review-big/bin/

@@ -1,0 +1,7 @@
+wrote big/k3h7/weights_k3_h7.txt: 24 weight types at z = 0.2129
+k=3 h=7 N=28966771 records=9427252448 z=0x1.b404ea4a8c155p-3 (0.21290000000000001)
+lambda_cert=0x1.2f970b6938e14p-2 (0.29647462682461989)
+rho_lower=0x1.2f970b68f84efp-2 (0.29647462680993802)
+bound interval: [0.737494265019612, 0.737494265019612]
+best possible at this z (from rho_lower): [0.73749426499, 0.73749426499]
+CERTIFIED: gamma_3 <= 0.737495   (k=3, h=7, z=0.2129, lambda_cert=0.2964746268246199)

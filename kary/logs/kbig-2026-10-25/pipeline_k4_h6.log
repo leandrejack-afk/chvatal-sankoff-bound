@@ -1,0 +1,53 @@
+15:23:35 project k=4 h=6
+projected 8342234 of 8502177 states onto the h=5 vector (others 0.650068) -> big/k4h6/start_k4_h6.bin
+15:23:37 stage 1: z = 0.1556 0.1560 0.1564 0.1568 0.1572 0.1576 0.1580 0.1584
+k=4 h=6 states=8502177 records=21142620884 weight types=28 chunks=158, 8 values of z, tol 1e-07
+z=0.1556 lambda in [0.247784246323618, 0.247784258577084] bound=0.679721017 passes=29
+z=0.1560 lambda in [0.249658153817933, 0.249658167305161] bound=0.679711194 passes=29
+z=0.1564 lambda in [0.251543027327399, 0.251543042104093] bound=0.679704515 passes=29
+z=0.1568 lambda in [0.253438921024082, 0.253438937147864] bound=0.679701021 passes=29
+z=0.1572 lambda in [0.255345889401554, 0.255345906932039] bound=0.679700755 passes=29
+z=0.1576 lambda in [0.257263987278047, 0.257264006276890] bound=0.679703760 passes=29
+z=0.1580 lambda in [0.259193269799630, 0.259193290330593] bound=0.679710078 passes=29
+z=0.1584 lambda in [0.261133792443450, 0.261133814572460] bound=0.679719756 passes=29
+eigen time 1704s
+z=0.1556 bound=0.679721017 (max/min - 1 = 4.9e-08)
+z=0.1560 bound=0.679711194 (max/min - 1 = 5.4e-08)
+z=0.1564 bound=0.679704515 (max/min - 1 = 5.9e-08)
+z=0.1568 bound=0.679701021 (max/min - 1 = 6.4e-08)
+z=0.1572 bound=0.679700755 (max/min - 1 = 6.9e-08)
+z=0.1576 bound=0.679703760 (max/min - 1 = 7.4e-08)
+z=0.1580 bound=0.679710078 (max/min - 1 = 7.9e-08)
+z=0.1584 bound=0.679719756 (max/min - 1 = 8.5e-08)
+vertex z=0.157033, predicted bound 0.679700468, curvature 10.2
+4-decimal z nearest the vertex: 0.1570
+15:52:01 stage 2: z = 0.1567 0.1568 0.1569 0.1570 0.1571 0.1572 0.1573 0.1574
+k=4 h=6 states=8502177 records=21142620884 weight types=28 chunks=158, 8 values of z, tol 1e-09
+z=0.1567 lambda in [0.252963920100486, 0.252963920267441] bound=0.679701580 passes=16
+z=0.1568 lambda in [0.253438929853085, 0.253438929929618] bound=0.679701007 passes=16
+z=0.1569 lambda in [0.253914631704779, 0.253914631875689] bound=0.679700636 passes=16
+z=0.1570 lambda in [0.254391026601648, 0.254391026813980] bound=0.679700468 passes=16
+z=0.1571 lambda in [0.254868115400120, 0.254868115574678] bound=0.679700502 passes=16
+z=0.1572 lambda in [0.255345898957906, 0.255345899042162] bound=0.679700740 passes=16
+z=0.1573 lambda in [0.255824378038788, 0.255824378217489] bound=0.679701182 passes=16
+z=0.1574 lambda in [0.256303553596856, 0.256303553817923] bound=0.679701830 passes=16
+eigen time 975s
+z=0.1567 bound=0.679701580 (max/min - 1 = 6.6e-10)
+z=0.1568 bound=0.679701007 (max/min - 1 = 3.0e-10)
+z=0.1569 bound=0.679700636 (max/min - 1 = 6.7e-10)
+z=0.1570 bound=0.679700468 (max/min - 1 = 8.3e-10)
+z=0.1571 bound=0.679700502 (max/min - 1 = 6.8e-10)
+z=0.1572 bound=0.679700740 (max/min - 1 = 3.3e-10)
+z=0.1573 bound=0.679701182 (max/min - 1 = 7.0e-10)
+z=0.1574 bound=0.679701830 (max/min - 1 = 8.6e-10)
+vertex z=0.157033, predicted bound 0.679700457, curvature 10.1
+4-decimal z nearest the vertex: 0.1570
+16:08:17 best z = 0.1570; certifying
+wrote big/k4h6/weights_k4_h6.txt: 28 weight types at z = 0.157
+k=4 h=6 N=8502177 records=21142620884 z=0x1.4189374bc6a7fp-3 (0.157)
+lambda_cert=0x1.047f14d17bdedp-2 (0.25439102676952424)
+rho_lower=0x1.047f14cf05242p-2 (0.25439102662611301)
+bound interval: [0.679700467578359, 0.679700467578359]
+best possible at this z (from rho_lower): [0.679700467298, 0.679700467298]
+CERTIFIED: gamma_4 <= 0.679701   (k=4, h=6, z=0.157, lambda_cert=0.25439102676952424)
+16:09:47 done

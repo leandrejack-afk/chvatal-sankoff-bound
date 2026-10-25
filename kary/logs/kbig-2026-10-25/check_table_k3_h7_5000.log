@@ -1,0 +1,2 @@
+k=3 h=7: states 28966771, records 9427252448, inputs kbig 975, by definition 975
+checked 5400 states (5000 random, seed 1, plus the first and last 200), 1768622 accepted transitions: 0 mismatching states

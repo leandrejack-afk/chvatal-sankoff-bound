@@ -1,0 +1,12 @@
+k=3 h=7 inputs=975 accepting states=28966771 accepted transitions=9520016086 records=9427252448 build 2762.0s -> big/k3h7/kbig_k3_h7.bin
+  records whose target was not yet known at the parallel lookup: 203024762
+Sun Oct 25 13:24:44 -04 2026
+their table: k=3 h=7 N=28966771 R=9427252448 classes=975 weight types=24
+orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0
+compared 286720 of 28966771 states (every 101-th block of 1024, phase 50): 0 states with differing records, 95729080 accepted transitions (mine), 0 targets not among kbig's states (35s)
+rvcmp_big exit 0
+Sun Oct 25 13:25:31 -04 2026
+k=3 h=7: states 28966771, records 9427252448, inputs kbig 975, by definition 975
+checked 1000 states (600 random, seed 2027, plus the first and last 200), 304413 accepted transitions: 0 mismatching states
+check_table_big exit 0
+Sun Oct 25 13:27:11 -04 2026

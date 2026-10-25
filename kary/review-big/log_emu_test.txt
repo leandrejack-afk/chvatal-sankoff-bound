@@ -1,0 +1,1 @@
+emulated directed rounding vs hardware: 120000000 operations, 0 mismatches (53698477 inexact)

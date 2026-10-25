@@ -1,0 +1,211 @@
+/* rvb_verify.c: reviewer's own verifier for kbig tables (review-big, 2026-10-25).
+ *
+ * Checks A_z v <= lambda v and A_z v >= rho v for the KBIG table, vector and weights that
+ * kbverify reads, but by a different route:
+ *   - the file is parsed with pread at fixed offsets (header, sizes, offsets, keys[0]);
+ *   - records are streamed in fixed blocks that ignore state boundaries (a state's records
+ *     may straddle two blocks); each pthread owns one contiguous state range;
+ *   - the rounding mode is never changed. Directed rounding is emulated in round-to-nearest
+ *     (rvb_emu.h), in kbverify's order of operations, so lambda_emu and rho_emu must equal
+ *     kbverify's lambda_cert and rho_lower bit for bit;
+ *   - independently of any directed rounding, a round-to-nearest pass gives qn_s with
+ *     q_s <= qn_s (1-u)^-(n_s+2) (n_s records: two products per term, n_s - 1 additions,
+ *     one division; nonnegative operands, no underflow), so
+ *     lambda_apriori = max_s qn_s * (1-u)^-(nmax+2) (evaluated exactly in rvb_bound.py).
+ *
+ * Usage: rvb_verify k h table.bin vector.bin weights.txt wtypes.txt [threads]
+ * Build: clang -O2 -ffp-contract=off -march=native -o rvb_verify rvb_verify.c -lm -lpthread
+ */
+#include <fcntl.h>
+#include <pthread.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include "rvb_emu.h"
+
+typedef struct { uint32_t tgt; uint16_t wt; uint16_t cnt; } Rec;
+
+static int K, H, NW, NT = 6;
+static uint64_t N, R, RECOFF;
+static uint64_t *OFF;
+static double *V, WU[256], WD[256];
+static int FD;
+
+static void die(const char *m) { fprintf(stderr, "rvb_verify: %s\n", m); exit(2); }
+
+static void pread_all(int fd, void *buf, uint64_t bytes, uint64_t at) {
+    uint64_t done = 0;
+    while (done < bytes) {
+        uint64_t want = bytes - done;
+        if (want > (1ULL << 28)) want = 1ULL << 28;
+        ssize_t got = pread(fd, (char *)buf + done, want, (off_t)(at + done));
+        if (got <= 0) die("short read");
+        done += (uint64_t)got;
+    }
+}
+
+typedef struct {
+    uint64_t s0, s1;
+    double lam_emu, rho_emu, qn_max, qn_min;
+    uint64_t nmax, empty, badrec, tiny, nrec, argmax;
+} Job;
+
+#define BLK (1ULL << 21)
+
+static void *work(void *arg) {
+    Job *j = arg;
+    Rec *blk = malloc(BLK * sizeof(Rec));
+    if (!blk) die("out of memory (block)");
+    uint64_t r = OFF[j->s0], rend = OFF[j->s1], bstart = r, bend = r;   /* block holds [bstart, bend) */
+    double lam = 0, rho = INFINITY, qmx = 0, qmn = INFINITY;
+    for (uint64_t s = j->s0; s < j->s1; s++) {
+        uint64_t e = OFF[s + 1], n = e - OFF[s];
+        if (n > j->nmax) j->nmax = n;
+        if (n == 0) j->empty++;
+        double su = 0, sd = 0, snu = 0, snd = 0;
+        for (; r < e; r++) {
+            if (r == bend) {                      /* refill: next block, whatever states it cuts */
+                bstart = r;
+                bend = r + BLK < rend ? r + BLK : rend;
+                pread_all(FD, blk, (bend - bstart) * sizeof(Rec), RECOFF + bstart * sizeof(Rec));
+            }
+            Rec x = blk[r - bstart];
+            if (x.tgt >= N || x.wt >= NW || x.cnt == 0) { j->badrec++; continue; }
+            double c = (double)x.cnt, vt = V[x.tgt];
+            double tu = up_mul(up_mul(c, WU[x.wt]), vt);
+            double td = dn_mul(dn_mul(c, WD[x.wt]), vt);
+            if (td < RVB_TINY) j->tiny++;
+            su = up_add(su, tu);
+            sd = dn_add(sd, td);
+            snu = snu + (c * WU[x.wt]) * vt;
+            snd = snd + (c * WD[x.wt]) * vt;
+            j->nrec++;
+        }
+        if (n > 0 && sd < RVB_TINY) j->tiny++;
+        double qu = up_div(su, V[s]), qd = dn_div(sd, V[s]);
+        double qnu = snu / V[s], qnd = snd / V[s];
+        if (qu > lam) { lam = qu; j->argmax = s; }
+        if (qd < rho) rho = qd;
+        if (qnu > qmx) qmx = qnu;
+        if (qnd < qmn) qmn = qnd;
+    }
+    if (r != rend) die("record cursor out of step");
+    j->lam_emu = lam; j->rho_emu = rho; j->qn_max = qmx; j->qn_min = qmn;
+    free(blk);
+    return NULL;
+}
+
+int main(int argc, char **argv) {
+    if (argc < 7) { fprintf(stderr, "usage: rvb_verify k h table vector weights wtypes [threads]\n"); return 1; }
+    K = atoi(argv[1]); H = atoi(argv[2]);
+    if (argc > 7) NT = atoi(argv[7]);
+    if (NT < 1 || NT > 64) die("threads");
+    FD = open(argv[3], O_RDONLY);
+    if (FD < 0) die("cannot open table");
+    fcntl(FD, F_NOCACHE, 1);
+    char magic[4];
+    int32_t kh[2], ninw[2];
+    uint64_t nr[2];
+    pread_all(FD, magic, 4, 0);
+    pread_all(FD, kh, 8, 4);
+    pread_all(FD, nr, 16, 12);
+    pread_all(FD, ninw, 8, 28);
+    if (memcmp(magic, "KBIG", 4) || kh[0] != K || kh[1] != H) die("table header");
+    N = nr[0]; R = nr[1]; NW = ninw[1];
+    if (NW < 1 || NW > 256 || N == 0 || N >= (1ULL << 32)) die("table header values");
+    int32_t wt[256][5];
+    pread_all(FD, wt, 20ULL * NW, 36);
+    RECOFF = 36 + 20ULL * NW;
+    struct stat sb;
+    if (fstat(FD, &sb) || (uint64_t)sb.st_size != RECOFF + 8 * R + 8 * (N + 1) + 8 * N) die("table size");
+    OFF = malloc((N + 1) * 8);
+    if (!OFF) die("out of memory (offsets)");
+    pread_all(FD, OFF, (N + 1) * 8, RECOFF + 8 * R);
+    if (OFF[0] != 0 || OFF[N] != R) die("offset ends");
+    for (uint64_t s = 0; s < N; s++) if (OFF[s + 1] < OFF[s]) die("offsets decrease");
+    uint64_t key0;
+    pread_all(FD, &key0, 8, RECOFF + 8 * R + 8 * (N + 1));
+    uint64_t start = 0;
+    for (int t = 0; t < H; t++) start |= (1ULL << (H + t)) | (1ULL << t);   /* x = y = 0^h, dx = dy = 1^h */
+    /* weight types against the text file */
+    FILE *fy = fopen(argv[6], "r");
+    if (!fy) die("wtypes file");
+    for (int i = 0; i < NW; i++) {
+        int a[6];
+        if (fscanf(fy, "%d %d %d %d %d %d", &a[0], &a[1], &a[2], &a[3], &a[4], &a[5]) != 6 || a[0] != i) die("wtypes file short");
+        for (int c = 0; c < 5; c++) if (a[c + 1] != wt[i][c]) die("wtypes file differs from the table header");
+    }
+    int extra;
+    if (fscanf(fy, "%d", &extra) == 1) die("wtypes file longer than the header");
+    fclose(fy);
+    /* weights: "up down" per type, hex doubles */
+    FILE *fw = fopen(argv[5], "r");
+    if (!fw) die("weights file");
+    for (int i = 0; i < NW; i++) {
+        char line[256], *e;
+        if (!fgets(line, sizeof line, fw)) die("weights short");
+        WU[i] = strtod(line, &e);
+        WD[i] = strtod(e, NULL);
+        if (!(WD[i] > 0) || !(WU[i] >= WD[i]) || !isfinite(WU[i])) die("weight line");
+    }
+    if (fgets((char[8]){0}, 8, fw)) die("weights file longer than NW lines");
+    fclose(fw);
+    /* vector */
+    int fv = open(argv[4], O_RDONLY);
+    if (fv < 0) die("vector file");
+    int32_t vk[2]; uint64_t vn; double z;
+    pread_all(fv, vk, 8, 0); pread_all(fv, &vn, 8, 8); pread_all(fv, &z, 8, 16);
+    if (vk[0] != K || vk[1] != H || vn != N) die("vector header");
+    if (fstat(fv, &sb) || (uint64_t)sb.st_size != 24 + 8 * N) die("vector size");
+    V = malloc(N * 8);
+    if (!V) die("out of memory (vector)");
+    pread_all(fv, V, 8 * N, 24);
+    close(fv);
+    double vmin = INFINITY, vmax = 0;
+    for (uint64_t s = 0; s < N; s++) {
+        if (!(V[s] > 0) || !isfinite(V[s])) die("vector entry not positive and finite");
+        if (V[s] < vmin) vmin = V[s];
+        if (V[s] > vmax) vmax = V[s];
+    }
+    /* split the states into NT ranges of about R/NT records */
+    Job jobs[64];
+    pthread_t th[64];
+    uint64_t s = 0;
+    for (int t = 0; t < NT; t++) {
+        uint64_t target = R / NT * (uint64_t)(t + 1), e = s;
+        if (t == NT - 1) e = N;
+        else while (e < N && OFF[e] < target) e++;
+        memset(&jobs[t], 0, sizeof(Job));
+        jobs[t].s0 = s; jobs[t].s1 = e;
+        s = e;
+    }
+    for (int t = 0; t < NT; t++) pthread_create(&th[t], NULL, work, &jobs[t]);
+    for (int t = 0; t < NT; t++) pthread_join(th[t], NULL);
+    double lam = 0, rho = INFINITY, qmx = 0, qmn = INFINITY;
+    uint64_t nmax = 0, empty = 0, bad = 0, tiny = 0, nrec = 0, arg = 0, covered = 0;
+    for (int t = 0; t < NT; t++) {
+        if (jobs[t].lam_emu > lam) { lam = jobs[t].lam_emu; arg = jobs[t].argmax; }
+        if (jobs[t].rho_emu < rho) rho = jobs[t].rho_emu;
+        if (jobs[t].qn_max > qmx) qmx = jobs[t].qn_max;
+        if (jobs[t].qn_min < qmn) qmn = jobs[t].qn_min;
+        if (jobs[t].nmax > nmax) nmax = jobs[t].nmax;
+        empty += jobs[t].empty; bad += jobs[t].badrec; tiny += jobs[t].tiny; nrec += jobs[t].nrec;
+        covered += jobs[t].s1 - jobs[t].s0;
+    }
+    printf("k=%d h=%d N=%llu R=%llu NW=%d z=%a threads=%d\n", K, H, (unsigned long long)N, (unsigned long long)R, NW, z, NT);
+    printf("states covered %llu, records summed %llu, bad records %llu, empty rows %llu, tiny operands %llu\n",
+           (unsigned long long)covered, (unsigned long long)nrec, (unsigned long long)bad,
+           (unsigned long long)empty, (unsigned long long)tiny);
+    printf("state 0 is the start state: %s\n", key0 == start ? "yes" : "NO");
+    printf("vector min %a max %a\n", vmin, vmax);
+    printf("lambda_emu=%a (%.17g) at state %llu\n", lam, lam, (unsigned long long)arg);
+    printf("rho_emu=%a (%.17g)\n", rho, rho);
+    printf("nearest_max_up_weights=%a nmax=%llu\n", qmx, (unsigned long long)nmax);
+    printf("nearest_min_down_weights=%a\n", qmn);
+    if (bad || tiny || covered != N || nrec != R || key0 != start) { printf("NOT VERIFIED\n"); return 3; }
+    printf("OK\n");
+    return 0;
+}

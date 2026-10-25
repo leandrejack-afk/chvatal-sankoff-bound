@@ -1,0 +1,5 @@
+their table: k=4 h=6 N=8502177 R=21142620884 classes=9748 weight types=28
+orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0
+compared 2125824 of 8502177 states (every 4-th block of 1024, phase 0): 0 states with differing records, 6920046139 accepted transitions (mine), 0 targets not among kbig's states (2822s)
+RESULT: no difference
+phase 0 exit 0

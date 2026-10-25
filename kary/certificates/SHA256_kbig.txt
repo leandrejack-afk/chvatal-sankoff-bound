@@ -1,0 +1,10 @@
+# SHA-256 of the k = 3, h = 7 and k = 4, h = 6 tables (kbig format), certified vectors, weights and weight types
+# (computed with sha256nc.c; the tables and vectors are not in this repository, see README.md)
+51d9d19bd9d4130dada1212730277a59a61b99d9b9d77649a99a11cf20845619  kbig_k3_h7.bin
+766c3dda9238a664ea324aeca3051a209e4eae308671f3dad605af1c765ee35b  kvec_k3_h7.bin
+d8e63f1d1059206b40b10c41df857ef71f83d29ad24f98cabb804ef267229931  weights_k3_h7.txt
+eb4373e2b0380cd6e47e29640641e0ff72879dd5d1ba3251f2b18f306129795a  wtypes_k3_h7.txt
+549ef26d620e906f073eec9f594b8552738634faebf92777264fe916d9b9bc4f  kbig_k4_h6.bin
+4ee380850c2d940226bcc6547f69ec5f5b983eb11fb09cf8c1fde320af28a19e  kvec_k4_h6.bin
+09b8c2d2295cec4fb46ff7534570c34e18c53f39594715242c19adde4c2a5d2d  weights_k4_h6.txt
+e39ba391b1d584ac07fc578ab8a559d8e5b988aae260d2ddb4d2a57538f05fb3  wtypes_k4_h6.txt

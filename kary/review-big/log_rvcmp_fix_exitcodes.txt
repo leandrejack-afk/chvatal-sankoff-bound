@@ -1,0 +1,7 @@
+k3h4_control: exit 0 | RESULT: no difference 
+k3h4_tgt_other: exit 1 | RESULT: DIFFERENCES FOUND 
+k3h4_cnt_dec: exit 1 | RESULT: DIFFERENCES FOUND 
+k3h4_off_shift: exit 1 | RESULT: DIFFERENCES FOUND 
+k3h4_key0: exit 1 | RESULT: DIFFERENCES FOUND 
+k3h4_drop_record: exit 1 | RESULT: DIFFERENCES FOUND 
+k3h4_hdr_wtype: exit 1 | weight type of class 36 not in their table 

@@ -3,8 +3,10 @@
 **Update, 25 October 2026.**
 
 - **Three and four letters.** The same method, run for alphabets of size 3 and 4, gives
-  **γ₃ < 0.739975** and **γ₄ < 0.683622**, below the bounds 0.765803 and 0.708236 that had
-  stood since Dančík's 1994 thesis. Code, certificates and checks are in
+  **γ₃ < 0.737495** and **γ₄ < 0.679701**, below the bounds 0.765803 and 0.708236 that had
+  stood since Dančík's 1994 thesis. These come from automata with h = 7 and h = 6, whose
+  tables (76 GB and 169 GB) are built and used from disk; the in-memory runs with h = 6 and
+  h = 5 gave 0.739975 and 0.683622. Code, certificates and checks are in
   [`kary/`](kary/README.md).
 - **Five to fifteen letters.** With h = 3 it also improves Dančík's bound for every
   alphabet size from 5 to 15, by 0.007 to 0.011, with exact rational certificates; see

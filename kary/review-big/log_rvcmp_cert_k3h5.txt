@@ -1,0 +1,4 @@
+their table: k=3 h=5 N=98041 R=12039641 classes=279 weight types=16
+orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0
+their vector on referee transitions, z=0x1.8ef34d6a161e5p-3: max ratio (up) 0x1.e29d481fee276p-3 = 0.23565155360644824, min ratio (down) 0x1.e29d481fecfd1p-3 = 0.23565155360631576 (6s)
+nice -n 10 ./rvcmp_big 3 5 review-big/eig35/kbig_k3_h5.bin    11.46s user 0.05s system 196% cpu 5.864 total

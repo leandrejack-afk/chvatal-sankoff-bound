@@ -1,0 +1,13 @@
+k=2 h=2 identical: 467c7a093339fbd9 k=2 h=2 inputs=6 accepting states=7 accepted transitions=36 records=36 |   records whose target was not yet known at the parallel lookup: 9
+k=2 h=3 identical: 9b3ed603a3a664f9 k=2 h=3 inputs=10 accepting states=98 accepted transitions=707 records=707 |   records whose target was not yet known at the parallel lookup: 181
+k=2 h=4 identical: 1f36ff12b043db8c k=2 h=4 inputs=14 accepting states=1020 accepted transitions=9165 records=9165 |   records whose target was not yet known at the parallel lookup: 2122
+k=2 h=5 identical: 19e52f017b7d02d5 k=2 h=5 inputs=18 accepting states=10160 accepted transitions=106114 records=106114 |   records whose target was not yet known at the parallel lookup: 21894
+k=2 h=6 identical: ee533c84ef638c46 k=2 h=6 inputs=22 accepting states=89960 accepted transitions=1065417 records=1065417 |   records whose target was not yet known at the parallel lookup: 188267
+k=2 h=7 identical: d115b314831720f2 k=2 h=7 inputs=26 accepting states=780368 accepted transitions=10203881 records=10203881 |   records whose target was not yet known at the parallel lookup: 1342894
+k=3 h=2 identical: f1cd76d4832fcf5f k=3 h=2 inputs=21 accepting states=10 accepted transitions=181 records=108 |   records whose target was not yet known at the parallel lookup: 16
+k=3 h=3 identical: bd94f82c67f30115 k=3 h=3 inputs=63 accepting states=249 accepted transitions=10592 records=8866 |   records whose target was not yet known at the parallel lookup: 1381
+k=3 h=4 identical: 9e5d386481d0ae06 k=3 h=4 inputs=141 accepting states=5116 accepted transitions=395020 records=366370 |   records whose target was not yet known at the parallel lookup: 47772
+k=3 h=5 identical: 7f51c895ada0df7b k=3 h=5 inputs=279 accepting states=98041 accepted transitions=12481994 records=12039641 |   records whose target was not yet known at the parallel lookup: 1007288
+k=4 h=2 identical: b7c30c36a6e865e8 k=4 h=2 inputs=52 accepting states=10 accepted transitions=461 records=119 |   records whose target was not yet known at the parallel lookup: 16
+k=4 h=3 identical: 5ccda1c2f5781886 k=4 h=3 inputs=292 accepting states=309 accepted transitions=60995 records=22916 |   records whose target was not yet known at the parallel lookup: 2923
+k=4 h=4 identical: 767f5dde8cda7b5b k=4 h=4 inputs=1108 accepting states=9427 accepted transitions=5400599 records=2914880 |   records whose target was not yet known at the parallel lookup: 260264

@@ -1,0 +1,10 @@
+z=0.1556 bound=0.679721017 (max/min - 1 = 4.9e-08)
+z=0.1560 bound=0.679711194 (max/min - 1 = 5.4e-08)
+z=0.1564 bound=0.679704515 (max/min - 1 = 5.9e-08)
+z=0.1568 bound=0.679701021 (max/min - 1 = 6.4e-08)
+z=0.1572 bound=0.679700755 (max/min - 1 = 6.9e-08)
+z=0.1576 bound=0.679703760 (max/min - 1 = 7.4e-08)
+z=0.1580 bound=0.679710078 (max/min - 1 = 7.9e-08)
+z=0.1584 bound=0.679719756 (max/min - 1 = 8.5e-08)
+vertex z=0.157033, predicted bound 0.679700468, curvature 10.2
+4-decimal z nearest the vertex: 0.1570

@@ -1,0 +1,20 @@
+kbig binary: 1bedda70009f1d29cb4c49e3d764b16bb4dc4f43362f788779e8ca0c761c54c0  (built from kbig.c 4ba8efbd6310408e6fd6046bc7984da7bc4d61d65e2c77ee28b1323aebb2101c)
+2026-10-25 15:29
+k=2 h=2 identical: 467c7a093339fbd9 k=2 h=2 inputs=6 accepting states=7 accepted transitions=36 records=36
+k=2 h=3 identical: 9b3ed603a3a664f9 k=2 h=3 inputs=10 accepting states=98 accepted transitions=707 records=707
+k=2 h=4 identical: 1f36ff12b043db8c k=2 h=4 inputs=14 accepting states=1020 accepted transitions=9165 records=9165
+k=2 h=5 identical: 19e52f017b7d02d5 k=2 h=5 inputs=18 accepting states=10160 accepted transitions=106114 records=106114
+k=2 h=6 identical: ee533c84ef638c46 k=2 h=6 inputs=22 accepting states=89960 accepted transitions=1065417 records=1065417
+k=2 h=7 identical: d115b314831720f2 k=2 h=7 inputs=26 accepting states=780368 accepted transitions=10203881 records=10203881
+k=2 h=8 identical: 8a52058fbd27d299 k=2 h=8 inputs=30 accepting states=6419109 accepted transitions=91508397 records=91508397
+k=3 h=2 identical: f1cd76d4832fcf5f k=3 h=2 inputs=21 accepting states=10 accepted transitions=181 records=108
+k=3 h=3 identical: bd94f82c67f30115 k=3 h=3 inputs=63 accepting states=249 accepted transitions=10592 records=8866
+k=3 h=4 identical: 9e5d386481d0ae06 k=3 h=4 inputs=141 accepting states=5116 accepted transitions=395020 records=366370
+k=3 h=5 identical: 7f51c895ada0df7b k=3 h=5 inputs=279 accepting states=98041 accepted transitions=12481994 records=12039641
+k=3 h=6 identical: 0f0c291d3ec83262 k=3 h=6 inputs=525 accepting states=1711682 accepted transitions=350867245 records=344419015
+k=4 h=2 identical: b7c30c36a6e865e8 k=4 h=2 inputs=52 accepting states=10 accepted transitions=461 records=119
+k=4 h=3 identical: 5ccda1c2f5781886 k=4 h=3 inputs=292 accepting states=309 accepted transitions=60995 records=22916
+k=4 h=4 identical: 767f5dde8cda7b5b k=4 h=4 inputs=1108 accepting states=9427 accepted transitions=5400599 records=2914880
+k=4 h=5 identical: fd7e1b4a53ad7ff9 k=4 h=5 inputs=3460 accepting states=290442 accepted transitions=409634897 records=274862010
+sha256 of the rebuilt k=3 h=6 table: 0f0c291d3ec83262bfda084194e0f31aed6d983309130f51784d527b43da451c; recorded in data/SHA256_kary.txt: 0f0c291d3ec83262bfda084194e0f31aed6d983309130f51784d527b43da451c
+sha256 of the rebuilt k=4 h=5 table: fd7e1b4a53ad7ff9a36c049113e12c28bfd035bd903a04a4d6d63893f6d2eea1; recorded in data/SHA256_kary.txt: fd7e1b4a53ad7ff9a36c049113e12c28bfd035bd903a04a4d6d63893f6d2eea1

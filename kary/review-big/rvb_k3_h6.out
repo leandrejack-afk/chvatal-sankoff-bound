@@ -1,0 +1,9 @@
+k=3 h=6 N=1711682 R=344419015 NW=20 z=0x1.a36e2eb1c432dp-3 threads=4
+states covered 1711682, records summed 344419015, bad records 0, empty rows 0, tiny operands 0
+state 0 is the start state: yes
+vector min 0x1.0c20bd82b663ap-4 max 0x1p+0
+lambda_emu=0x1.127d82e6e2c72p-2 (0.26805691274848364) at state 969637
+rho_emu=0x1.127d82e6e2234p-2 (0.26805691274833809)
+nearest_max_up_weights=0x1.127d82e6e2c7p-2 nmax=514
+nearest_min_down_weights=0x1.127d82e6e22dbp-2
+OK

@@ -1,0 +1,12 @@
+kbverify binary: 5da5b2c95315f4b04940010ccb428c076fda726a11711c313a332d4492cd0272  (built from kbverify.c c690e860d4b48a8c77629ffeff158394c4e2a7549a2348d1e8cd77a61d2d3af8)
+kbverify on kbig's rebuilds (big/repro) with kary.c's vectors and weights (data/), against kverify's lines in data/certify_k<k>_h<h>.out
+k=2 h=8 identical: lambda_cert=0x1.5e09468fa90bp-2 (0.34183225871880563) rho_lower=0x1.5e09468fa7c72p-2 (0.34183225871851797) 
+k=3 h=2 identical: lambda_cert=0x1.ca0db9cf13ee8p-4 (0.11182949620819793) rho_lower=0x1.ca0db9cf13a79p-4 (0.11182949620818218) 
+k=3 h=3 identical: lambda_cert=0x1.3ecdd1d883eb4p-3 (0.15566600744249615) rho_lower=0x1.3ecdd1d883a08p-3 (0.15566600744246295) 
+k=3 h=4 identical: lambda_cert=0x1.9699a6593d1cbp-3 (0.19853525123438795) rho_lower=0x1.9699a6593c71fp-3 (0.19853525123431212) 
+k=3 h=5 identical: lambda_cert=0x1.e29d481fee95bp-3 (0.23565155360649723) rho_lower=0x1.e29d481fed35bp-3 (0.23565155360634091) 
+k=3 h=6 identical: lambda_cert=0x1.127d82e6e2c72p-2 (0.26805691274848364) rho_lower=0x1.127d82e6e2234p-2 (0.26805691274833809) 
+k=4 h=2 identical: lambda_cert=0x1.c4eaa359bbd76p-4 (0.11057533081815571) rho_lower=0x1.c4eaa359bb92cp-4 (0.11057533081814047) 
+k=4 h=3 identical: lambda_cert=0x1.2f3bdad0dbce3p-3 (0.14806338262449179) rho_lower=0x1.2f3bdad0db7edp-3 (0.14806338262445654) 
+k=4 h=4 identical: lambda_cert=0x1.7e299e71d3917p-3 (0.18660281929846498) rho_lower=0x1.7e299e71d305fp-3 (0.18660281929840303) 
+k=4 h=5 identical: lambda_cert=0x1.c7edf121aebe8p-3 (0.22262180694619293) rho_lower=0x1.c7edf121ad712p-3 (0.22262180694604489) 
