@@ -1,0 +1,5 @@
+k=5 h=2: 1500 pairs, 14141 canonical steps (3964 truncated inputs), no rejection
+k=5 h=3: 1500 pairs, 14141 canonical steps (2837 truncated inputs), no rejection
+k=6 h=3: 1500 pairs, 12603 canonical steps (2922 truncated inputs), no rejection
+k=8 h=2: 1500 pairs, 10888 canonical steps (3987 truncated inputs), no rejection
+k=13 h=2: 1500 pairs, 8678 canonical steps (3792 truncated inputs), no rejection

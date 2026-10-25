@@ -1,0 +1,1 @@
+k=14 h=3 z=0.0452 states=316 classes=350182 accepted=96489024 lambda<0.141876103688902 (exact) mu>=0.141876103688902 bound=0.468661001718 best_at_z=0.468661001718 CERTIFIED gamma_14 <= 0.468662  dancik=0.476198 BEATS  (build 1335s, total 1335s, iters 16)
