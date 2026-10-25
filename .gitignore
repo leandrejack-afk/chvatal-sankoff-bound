@@ -7,3 +7,11 @@ lcs_compact_f32
 verify_cert
 verify_cert_stream
 __pycache__/
+kary/data/
+kary/kary
+kary/kverify
+kary/review/rvk
+kary/review/rvcmp
+kary/__pycache__/
+kary/review/__pycache__/
+!kary/vectors/*.bin

@@ -1,0 +1,6 @@
+k=3 h=5 sym=0: states 588054, classes 279, accepted 74856780, records 74856780, empty rows 0, build 8.8s
+lambda_up 0x1.e29d481fedb58p-3 = 0.23565155360639767
+rho_low   0x1.e29d481fed73p-3 = 0.23565155360636814
+k=4 h=4 sym=0: states 213880, classes 1108, accepted 121148860, records 121148860, empty rows 0, build 10.8s
+lambda_up 0x1.7e299e71d3665p-3 = 0.18660281929844583
+rho_low   0x1.7e299e71d32fp-3 = 0.18660281929842126

@@ -1,0 +1,8 @@
+their table: k=3 h=6 N=1711682 R=344419015 classes=525 weight types=20
+orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0
+compared all 1711682 states: 0 states with differing records, 350867245 accepted transitions (mine), 0 targets not among kary's states (67s)
+referee state list: 1711682 states, 0 not among kary's orbits
+their table: k=4 h=5 N=290442 R=274862010 classes=3460 weight types=22
+orbit map: 0 stored states share an orbit with another, 0 not in kary's own canonical form; start state index 0
+compared all 290442 states: 0 states with differing records, 409634897 accepted transitions (mine), 0 targets not among kary's states (65s)
+referee state list: 290442 states, 0 not among kary's orbits

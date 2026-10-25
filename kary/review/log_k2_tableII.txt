@@ -1,0 +1,10 @@
+k=2 h=2 sym=1: states 7, classes 6, accepted 36, records 36  (0.0s)
+   z=0.2118: rho in [0.13120421149656478, 0.13120421149657249] after 31 iterations
+k=2 h=3 sym=1: states 98, classes 10, accepted 707, records 707  (0.0s)
+   z=0.2422: rho in [0.17775261044260837, 0.17775261044262411] after 70 iterations
+k=2 h=4 sym=1: states 1020, classes 14, accepted 9165, records 9165  (0.1s)
+   z=0.2642: rho in [0.2170175100984329, 0.21701751009845149] after 100 iterations
+k=2 h=5 sym=1: states 10160, classes 18, accepted 106114, records 106114  (2.5s)
+   z=0.2828: rho in [0.25410060606001317, 0.25410060606003676] after 135 iterations
+k=2 h=6 sym=1: states 89960, classes 22, accepted 1065417, records 1065417  (22.8s)
+   z=0.2980: rho in [0.28715560866856049, 0.28715560866858897] after 171 iterations

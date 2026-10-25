@@ -1,0 +1,7 @@
+wrote data/weights_k4_h4.txt: 16 weight types at z = 0.1402
+k=4 h=4 N=9427 records=2914880 z=0x1.1f212d77318fcp-3 (0.14019999999999999)
+lambda_cert=0x1.7e299e71d3917p-3 (0.18660281929846498)
+rho_lower=0x1.7e299e71d305fp-3 (0.18660281929840303)
+bound interval: [0.68906395796234, 0.68906395796234]
+best possible at this z (from rho_lower): [0.689063957962, 0.689063957962]
+CERTIFIED: gamma_4 <= 0.689064   (k=4, h=4, z=0.1402, lambda_cert=0.18660281929846498)

@@ -1,0 +1,10 @@
+cover k=3 h=2: 4000 pairs, 28585 steps, 8062 truncated inputs, 0 rejections
+cover k=3 h=3: 4000 pairs, 28585 steps, 5216 truncated inputs, 0 rejections
+cover k=3 h=4: 4000 pairs, 28585 steps, 3590 truncated inputs, 0 rejections
+cover k=3 h=5: 4000 pairs, 28585 steps, 2601 truncated inputs, 0 rejections
+cover k=3 h=6: 4000 pairs, 28585 steps, 1962 truncated inputs, 0 rejections
+cover k=4 h=2: 4000 pairs, 24441 steps, 8774 truncated inputs, 0 rejections
+cover k=4 h=3: 4000 pairs, 24441 steps, 6033 truncated inputs, 0 rejections
+cover k=4 h=4: 4000 pairs, 24441 steps, 4408 truncated inputs, 0 rejections
+cover k=4 h=5: 4000 pairs, 24441 steps, 3238 truncated inputs, 0 rejections
+cover k=2 h=4: 4000 pairs, 36851 steps, 2103 truncated inputs, 0 rejections

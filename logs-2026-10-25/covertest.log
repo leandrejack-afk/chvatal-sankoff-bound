@@ -1,0 +1,23 @@
+# covertest (review/covertest.c), same parameters as the 2026-10-17 run
+$ covertest 2 10000 150 2
+h=2 pairs=10000 steps=379909 truncated-inputs=61362 failures=0 symmetry/reduction-mismatches=0
+$ covertest 3 10000 150 3
+h=3 pairs=10000 steps=380263 truncated-inputs=38077 failures=0 symmetry/reduction-mismatches=0
+$ covertest 4 10000 150 4
+h=4 pairs=10000 steps=370356 truncated-inputs=26097 failures=0 symmetry/reduction-mismatches=0
+$ covertest 5 10000 150 5
+h=5 pairs=10000 steps=374793 truncated-inputs=18576 failures=0 symmetry/reduction-mismatches=0
+$ covertest 6 10000 150 6
+h=6 pairs=10000 steps=375795 truncated-inputs=14295 failures=0 symmetry/reduction-mismatches=0
+$ covertest 7 10000 150 7
+h=7 pairs=10000 steps=375251 truncated-inputs=11573 failures=0 symmetry/reduction-mismatches=0
+$ covertest 8 10000 150 8
+h=8 pairs=10000 steps=374715 truncated-inputs=9844 failures=0 symmetry/reduction-mismatches=0
+$ covertest 9 10000 150 9
+h=9 pairs=10000 steps=376494 truncated-inputs=8275 failures=0 symmetry/reduction-mismatches=0
+$ covertest 10 10000 150 10
+h=10 pairs=10000 steps=372698 truncated-inputs=7054 failures=0 symmetry/reduction-mismatches=0
+$ covertest 9 1500 400 109
+h=9 pairs=1500 steps=156416 truncated-inputs=3368 failures=0 symmetry/reduction-mismatches=0
+$ covertest 10 1500 400 110
+h=10 pairs=1500 steps=145228 truncated-inputs=2875 failures=0 symmetry/reduction-mismatches=0

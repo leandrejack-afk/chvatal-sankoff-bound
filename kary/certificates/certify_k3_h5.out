@@ -1,0 +1,7 @@
+wrote data/weights_k3_h5.txt: 16 weight types at z = 0.1948
+k=3 h=5 N=98041 records=12039641 z=0x1.8ef34d6a161e5p-3 (0.1948)
+lambda_cert=0x1.e29d481fee95bp-3 (0.23565155360649723)
+rho_lower=0x1.e29d481fed35bp-3 (0.23565155360634091)
+bound interval: [0.74328105062039, 0.74328105062039]
+best possible at this z (from rho_lower): [0.74328105062, 0.74328105062]
+CERTIFIED: gamma_3 <= 0.743282   (k=3, h=5, z=0.1948, lambda_cert=0.23565155360649723)

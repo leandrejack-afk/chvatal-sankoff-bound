@@ -1,0 +1,2 @@
+k=4 h=4 sym=1: states 9427, classes 1108, accepted 5400599, records 2914973  (196.9s)
+   z=0.1402: rho in [0.1866028192984267, 0.18660281929843953] after 46 iterations

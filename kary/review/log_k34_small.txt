@@ -1,0 +1,16 @@
+k=3 h=2 sym=1: states 10, classes 21, accepted 181, records 108  (0.0s)
+   z=0.1442: rho in [0.11182949620819023, 0.11182949620819413] after 21 iterations
+k=3 h=2 sym=0: states 57, classes 21, accepted 1023, records 1023  (0.0s)
+   z=0.1442: rho in [0.11182949620819022, 0.11182949620819409] after 21 iterations
+k=4 h=2 sym=1: states 10, classes 52, accepted 461, records 119  (0.0s)
+   z=0.1147: rho in [0.11057533081814913, 0.11057533081815139] after 17 iterations
+k=4 h=2 sym=0: states 148, classes 52, accepted 6712, records 6712  (0.0s)
+   z=0.1147: rho in [0.1105753308181491, 0.11057533081815146] after 17 iterations
+k=3 h=3 sym=1: states 249, classes 63, accepted 10592, records 8866  (0.1s)
+   z=0.1652: rho in [0.15566600744248396, 0.15566600744249268] after 41 iterations
+k=4 h=3 sym=1: states 309, classes 292, accepted 60995, records 22916  (1.1s)
+   z=0.1285: rho in [0.14806338262446822, 0.14806338262448279] after 30 iterations
+k=3 h=3 sym=0: states 1482, classes 63, accepted 62928, records 62928  (0.8s)
+   z=0.1652: rho in [0.15566600744248393, 0.15566600744249273] after 41 iterations
+k=2 h=4 sym=0: states 2040, classes 14, accepted 18330, records 18330  (0.3s)
+   z=0.2642: rho in [0.21701751009843293, 0.21701751009845147] after 100 iterations

@@ -1,0 +1,4 @@
+k=4 h=5 inputs per state=3460 weight types=22
+  processed 141133, discovered 223432, records 130271591 (31s)
+  processed 281725, discovered 286867, records 269016302 (62s)
+k=4 h=5 inputs=3460 accepting states=290442 accepted transitions=409634897 records=274862010 build 64.4s -> data/ktab_k4_h5.bin

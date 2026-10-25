@@ -1,0 +1,12 @@
+k=3 h=5 sym=1: states 98041, classes 279, accepted 12481994, records 12039641, empty rows 0, build 1.8s
+power iteration: 81 its, last nearest ratios [0.23565155360636458, 0.23565155360640125]
+lambda_up 0x1.e29d481fedb59p-3 = 0.2356515536063977
+rho_low   0x1.e29d481fed742p-3 = 0.23565155360636864
+nearest   [0.23565155360636966, 0.23565155360639647]
+time total 2.7s
+k=4 h=4 sym=1: states 9427, classes 1108, accepted 5400599, records 2914973, empty rows 0, build 0.6s
+power iteration: 45 its, last nearest ratios [0.18660281929842146, 0.18660281929844444]
+lambda_up 0x1.7e299e71d365bp-3 = 0.18660281929844555
+rho_low   0x1.7e299e71d32ffp-3 = 0.18660281929842168
+nearest   [0.18660281929842656, 0.18660281929843986]
+time total 1.5s

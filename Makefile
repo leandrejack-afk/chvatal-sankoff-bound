@@ -21,3 +21,11 @@ verify_cert_stream: src/verify_cert_stream.c
 
 clean:
 	rm -f lcs_upper lcs_upper_big lcs_compact lcs_compact_f32 verify_cert verify_cert_stream
+
+# Three and four letters (kary/): build there with
+#   clang -O3 -march=native -o kary/kary kary/kary.c -lm
+#   clang -O2 -ffp-model=strict -march=native -o kary/kverify kary/kverify.c -lm
+kary/kary: kary/kary.c
+	$(CC) $(CFLAGS) -o $@ $< -lm
+kary/kverify: kary/kverify.c
+	$(CC) $(STRICT) -o $@ $< -lm

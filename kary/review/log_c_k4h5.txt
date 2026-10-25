@@ -1,0 +1,24 @@
+k=4 h=5 sym=1: states 290442, classes 3460, accepted 409634897, records 274868672, empty rows 0, build 53.1s
+power iteration: 61 its, last nearest ratios [0.22262180694610118, 0.22262180694613726]
+lambda_up 0x1.c7edf121ae6a3p-3 = 0.22262180694615549
+rho_low   0x1.c7edf121adcbp-3 = 0.2226218069460848
+nearest   [0.22262180694610775, 0.22262180694613115]
+time total 153.4s
+      153.48 real       364.87 user         1.68 sys
+          2109587456  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              135626  page reclaims
+                   1  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   4  voluntary context switches
+              190903  involuntary context switches
+       3444251413977  instructions retired
+        747681420860  cycles elapsed
+          2110179224  peak memory footprint

@@ -1,0 +1,3 @@
+k=3 h=6 inputs per state=525 weight types=20
+  processed 1457774, discovered 1594661, records 294446055 (30s)
+k=3 h=6 inputs=525 accepting states=1711682 accepted transitions=350867245 records=344419015 build 38.8s -> data/ktab_k3_h6.bin

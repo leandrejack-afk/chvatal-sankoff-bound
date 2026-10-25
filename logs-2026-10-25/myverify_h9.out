@@ -1,0 +1,7 @@
+eigen trailing bytes: none
+extra weight lines: 0
+h=9 N=51425006 z=0x1.51b71758e2196p-2 (0.32979999999999998) v in [7.282480e-03, 1.000000e+00] nonpositive/nonfinite=0
+targets > N: 0   rows with l=0 rejected: 0
+lam_up      = 0x1.75761bcf75075p-2 (0.36470836118429101) at state 848353
+lam_nearest = 0x1.75761bcf75071p-2 (0.36470836118429079) at state 66201
+lam_apriori = 0x1.75761bcf750a5p-2 (0.36470836118429367)  [factor 0x1.0000000000023p+0]

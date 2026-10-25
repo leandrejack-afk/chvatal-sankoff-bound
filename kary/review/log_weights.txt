@@ -1,0 +1,6 @@
+weights k=2 h=3 size<=12: 10 classes, 42 minimal match pairs, 0 mismatches
+weights k=3 h=2 size<=10: 21 classes, 3231 minimal match pairs, 0 mismatches
+weights k=3 h=3 size<=10: 63 classes, 3231 minimal match pairs, 0 mismatches
+weights k=3 h=4 size<=10: 141 classes, 3231 minimal match pairs, 0 mismatches
+weights k=4 h=2 size<=8: 52 classes, 11116 minimal match pairs, 0 mismatches
+weights k=4 h=3 size<=8: 292 classes, 11116 minimal match pairs, 0 mismatches

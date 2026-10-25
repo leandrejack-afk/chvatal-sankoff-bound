@@ -1,0 +1,10 @@
+k=3 h=2 z=0x1.27525460aa64cp-3: 4 weight types, kary up >= exact >= kary down and adjacent: 4/4
+k=3 h=3 z=0x1.525460aa64c30p-3: 8 weight types, kary up >= exact >= kary down and adjacent: 8/8
+k=3 h=4 z=0x1.74f0d844d013bp-3: 12 weight types, kary up >= exact >= kary down and adjacent: 12/12
+k=3 h=5 z=0x1.8ef34d6a161e5p-3: 16 weight types, kary up >= exact >= kary down and adjacent: 16/16
+k=3 h=6 z=0x1.a36e2eb1c432dp-3: 20 weight types, kary up >= exact >= kary down and adjacent: 20/20
+k=4 h=2 z=0x1.d5cfaacd9e83ep-4: 4 weight types, kary up >= exact >= kary down and adjacent: 4/4
+k=4 h=3 z=0x1.072b020c49ba6p-3: 10 weight types, kary up >= exact >= kary down and adjacent: 10/10
+k=4 h=4 z=0x1.1f212d77318fcp-3: 16 weight types, kary up >= exact >= kary down and adjacent: 16/16
+k=4 h=5 z=0x1.32617c1bda512p-3: 22 weight types, kary up >= exact >= kary down and adjacent: 22/22
+k=2 h=8 z=0x1.489a027525461p-2: 9 weight types, kary up >= exact >= kary down and adjacent: 9/9

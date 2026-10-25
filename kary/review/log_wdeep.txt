@@ -1,0 +1,5 @@
+wdeep k=3 h=2 E=10: 4 weight keys, 43 coefficients, 0 mismatches
+wdeep k=4 h=2 E=8: 4 weight keys, 37 coefficients, 0 mismatches
+wdeep k=4 h=3 E=7: 15 weight keys, 142 coefficients, 0 mismatches
+wdeep k=4 h=5 E=6: 59 weight keys, 371 coefficients, 0 mismatches
+wdeep k=3 h=6 E=7: 44 weight keys, 220 coefficients, 0 mismatches

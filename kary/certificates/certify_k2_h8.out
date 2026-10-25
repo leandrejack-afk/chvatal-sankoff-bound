@@ -1,0 +1,7 @@
+wrote data/weights_k2_h8.txt: 9 weight types at z = 0.3209
+k=2 h=8 N=6419109 records=91508397 z=0x1.489a027525461p-2 (0.32090000000000002)
+lambda_cert=0x1.5e09468fa90bp-2 (0.34183225871880563)
+rho_lower=0x1.5e09468fa7c72p-2 (0.34183225871851797)
+bound interval: [0.826279178560429, 0.826279178560429]
+best possible at this z (from rho_lower): [0.82627917856, 0.82627917856]
+CERTIFIED: gamma_2 <= 0.826280   (k=2, h=8, z=0.3209, lambda_cert=0.3418322587188056)

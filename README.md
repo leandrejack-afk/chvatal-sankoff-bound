@@ -1,5 +1,17 @@
 # An improved upper bound on the binary Chvátal–Sankoff constant
 
+**Update, 25 October 2026.**
+
+- **Three and four letters.** The same method, run for alphabets of size 3 and 4, gives
+  **γ₃ < 0.739975** and **γ₄ < 0.683622**, below the bounds 0.765803 and 0.708236 that had
+  stood since Dančík's 1994 thesis. Code, certificates and checks are in
+  [`kary/`](kary/README.md).
+- **Binary.** The h = 9 and h = 10 bounds below have been reproduced by Carlos Toledo and by
+  Jeetu SK with their own programs (teorth/optimizationproblems pull request 249), and
+  T. S. Tomar has proved them in Lean 4 and extended the computation to h = 13, giving
+  γ₂ ≤ 0.821963 (doi:10.5281/zenodo.23610945).
+- Logs of the checks rerun on 25 October 2026 are in `logs-2026-10-25/`.
+
 For two independent uniformly random binary strings of length n, the expected length of
 their longest common subsequence is γ₂·n + o(n), where γ₂ is the binary Chvátal–Sankoff
 constant. Its exact value is unknown (simulations suggest about 0.812). The best upper bound
@@ -51,8 +63,11 @@ h = 8.
 4. **Covering property, directly.** For random binary string pairs the canonical decomposition,
    computed by the full dynamic program, is a list of minimal match pairs followed by a null
    pair, and the automaton never rejects it (`src/check_cover.py`; and `review/covertest.c`, which
-   biases the strings toward long runs so that the truncation μ is exercised: about 3.4 million
-   canonical steps for h = 2, …, 10, including 189,000 truncated inputs, no rejection).
+   biases the strings toward long runs so that the truncation μ is exercised: 3,681,918
+   canonical steps for h = 2, …, 10, including 201,396 truncated inputs, no rejection; log in
+   `logs-2026-10-25/covertest.log`. An earlier version of this README said about 3.4 million
+   steps and 189,000 truncated inputs; the 10,000-pair runs alone give 3,380,274 and 195,153,
+   and the totals above add the 1,500-pair runs with longer strings at h = 9 and 10).
 5. **Two builders, identical tables.** `lcs_upper_big` (parallel, low memory) writes tables
    byte-identical to those of `lcs_upper`. The compact format used for the h = 10 power
    iteration is produced by `lcs_compact convert`, which also checks that for every state the

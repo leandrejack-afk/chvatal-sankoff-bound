@@ -1,0 +1,4 @@
+k=2 h=2 sym=1: states 7, classes 6, accepted 36, records 36  (0.0s)
+k=2 h=3 sym=1: states 98, classes 10, accepted 707, records 707  (0.0s)
+k=2 h=4 sym=1: states 1020, classes 14, accepted 9165, records 9165  (0.2s)
+k=2 h=5 sym=1: states 10160, classes 18, accepted 106114, records 106114  (2.4s)
