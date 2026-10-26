@@ -1,0 +1,9 @@
+k=2 n=10 m=10: 1048576 pairs, 0 mismatches
+k=2 n=8 m=12: 1048576 pairs, 0 mismatches
+k=3 n=7 m=7: 4782969 pairs, 0 mismatches
+k=3 n=6 m=8: 4782969 pairs, 0 mismatches
+k=4 n=5 m=6: 4194304 pairs, 0 mismatches
+k=5 n=5 m=5: 9765625 pairs, 0 mismatches
+k=6 n=4 m=5: 10077696 pairs, 0 mismatches
+k=2 n=12 m=12: 16777216 pairs, 0 mismatches
+k=3 n=8 m=8: 43046721 pairs, 0 mismatches

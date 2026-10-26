@@ -1,0 +1,6 @@
+mut k=2 n=100 m=105: 3000 pairs; (A) pairs with an optimal alignment violating rule 5: 0; (B) pairs with min rule 1-5 cost != ed: 0
+mut k=2 n=60 m=61: 5000 pairs; (A) pairs with an optimal alignment violating rule 5: 0; (B) pairs with min rule 1-5 cost != ed: 0
+mut k=3 n=60 m=61: 5000 pairs; (A) pairs with an optimal alignment violating rule 5: 0; (B) pairs with min rule 1-5 cost != ed: 0
+mut k=4 n=100 m=101: 2000 pairs; (A) pairs with an optimal alignment violating rule 5: 0; (B) pairs with min rule 1-5 cost != ed: 0
+mut k=2 n=150 m=143: 600 pairs; (A) pairs with an optimal alignment violating rule 5: 0; (B) pairs with min rule 1-5 cost != ed: 0
+mut k=8 n=80 m=81: 2000 pairs; (A) pairs with an optimal alignment violating rule 5: 0; (B) pairs with min rule 1-5 cost != ed: 0

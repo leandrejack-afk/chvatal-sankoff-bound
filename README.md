@@ -2,8 +2,8 @@
 
 **Update, 26 October 2026: the edit distance.** A first-moment count of canonical optimal
 alignments, done exactly with a small transfer matrix, gives new lower bounds on the average edit
-distance between two random strings for every alphabet size tried, for example **α₂ ≥ 0.213213**
-(previously 0.178037) and **α₄ ≥ 0.417664** (previously 0.359783); see
+distance between two random strings for every alphabet size tried, for example **α₂ ≥ 0.216276**
+(previously 0.178037) and **α₄ ≥ 0.424710** (previously 0.359783); see
 [`edit-distance-lower/`](edit-distance-lower/README.md).
 
 **Update, 26 October 2026: lower bounds.** Lueker's lower-bound method, with one value stored

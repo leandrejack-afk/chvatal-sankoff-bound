@@ -1,0 +1,4 @@
+det(l I - K) = l*(b - l)*(M*b + M*l - S*b + 2*S*c + S*l + b*l - l**2)
+equals l (l - b) (l^2 - (a+b) l + ab - 2Mb - 2Sc): True
+f(1) = -M*b - M + S*b - 2*S*c - S - b + 1
+c=b: -M*b - M*l - S*b - S*l - b*l + l**2

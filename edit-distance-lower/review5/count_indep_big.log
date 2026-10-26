@@ -1,0 +1,11 @@
+k=2 n=6 m=6: 259 paths x 4096 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=2 n=7 m=7: 817 paths x 16384 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=2 n=3 m=9: 110 paths x 4096 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=2 n=2 m=10: 47 paths x 4096 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=2 n=5 m=8: 380 paths x 8192 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=3 n=5 m=5: 83 paths x 59049 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=3 n=3 m=6: 37 paths x 19683 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=4 n=4 m=4: 27 paths x 65536 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=4 n=2 m=6: 17 paths x 65536 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+k=5 n=3 m=4: 15 paths x 78125 pairs; brute == own automaton: True; pairs without canonical optimum: 0; P(ed<=c) <= E[N<=c] for all c: True (min ratio E/P = 1.0000)
+ALL OK

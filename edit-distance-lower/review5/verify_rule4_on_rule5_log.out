@@ -1,0 +1,9 @@
+k=2: 1 - (rho condition) = -7.503e-03 > 0: False; a* = 0.216276271287419282; claimed 0.216276; FAIL
+k=3: 1 - (rho condition) = -1.423e-02 > 0: False; a* = 0.340971046099662312; claimed 0.340971; FAIL
+k=4: 1 - (rho condition) = -1.726e-02 > 0: False; a* = 0.424710798573785298; claimed 0.42471; FAIL
+k=5: 1 - (rho condition) = -1.820e-02 > 0: False; a* = 0.485876804406580205; claimed 0.485876; FAIL
+k=6: 1 - (rho condition) = -1.810e-02 > 0: False; a* = 0.533057633712471814; claimed 0.533057; FAIL
+k=7: 1 - (rho condition) = -1.751e-02 > 0: False; a* = 0.570869093699745067; claimed 0.570869; FAIL
+k=8: 1 - (rho condition) = -1.670e-02 > 0: False; a* = 0.602039986483757063; claimed 0.602039; FAIL
+k=16: 1 - (rho condition) = -1.050e-02 > 0: False; a* = 0.740007738510670941; claimed 0.740007; FAIL
+k=32: 1 - (rho condition) = -4.967e-03 > 0: False; a* = 0.839930596319200504; claimed 0.83993; FAIL

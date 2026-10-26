@@ -1,0 +1,16 @@
+k=2: optimum a for R = 1, 2, 4, 8, 32, oo: 0.211635244, 0.2158288755, 0.2162729562, 0.2162762721, 0.2162762723, 0.2162762723; non-decreasing: True
+k=4: optimum a for R = 1, 2, 4, 8, 32, oo: 0.4191075907, 0.423706297, 0.4246804392, 0.4247107713, 0.4247107997, 0.4247107997; non-decreasing: True
+k=32: optimum a for R = 1, 2, 4, 8, 32, oo: 0.8389143387, 0.8395902894, 0.8398926483, 0.8399301305, 0.8399305974, 0.8399305974; non-decreasing: True
+k=2 n=6 m=6 R=1: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=2 n=6 m=6 R=2: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=2 n=3 m=8 R=1: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=2 n=3 m=8 R=2: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=3 n=4 m=5 R=1: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=3 n=4 m=5 R=2: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=4 n=3 m=5 R=1: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=4 n=3 m=5 R=2: capped >= uncapped at every cost: True (strictly somewhere: True)
+k=2 n=5: author's count_check5.automaton == reviewer's two_counter: True
+k=2 n=6: author's count_check5.automaton == reviewer's two_counter: True
+k=3 n=4: author's count_check5.automaton == reviewer's two_counter: True
+k=4 n=4: author's count_check5.automaton == reviewer's two_counter: True
+k=5 n=3: author's count_check5.automaton == reviewer's two_counter: True

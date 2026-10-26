@@ -1,0 +1,28 @@
+== author's canon_check5 binary, small cases
+k=2 n=6 m=6: 4096 pairs, 0 mismatches
+k=3 n=4 m=5: 19683 pairs, 0 mismatches
+k=2 n=4 m=9: 8192 pairs, 0 mismatches
+k=4 n=3 m=4: 16384 pairs, 0 mismatches
+== author's count_check5.py rerun vs count_check5.log
+count_check5 rerun: byte-identical to count_check5.log
+== exact finite-n first moment
+k=2 n=10 m=10: P(ed<=c) <= E[N<=c] for all c: True; E/P by c: c=0: 1, c=1: 1, c=2: 1.227, c=3: 1.678, c=4: 2.728, c=5: 4.719, c=6: 7.719, c=7: 10.89, c=8: 13.39, c=9: 14.88, c=10: 15.66, c=11: 16.01, c=12: 16.17, c=13: 16.22
+k=2 n=12 m=12: P(ed<=c) <= E[N<=c] for all c: True; E/P by c: c=0: 1, c=1: 1, c=2: 1.195, c=3: 1.575, c=4: 2.462, c=5: 4.35, c=6: 7.972, c=7: 13.45, c=8: 19.76, c=9: 25.26, c=10: 29.15, c=11: 31.45, c=12: 32.69, c=13: 33.29
+k=2 n=8 m=12: P(ed<=c) <= E[N<=c] for all c: True; E/P by c: c=4: 1, c=5: 1.89, c=6: 3.728, c=7: 6.376, c=8: 9.061, c=9: 10.94, c=10: 12.01, c=11: 12.51, c=12: 12.75, c=13: 12.84, c=14: 12.88, c=15: 12.89, c=16: 12.9, c=17: 12.9
+k=3 n=8 m=8: P(ed<=c) <= E[N<=c] for all c: True; E/P by c: c=0: 1, c=1: 1, c=2: 1.098, c=3: 1.322, c=4: 1.815, c=5: 2.792, c=6: 4.371, c=7: 6.034, c=8: 7.107, c=9: 7.592, c=10: 7.805, c=11: 7.878, c=12: 7.905, c=13: 7.908
+k=4 n=6 m=6: P(ed<=c) <= E[N<=c] for all c: True; E/P by c: c=0: 1, c=1: 1, c=2: 1.064, c=3: 1.245, c=4: 1.645, c=5: 2.356, c=6: 3.097, c=7: 3.41, c=8: 3.523, c=9: 3.56, c=10: 3.56, c=11: 3.56, c=12: 3.56
+k=5 n=5 m=5: P(ed<=c) <= E[N<=c] for all c: True; E/P by c: c=0: 1, c=1: 1, c=2: 1.045, c=3: 1.204, c=4: 1.556, c=5: 2.077, c=6: 2.291, c=7: 2.375, c=8: 2.375, c=9: 2.375, c=10: 2.375
+k=8 n=4 m=4: P(ed<=c) <= E[N<=c] for all c: True; E/P by c: c=0: 1, c=1: 1, c=2: 1.02, c=3: 1.142, c=4: 1.414, c=5: 1.542, c=6: 1.542, c=7: 1.542, c=8: 1.542
+== Monte Carlo
+k=2 n=4000 samples=30: mean ed/n = 0.29087 (sd 0.00289, se 0.00053), min 0.28575, max 0.29650
+k=3 n=4000 samples=30: mean ed/n = 0.43234 (sd 0.00252, se 0.00046), min 0.42775, max 0.43775
+k=4 n=4000 samples=30: mean ed/n = 0.52067 (sd 0.00301, se 0.00055), min 0.51250, max 0.52675
+k=5 n=4000 samples=30: mean ed/n = 0.58243 (sd 0.00226, se 0.00041), min 0.57625, max 0.58650
+k=6 n=4000 samples=30: mean ed/n = 0.63029 (sd 0.00221, se 0.00040), min 0.62475, max 0.63375
+k=7 n=4000 samples=30: mean ed/n = 0.66768 (sd 0.00236, se 0.00043), min 0.66100, max 0.67250
+k=8 n=4000 samples=30: mean ed/n = 0.69720 (sd 0.00281, se 0.00051), min 0.69075, max 0.70275
+k=16 n=4000 samples=30: mean ed/n = 0.82166 (sd 0.00176, se 0.00032), min 0.81825, max 0.82475
+k=32 n=4000 samples=30: mean ed/n = 0.90146 (sd 0.00166, se 0.00030), min 0.89825, max 0.90450
+k=2 n=1000 samples=2000: mean ed/n = 0.29651 (sd 0.00633, se 0.00014), min 0.27500, max 0.31800
+k=4 n=1000 samples=2000: mean ed/n = 0.52622 (sd 0.00636, se 0.00014), min 0.50100, max 0.54700
+== done

@@ -1,0 +1,16 @@
+k=2 n=1: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 2), 1: Fraction(1, 2)}
+k=2 n=2: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 4), 1: Fraction(1, 2), 2: Fraction(1, 4)}
+k=2 n=3: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 8), 1: Fraction(3, 8), 2: Fraction(5, 8), 3: Fraction(1, 4)}
+k=2 n=4: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 16), 1: Fraction(1, 4), 2: Fraction(11, 16), 3: Fraction(19, 32), 4: Fraction(9, 32), 5: Fraction(1, 32)}
+k=2 n=5: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 32), 1: Fraction(5, 32), 2: Fraction(19, 32), 3: Fraction(27, 32), 4: Fraction(91, 128), 5: Fraction(33, 128), 6: Fraction(11, 128), 7: Fraction(1, 128)}
+k=2 n=6: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 64), 1: Fraction(3, 32), 2: Fraction(29, 64), 3: Fraction(117, 128), 4: Fraction(291, 256), 5: Fraction(187, 256), 6: Fraction(181, 512), 7: Fraction(47, 512), 8: Fraction(19, 512), 9: Fraction(1, 512)}
+k=2 n=7: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 128), 1: Fraction(7, 128), 2: Fraction(41, 128), 3: Fraction(27, 32), 4: Fraction(361, 256), 5: Fraction(343, 256), 6: Fraction(115, 128), 7: Fraction(97, 256), 8: Fraction(341, 2048), 9: Fraction(81, 2048), 10: Fraction(35, 2048), 11: Fraction(1, 2048)}
+k=3 n=2: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 9), 1: Fraction(4, 9), 2: Fraction(4, 9)}
+k=3 n=3: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 27), 1: Fraction(2, 9), 2: Fraction(16, 27), 3: Fraction(40, 81)}
+k=3 n=4: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 81), 1: Fraction(8, 81), 2: Fraction(104, 243), 3: Fraction(536, 729), 4: Fraction(376, 729), 5: Fraction(64, 729)}
+k=3 n=5: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 243), 1: Fraction(10, 243), 2: Fraction(20, 81), 3: Fraction(1472, 2187), 4: Fraction(6104, 6561), 5: Fraction(1240, 2187), 6: Fraction(112, 729), 7: Fraction(256, 6561)}
+k=4 n=2: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 16), 1: Fraction(3, 8), 2: Fraction(9, 16)}
+k=4 n=3: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 64), 1: Fraction(9, 64), 2: Fraction(33, 64), 3: Fraction(81, 128)}
+k=4 n=4: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 256), 1: Fraction(3, 64), 2: Fraction(141, 512), 3: Fraction(1413, 2048), 4: Fraction(1359, 2048), 5: Fraction(243, 2048)}
+k=5 n=3: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 125), 1: Fraction(12, 125), 2: Fraction(56, 125), 3: Fraction(448, 625)}
+k=6 n=3: IDENTICAL  E[#alignments obeying rules 1-5] by cost: {0: Fraction(1, 216), 1: Fraction(5, 72), 2: Fraction(85, 216), 3: Fraction(125, 162)}

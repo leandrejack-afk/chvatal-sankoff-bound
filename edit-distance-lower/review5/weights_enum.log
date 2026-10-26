@@ -1,0 +1,94 @@
+k=2 SIM      enum=        1/16 automaton=        1/16 closed=        1/16 OK
+k=2 SDM      enum=        1/16 automaton=        1/16 closed=        1/16 OK
+k=2 SI       enum=         1/4 automaton=         1/4 closed=         1/4 OK
+k=2 SD       enum=         1/4 automaton=         1/4 closed=         1/4 OK
+k=2 IM       enum=         1/4 automaton=         1/4 closed=         1/4 OK
+k=2 MIM      enum=         1/8 automaton=         1/8 closed=         1/8 OK
+k=2 SIIM     enum=        1/32 automaton=        1/32 closed=        1/32 OK
+k=2 SDDM     enum=        1/32 automaton=        1/32 closed=        1/32 OK
+k=2 SII      enum=         1/8 automaton=         1/8 closed=         1/8 OK
+k=2 SDD      enum=         1/8 automaton=         1/8 closed=         1/8 OK
+k=2 IIM      enum=         1/8 automaton=         1/8 closed=         1/8 OK
+k=2 MIIM     enum=        1/16 automaton=        1/16 closed=        1/16 OK
+k=2 SIIIM    enum=        1/64 automaton=        1/64 closed=        1/64 OK
+k=2 SDDDM    enum=        1/64 automaton=        1/64 closed=        1/64 OK
+k=2 SIII     enum=        1/16 automaton=        1/16 closed=        1/16 OK
+k=2 SDDD     enum=        1/16 automaton=        1/16 closed=        1/16 OK
+k=2 IIIM     enum=        1/16 automaton=        1/16 closed=        1/16 OK
+k=2 MIIIM    enum=        1/32 automaton=        1/32 closed=        1/32 OK
+k=2 SIIIIM   enum=       1/128 automaton=       1/128 closed=       1/128 OK
+k=2 SDDDDM   enum=       1/128 automaton=       1/128 closed=       1/128 OK
+k=2 SIIII    enum=        1/32 automaton=        1/32 closed=        1/32 OK
+k=2 SDDDD    enum=        1/32 automaton=        1/32 closed=        1/32 OK
+k=2 IIIIM    enum=        1/32 automaton=        1/32 closed=        1/32 OK
+k=2 MIIIIM   enum=        1/64 automaton=        1/64 closed=        1/64 OK
+k=3 SIM      enum=        8/81 automaton=        8/81 closed=        8/81 OK
+k=3 SDM      enum=        8/81 automaton=        8/81 closed=        8/81 OK
+k=3 SI       enum=         4/9 automaton=         4/9 closed=         4/9 OK
+k=3 SD       enum=         4/9 automaton=         4/9 closed=         4/9 OK
+k=3 IM       enum=         2/9 automaton=         2/9 closed=         2/9 OK
+k=3 MIM      enum=        2/27 automaton=        2/27 closed=        2/27 OK
+k=3 SIIM     enum=        4/81 automaton=        4/81 closed=        4/81 OK
+k=3 SDDM     enum=        4/81 automaton=        4/81 closed=        4/81 OK
+k=3 SII      enum=        8/27 automaton=        8/27 closed=        8/27 OK
+k=3 SDD      enum=        8/27 automaton=        8/27 closed=        8/27 OK
+k=3 IIM      enum=        4/27 automaton=        4/27 closed=        4/27 OK
+k=3 MIIM     enum=        4/81 automaton=        4/81 closed=        4/81 OK
+k=3 SIIIM    enum=      20/729 automaton=      20/729 closed=      20/729 OK
+k=3 SDDDM    enum=      20/729 automaton=      20/729 closed=      20/729 OK
+k=3 SIII     enum=       16/81 automaton=       16/81 closed=       16/81 OK
+k=3 SDDD     enum=       16/81 automaton=       16/81 closed=       16/81 OK
+k=3 IIIM     enum=        8/81 automaton=        8/81 closed=        8/81 OK
+k=3 MIIIM    enum=       8/243 automaton=       8/243 closed=       8/243 OK
+k=3 SIIIIM   enum=       4/243 automaton=       4/243 closed=       4/243 OK
+k=3 SDDDDM   enum=       4/243 automaton=       4/243 closed=       4/243 OK
+k=3 SIIII    enum=      32/243 automaton=      32/243 closed=      32/243 OK
+k=3 SDDDD    enum=      32/243 automaton=      32/243 closed=      32/243 OK
+k=3 IIIIM    enum=      16/243 automaton=      16/243 closed=      16/243 OK
+k=3 MIIIIM   enum=      16/729 automaton=      16/729 closed=      16/729 OK
+k=4 SIM      enum=      27/256 automaton=      27/256 closed=      27/256 OK
+k=4 SDM      enum=      27/256 automaton=      27/256 closed=      27/256 OK
+k=4 SI       enum=        9/16 automaton=        9/16 closed=        9/16 OK
+k=4 SD       enum=        9/16 automaton=        9/16 closed=        9/16 OK
+k=4 IM       enum=        3/16 automaton=        3/16 closed=        3/16 OK
+k=4 MIM      enum=        3/64 automaton=        3/64 closed=        3/64 OK
+k=4 SIIM     enum=     63/1024 automaton=     63/1024 closed=     63/1024 OK
+k=4 SDDM     enum=     63/1024 automaton=     63/1024 closed=     63/1024 OK
+k=4 SII      enum=       27/64 automaton=       27/64 closed=       27/64 OK
+k=4 SDD      enum=       27/64 automaton=       27/64 closed=       27/64 OK
+k=4 IIM      enum=        9/64 automaton=        9/64 closed=        9/64 OK
+k=4 MIIM     enum=       9/256 automaton=       9/256 closed=       9/256 OK
+k=4 SIIIM    enum=    153/4096 automaton=    153/4096 closed=    153/4096 OK
+k=4 SDDDM    enum=    153/4096 automaton=    153/4096 closed=    153/4096 OK
+k=4 SIII     enum=      81/256 automaton=      81/256 closed=      81/256 OK
+k=4 SDDD     enum=      81/256 automaton=      81/256 closed=      81/256 OK
+k=4 IIIM     enum=      27/256 automaton=      27/256 closed=      27/256 OK
+k=4 MIIIM    enum=     27/1024 automaton=     27/1024 closed=     27/1024 OK
+k=5 SIM      enum=      64/625 automaton=      64/625 closed=      64/625 OK
+k=5 SDM      enum=      64/625 automaton=      64/625 closed=      64/625 OK
+k=5 SI       enum=       16/25 automaton=       16/25 closed=       16/25 OK
+k=5 SD       enum=       16/25 automaton=       16/25 closed=       16/25 OK
+k=5 IM       enum=        4/25 automaton=        4/25 closed=        4/25 OK
+k=5 MIM      enum=       4/125 automaton=       4/125 closed=       4/125 OK
+k=5 SIIM     enum=    208/3125 automaton=    208/3125 closed=    208/3125 OK
+k=5 SDDM     enum=    208/3125 automaton=    208/3125 closed=    208/3125 OK
+k=5 SII      enum=      64/125 automaton=      64/125 closed=      64/125 OK
+k=5 SDD      enum=      64/125 automaton=      64/125 closed=      64/125 OK
+k=5 IIM      enum=      16/125 automaton=      16/125 closed=      16/125 OK
+k=5 MIIM     enum=      16/625 automaton=      16/625 closed=      16/625 OK
+k=5 SIIIM    enum=   688/15625 automaton=   688/15625 closed=   688/15625 OK
+k=5 SDDDM    enum=   688/15625 automaton=   688/15625 closed=   688/15625 OK
+k=5 SIII     enum=     256/625 automaton=     256/625 closed=     256/625 OK
+k=5 SDDD     enum=     256/625 automaton=     256/625 closed=     256/625 OK
+k=5 IIIM     enum=      64/625 automaton=      64/625 closed=      64/625 OK
+k=5 MIIIM    enum=     64/3125 automaton=     64/3125 closed=     64/3125 OK
+k=2: all 1254 structurally allowed labelled sequences of length <= 6: enum == automaton product
+k=3: all 432 structurally allowed labelled sequences of length <= 5: enum == automaton product
+k=4: all 148 structurally allowed labelled sequences of length <= 4: enum == automaton product
+k=2: h(1) = 1/2 == q: True; h non-increasing on 1..59: True; h(r) >= 1/k: True
+k=3: h(1) = 2/3 == q: True; h non-increasing on 1..59: True; h(r) >= 1/k: True
+k=4: h(1) = 3/4 == q: True; h non-increasing on 1..59: True; h(r) >= 1/k: True
+k=5: h(1) = 4/5 == q: True; h non-increasing on 1..59: True; h(r) >= 1/k: True
+k=8: h(1) = 7/8 == q: True; h non-increasing on 1..59: True; h(r) >= 1/k: True
+k=32: h(1) = 31/32 == q: True; h non-increasing on 1..59: True; h(r) >= 1/k: True
+TOTAL MISMATCHES: 0
