@@ -1,0 +1,34 @@
+rules=3 k=2 n=4 m=4 pairs=256 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 16 64 240 304 248 64 32 0 0
+rules=3 k=2 n=5 m=5 pairs=1024 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 32 160 768 1472 1888 1104 552 128 64 0 0
+rules=3 k=2 n=6 m=6 pairs=4096 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 64 384 2240 5760 10208 9728 6640 2672 1256 256 128 0 0
+rules=3 k=2 n=5 m=8 pairs=8192 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 0 2976 10240 20896 21184 14664 5872 2664 576 288 0 0
+rules=3 k=2 n=7 m=7 pairs=16384 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 128 896 6144 19840 45120 60608 57024 33920 17696 6256 2792 512 256 0 0
+rules=3 k=3 n=4 m=4 pairs=6561 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 81 648 3564 7776 8280 2592 1296 0 0
+rules=3 k=3 n=5 m=5 pairs=59049 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 243 2430 17496 58320 110160 94608 48672 15552 7776 0 0
+rules=3 k=2 n=6 m=9 pairs=32768 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 0 8320 35712 92000 128320 121088 71616 36632 13104 5928 1152 576 0 0
+rules=3 k=3 n=4 m=6 pairs=59049 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 5913 33048 91854 106920 63252 16848 8424 0 0
+rules=3 k=4 n=4 m=4 pairs=65536 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 256 3072 21888 65664 85536 27648 13824 0 0
+rules=3 k=2 n=8 m=8 pairs=65536 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 256 2048 16128 62720 174592 304896 377088 309888 198688 94080 44176 14192 6120 1024 512 0 0
+rules=3 k=4 n=3 m=5 pairs=65536 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 6784 38592 87648 56448 14400 0 0
+rules=3 k=5 n=4 m=4 pairs=390625 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 625 10000 87000 328000 504800 160000 80000 0 0
+rules=3 k=6 n=3 m=3 pairs=46656 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 216 3240 22320 48600 10800 0 0
+rules=3 k=6 n=3 m=4 pairs=279936 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 4536 51840 227160 280800 59400 0 0
+rules=4 k=2 n=4 m=4 pairs=256 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 16 64 176 208 112 32 0 0 0
+rules=4 k=2 n=5 m=5 pairs=1024 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 32 160 608 1088 1072 592 192 64 0 0 0
+rules=4 k=2 n=6 m=6 pairs=4096 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 64 384 1856 4480 6432 5568 3088 1264 384 128 0 0 0
+rules=4 k=2 n=7 m=7 pairs=16384 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 128 896 5248 16000 30336 36416 29152 16512 7248 2800 768 256 0 0 0
+rules=4 k=2 n=8 m=8 pairs=65536 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 256 2048 14080 51968 123136 191232 203392 153600 88032 41664 16720 6128 1536 512 0 0 0
+rules=3 k=3 n=6 m=6 pairs=531441 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 729 8748 77760 349920 964224 1446336 1267488 642816 326880 93312 46656 0 0
+rules=4 k=2 n=5 m=8 pairs=8192 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 0 2976 10240 15904 13792 7504 2928 864 288 0 0 0
+rules=4 k=3 n=4 m=4 pairs=6561 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 81 648 2808 5616 4536 1296 0 0 0
+rules=4 k=3 n=5 m=5 pairs=59049 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 243 2430 14580 44712 70200 54864 19440 7776 0 0 0
+rules=4 k=2 n=6 m=9 pairs=32768 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 0 8320 35712 72800 86336 66336 36128 15504 5936 1728 576 0 0 0
+rules=4 k=3 n=4 m=6 pairs=59049 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 5913 33048 72144 73656 32724 8424 0 0 0
+rules=4 k=4 n=4 m=4 pairs=65536 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 256 3072 18048 49536 52992 13824 0 0 0
+rules=3 k=4 n=5 m=5 pairs=1048576 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 1024 15360 144384 663552 1624320 1752192 887328 331776 165888 0 0
+rules=4 k=4 n=3 m=5 pairs=65536 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 0 6784 38592 68736 42048 0 0 0
+rules=4 k=5 n=4 m=4 pairs=390625 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 625 10000 74000 256000 340000 80000 0 0 0
+rules=4 k=6 n=3 m=3 pairs=46656 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 216 3240 18360 37800 0 0 0
+rules=4 k=6 n=3 m=4 pairs=279936 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 0 4536 51840 190080 221400 0 0 0
+rules=4 k=3 n=6 m=6 pairs=531441 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 729 8748 67068 279936 662256 892944 669600 312768 116640 46656 0 0 0
+rules=4 k=4 n=5 m=5 pairs=1048576 existence-mismatches=0 | first-moment P(ed<=c) <= E[N_<=c] for all c: yes | brute vs automaton: IDENTICAL | totals 1024 15360 124416 525312 1116288 1095552 387072 165888 0 0 0
