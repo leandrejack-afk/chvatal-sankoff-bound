@@ -1,5 +1,11 @@
 # Upper bounds on the Chvátal–Sankoff constants
 
+**Update, 26 October 2026: lower bounds.** Lueker's lower-bound method, with one value stored
+per class of string pairs under alphabet permutations and swapping, raises the best known
+lower bound on γ_k for every alphabet size from 3 to 15, for example **γ₃ ≥ 0.686509** (was
+0.68422) and **γ₄ ≥ 0.617356** (was 0.614333). Code, certificates, an independently written
+checker and a review are in [`lower/`](lower/README.md).
+
 **Update, 25 October 2026.**
 
 - **Three and four letters.** The same method, run for alphabets of size 3 and 4, gives

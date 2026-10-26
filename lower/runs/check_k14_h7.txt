@@ -1,0 +1,31 @@
+lowcheck: 5% of ranks dispatched, 12 s
+lowcheck: 10% of ranks dispatched, 21 s
+lowcheck: 15% of ranks dispatched, 30 s
+lowcheck: 20% of ranks dispatched, 38 s
+lowcheck: 25% of ranks dispatched, 46 s
+lowcheck: 30% of ranks dispatched, 54 s
+lowcheck: 35% of ranks dispatched, 60 s
+lowcheck: 40% of ranks dispatched, 66 s
+lowcheck: 45% of ranks dispatched, 72 s
+lowcheck: 50% of ranks dispatched, 77 s
+lowcheck: 55% of ranks dispatched, 81 s
+lowcheck: 60% of ranks dispatched, 86 s
+lowcheck: 65% of ranks dispatched, 90 s
+lowcheck: 70% of ranks dispatched, 93 s
+lowcheck: 75% of ranks dispatched, 96 s
+lowcheck: 80% of ranks dispatched, 99 s
+lowcheck: 85% of ranks dispatched, 100 s
+lowcheck: 90% of ranks dispatched, 102 s
+lowcheck: 95% of ranks dispatched, 103 s
+lowcheck: 100% of ranks dispatched, 103 s
+lowcheck k=14 h=7 witness=runs/k14_h7_w.bin threads=4
+ranks: 190899322 RGS of length 14 with at most 14 labels
+index memory: 25.6 MB (bitmap and block counts), built in 2.20 s
+classes computed: 95475556 (Burnside orbit count of S_14 x swap: 95475556, agrees)
+witness values: 95475556 (equals the class count)
+r = 30037630 (units of 2^-27, min over classes of T - w)
+min of T - w at class 57 (rank 57): s=0000000 t=0010012 w=669967479
+max of T - w = 30037633
+bound: gamma_14 >= 0.365743076 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 101.27 s, total 103.47 s
+claimed r = 30037630: PASS (computed r - claimed r = 0)

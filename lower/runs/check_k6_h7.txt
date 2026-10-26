@@ -1,0 +1,11 @@
+lowcheck k=6 h=7 witness=runs/k6_h7_w.bin threads=4
+ranks: 114700315 RGS of length 14 with at most 6 labels
+index memory: 15.4 MB (bitmap and block counts), built in 1.22 s
+classes computed: 57365191 (Burnside orbit count of S_6 x swap: 57365191, agrees)
+witness values: 57365191 (equals the class count)
+r = 47667784 (units of 2^-27, min over classes of T - w)
+min of T - w at class 1478 (rank 1478): s=0000000 t=1023232 w=266057760
+max of T - w = 47667787
+bound: gamma_6 >= 0.524151522 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 22.44 s, total 23.66 s
+claimed r = 47667784: PASS (computed r - claimed r = 0)

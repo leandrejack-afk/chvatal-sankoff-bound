@@ -1,0 +1,8 @@
+k=13 h=7 rgs=190899321 (DFS 190899321, rank self-test failures 0) classes=95475555 witness values=95475555
+classes visited 95475555 (matched first letters 13830235)
+exact r = 5293131285/169 units = 31320303.461538 units = 0.233354445260   max T-w = 0.233354468670
+argmin class 1356571: s=0001111 t=2232443
+random raw pairs: 200000, mismatches with their class representative: 0
+bound from exact r: gamma_13 >= 0.378406136
+PASS: claimed r = 31320303, exact r - claimed = 0.4615 units
+exit=0

@@ -1,0 +1,23 @@
+# SHA-256 of the witnesses (uint32 little-endian, one value per class, unit 2^-27).
+# The command shown regenerates each file: the iteration is integer arithmetic only, and reruns of
+# k = 6, h = 7 (same machine) and of three smaller cases on ARM macOS (clang) and x86 Linux (gcc)
+# gave byte-identical files, with any thread count. KLOW_INIT starts from the witness for h - 1.
+
+b4e29303c3296f54f85d89add07f80c09b049896a1e2a6e612aee1d888bbfbdd  k6_h7_w.bin  # ./klow 6 7 150 8 k6_h7
+7b56ccd2d890d166c44d9d13ab55fd46d9075cea7ddd3f10c416468f36852506  k7_h7_w.bin  # ./klow 7 7 150 8 k7_h7
+a1759a3cf8fc91e3f836322a5135d0924d53b0199d4084bdf18237433b307939  k8_h7_w.bin  # ./klow 8 7 150 8 k8_h7
+d7c9f69c5afc973830ced9b665cc0e80a6e90ea097086aec41caf0359909ef1b  k9_h7_w.bin  # ./klow 9 7 150 8 k9_h7
+ff462d641f0d2fe2bcbdb987ef408e525ef1bcf7b6ac55865ba3e50f526f4b38  k10_h7_w.bin  # ./klow 10 7 150 8 k10_h7
+e439dda7d017f7b2a6d67283333cdaee2893c4c8c2d35738f23336b5e51e4451  k11_h7_w.bin  # ./klow 11 7 150 8 k11_h7
+ddf71201835e3599dfe99d8db8dbd4f322623bd25106e251fdd79bacd6595376  k12_h7_w.bin  # ./klow 12 7 150 8 k12_h7
+a2f2bcc1ff348bedf15c4bcd74bff577b626a63267cc30fc8febb09fbc03c582  k13_h7_w.bin  # ./klow 13 7 150 8 k13_h7
+ed2e17e10c04aa57aeedbab104eed46c7af6230f1a9a00f07e7c16dc0002578a  k14_h7_w.bin  # ./klow 14 7 150 8 k14_h7
+0f4c45b26cb1156c69a31830440c7f5dada3e744005defd14b0ea8779df5c94d  k15_h7_w.bin  # ./klow 15 7 150 8 k15_h7
+0d9a932597fae5ea395b89de6a889487d1dde26801b97c9c0157fa2bf65f3803  k5_h7_w.bin  # ./klow 5 7 150 8 k5_h7
+2a28425bb6f829102e97444641bb491ce3394939201970c91228e6c1df394045  k5_h8_w.bin  # KLOW_INIT=k5_h7_w.bin ./klow 5 8 150 8 k5_h8
+1b26ce0f4733102b725db674d87f4da016686e307d0e1725cf8e0a2b473c2ce9  k4_h8_w.bin  # ./klow 4 8 150 8 k4_h8
+27f185f8d831179ef8083311be0d322189734417037ed54fe389683780135438  k4_h9_w.bin  # KLOW_INIT=k4_h8_w.bin ./klow 4 9 150 8 k4_h9
+d7712570e94c176cbcb1a6294842814b28f5d56fa5026898285c791d5a150ac2  k3_h9_w.bin  # ./klow 3 9 150 8 k3_h9
+1793cba6e9e159f9a3de870b29a2bd68ccf27ac3aeb540780080ab9b220ee615  k3_h10_w.bin  # KLOW_INIT=k3_h9_w.bin ./klow 3 10 150 8 k3_h10
+c7db20e42f77be2719f925bd936f92f716d6036f8a072c958c9b28b8b41638b4  server/k3_h10_w.bin  # ./klow 3 10 150 16 k3_h10   (cold start; the Mac file above was warm-started)
+fc9c9c0755f7882229438651977474d7b9a1841598c2c83d47c974b0e6976a60  server/k3_h11_w.bin  # KLOW_INIT=k3_h10_w.bin ./klow 3 11 150 16 k3_h11   (needs about 19 GB of memory)

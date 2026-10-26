@@ -1,0 +1,8 @@
+k=15 h=7 rgs=190899322 (DFS 190899322, rank self-test failures 0) classes=95475556 witness values=95475556
+classes visited 95475556 (matched first letters 13830235)
+exact r = 6498249525/225 units = 28881109.000000 units = 0.215181030333   max T-w = 0.215181056923
+argmin class 828712: s=0001012 t=2134012
+random raw pairs: 200000, mismatches with their class representative: 0
+bound from exact r: gamma_15 >= 0.354154689
+PASS: claimed r = 28881109, exact r - claimed = 0.0000 units
+exit=0

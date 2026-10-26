@@ -1,0 +1,685 @@
+TESTS.txt: test log for lower/check/lowcheck.c (2026-10-26)
+
+Machine: 10-core Apple Silicon Mac, 24 GB, shared with a background klow run at nice 10 on
+8 threads (load average 20 to 26 during these runs). Every run used 6 threads.
+All commands run from lower/check/. Build: clang -O3 -march=native -lpthread lowcheck.c -o lowcheck
+(no warnings under -Wall -Wextra -Wconversion).
+
+Interface: "lowcheck k h witness.bin [threads] [claimed_r]" is the spec's. Two extra modes exist
+only to run the spec's tests: "--brute k h witness.bin [threads]" (TEST 1) and
+"--count k h [threads]" (TEST 2 for sizes with no witness file). Every run also prints an
+independent class count from Burnside's lemma over S_k x swap and exits 2 if it disagrees.
+
+SUMMARY
+
+TEST 1, brute force, all 11 witnesses (k^(2h) from 64 to 60,466,176): every check PASS in all 11.
+  - rank equals the lexicographic position found by scanning all k^(2h) strings; unrank and the
+    successor function agree with it.
+  - every pair lands on a set bit; swap and letter permutations keep the class (all of S_k for
+    k <= 5; for k = 6, 7, 10 the k-1 adjacent transpositions, which generate S_k, plus 8 random
+    permutations); every class is hit; for k <= 5 the brute-force orbit count equals the class
+    count and no class spans two orbits.
+  - T at every pair, computed from the definition with base-k index arithmetic on the expanded
+    vector, equals its class representative's T; min and max of T - w over all pairs equal the
+    class-based r and max.
+TEST 2, class counts: all 12 claimed counts reproduced, each equal to the Burnside count.
+  k=2 h=3: 20, k=2 h=6: 1056, k=3 h=3: 70, k=3 h=5: 5002, k=4 h=4: 1451, k=5 h=4: 1993,
+  k=6 h=5: 55091, k=7 h=4: 2151, k=10 h=3: 117, k=3 h=7: 399310, k=4 h=6: 350891,
+  k=6 h=7: 57365191.
+  Production sizes: k=15 h=7: 95475556 (index 25.6 MB), k=5 h=8: 637624313 (171.0 MB),
+  k=4 h=9: 1431743147 (384.0 MB), k=3 h=11: 2615147350 (701.4 MB).
+TEST 3, witnesses against claims.txt: all 11 PASS. computed r - claimed r = 0 for 10 witnesses
+  and +1 for k=3 h=3 (63884749 against 63884748).
+TEST 4, tamper (copies in a mktemp directory):
+  - k=4 h=6 class 2514 (the argmin) + 2^20: r = 57269083, exactly r - 2^20.
+  - k=4 h=6 class 9684 (an A-term neighbour of class 2514, where A exceeds B by 62.4 million)
+    - 2^20: r = 58055515, exactly r - 2^18.
+  - k=4 h=6 class 2514 + 2^26: r = -8791205, "no bound follows".
+  - k=2 h=6 class 63 + 2^20: r - 2^19 (class 63 is its own A-neighbour, so its T rises by 2^19).
+  - k=3 h=7 class 82 (the argmin) + 2^20: r - 2^20.
+  All five FAIL against the original claim with exit status 1. A file one value short, one value
+  long, or read with the wrong h stops with exit status 2 and a message; claimed r + 1 on the
+  untouched witness gives FAIL with exit status 1.
+TEST 5, Lueker's Table I: k=2 h=3 gives 0.747922428 and k=2 h=6 gives 0.770273864, which agree
+  with 0.747922 and 0.770273 to 6 decimals. A hand-derived h=1 witness (w(match) = 2^27,
+  w(mismatch) = 0) gives r = floor(2^27/k) and bounds 0.666666666, 0.499999994, 0.400000000 for
+  k = 2, 3, 4, equal to exact rational arithmetic; k=2 matches Table I row h=1 (0.666666).
+EXTRA, naive Python reference written from the spec (dictionary ranks, no bitmap, no shared
+  code): same r, argmin class, rank, strings and max as lowcheck for all 11 witnesses.
+EXTRA, witness facts: each witness has exactly one zero, at the class of (0^h, 1^h); the largest
+  value is 8.54 units (k=3 h=7) of the 32 a uint32 holds; where tested, every match-pair value
+  ignores the shared first letter (Lueker's third identity).
+PERFORMANCE (synthetic random witnesses; the values are meaningless, only throughput matters):
+  k=4 h=8 check 22.8 s; k=4 h=9 (1,431,743,147 classes, 5.73 GB file) index 29.7 s plus check
+  468.2 s, 497.9 s in all at 6 threads, peak resident size 6.13 GB.
+
+Helper scripts used below (in tools/):
+  naive.py         tools/naive.py
+  witness_facts.py tools/witness_facts.py
+
+FULL LOG (every command, its output, and the exit status of each command in its pipeline)
+
+[exit status] lists every command of a pipeline in order, so 'lowcheck ... | grep' shows lowcheck's status first.
+=== BUILD
+$ clang -O3 -march=native -lpthread lowcheck.c -o lowcheck
+[exit status 0]
+
+$ clang -O3 -march=native -Wall -Wextra -Wconversion -Wno-sign-conversion -lpthread lowcheck.c -o lowcheck && echo no warnings
+no warnings
+[exit status 0]
+
+=== TEST 3: every witness against claims.txt (also the class counts of TEST 2 and the bounds of TEST 5)
+$ ./lowcheck 2 3 witness/k2_h3_w.bin 6 80174305
+lowcheck k=2 h=3 witness=witness/k2_h3_w.bin threads=6
+ranks: 32 RGS of length 6 with at most 2 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 20 (Burnside orbit count of S_2 x swap: 20, agrees)
+witness values: 20 (equals the class count)
+r = 80174305 (units of 2^-27, min over classes of T - w)
+min of T - w at class 7 (rank 7): s=000 t=111 w=0
+max of T - w = 80174307
+bound: gamma_2 >= 0.747922428 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.00 s, total 0.00 s
+claimed r = 80174305: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 2 6 witness/k2_h6_w.bin 6 84071083
+lowcheck k=2 h=6 witness=witness/k2_h6_w.bin threads=6
+ranks: 2048 RGS of length 12 with at most 2 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 1056 (Burnside orbit count of S_2 x swap: 1056, agrees)
+witness values: 1056 (equals the class count)
+r = 84071083 (units of 2^-27, min over classes of T - w)
+min of T - w at class 63 (rank 63): s=000000 t=111111 w=0
+max of T - w = 84071086
+bound: gamma_2 >= 0.770273864 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.00 s, total 0.00 s
+claimed r = 84071083: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 3 3 witness/k3_h3_w.bin 6 63884748
+lowcheck k=3 h=3 witness=witness/k3_h3_w.bin threads=6
+ranks: 122 RGS of length 6 with at most 3 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 70 (Burnside orbit count of S_3 x swap: 70, agrees)
+witness values: 70 (equals the class count)
+r = 63884749 (units of 2^-27, min over classes of T - w)
+min of T - w at class 0 (rank 0): s=000 t=000 w=446409478
+max of T - w = 63884750
+bound: gamma_3 >= 0.644966685 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.00 s, total 0.00 s
+claimed r = 63884748: PASS (computed r - claimed r = 1)
+[exit status 0]
+
+$ ./lowcheck 3 5 witness/k3_h5_w.bin 6 66989259
+lowcheck k=3 h=5 witness=witness/k3_h5_w.bin threads=6
+ranks: 9842 RGS of length 10 with at most 3 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 5002 (Burnside orbit count of S_3 x swap: 5002, agrees)
+witness values: 5002 (equals the class count)
+r = 66989259 (units of 2^-27, min over classes of T - w)
+min of T - w at class 0 (rank 0): s=00000 t=00000 w=789177431
+max of T - w = 66989260
+bound: gamma_3 >= 0.665874083 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.00 s, total 0.00 s
+claimed r = 66989259: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 4 4 witness/k4_h4_w.bin 6 56092496
+lowcheck k=4 h=4 witness=witness/k4_h4_w.bin threads=6
+ranks: 2795 RGS of length 8 with at most 4 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 1451 (Burnside orbit count of S_4 x swap: 1451, agrees)
+witness values: 1451 (equals the class count)
+r = 56092496 (units of 2^-27, min over classes of T - w)
+min of T - w at class 0 (rank 0): s=0000 t=0000 w=615037285
+max of T - w = 56092498
+bound: gamma_4 >= 0.589484840 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.00 s, total 0.00 s
+claimed r = 56092496: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 5 4 witness/k5_h4_w.bin 6 49532660
+lowcheck k=5 h=4 witness=witness/k5_h4_w.bin threads=6
+ranks: 3845 RGS of length 8 with at most 5 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 1993 (Burnside orbit count of S_5 x swap: 1993, agrees)
+witness values: 1993 (equals the class count)
+r = 49532660 (units of 2^-27, min over classes of T - w)
+min of T - w at class 25 (rank 25): s=0000 t=1100 w=319198067
+max of T - w = 49532662
+bound: gamma_5 >= 0.539129854 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.00 s, total 0.00 s
+claimed r = 49532660: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 6 5 witness/k6_h5_w.bin 6 46047816
+lowcheck k=6 h=5 witness=witness/k6_h5_w.bin threads=6
+ranks: 109299 RGS of length 10 with at most 6 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 55091 (Burnside orbit count of S_6 x swap: 55091, agrees)
+witness values: 55091 (equals the class count)
+r = 46047816 (units of 2^-27, min over classes of T - w)
+min of T - w at class 22 (rank 22): s=00000 t=01021 w=369205710
+max of T - w = 46047818
+bound: gamma_6 >= 0.510888714 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.05 s, total 0.05 s
+claimed r = 46047816: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 7 4 witness/k7_h4_w.bin 6 40827678
+lowcheck k=7 h=4 witness=witness/k7_h4_w.bin threads=6
+ranks: 4139 RGS of length 8 with at most 7 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 2151 (Burnside orbit count of S_7 x swap: 2151, agrees)
+witness values: 2151 (equals the class count)
+r = 40827678 (units of 2^-27, min over classes of T - w)
+min of T - w at class 29 (rank 29): s=0000 t=1111 w=0
+max of T - w = 40827680
+bound: gamma_7 >= 0.466480999 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.01 s, total 0.01 s
+claimed r = 40827678: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 10 3 witness/k10_h3_w.bin 6 30011715
+lowcheck k=10 h=3 witness=witness/k10_h3_w.bin threads=6
+ranks: 203 RGS of length 6 with at most 10 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 117 (Burnside orbit count of S_10 x swap: 117, agrees)
+witness values: 117 (equals the class count)
+r = 30011715 (units of 2^-27, min over classes of T - w)
+min of T - w at class 6 (rank 6): s=000 t=101 w=160562547
+max of T - w = 30011716
+bound: gamma_10 >= 0.365485195 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.00 s, total 0.00 s
+claimed r = 30011715: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 3 7 witness/k3_h7_w.bin 6 68534490
+lowcheck k=3 h=7 witness=witness/k3_h7_w.bin threads=6
+ranks: 797162 RGS of length 14 with at most 3 labels
+index memory: 0.1 MB (bitmap and block counts), built in 0.00 s
+classes computed: 399310 (Burnside orbit count of S_3 x swap: 399310, agrees)
+witness values: 399310 (equals the class count)
+r = 68534490 (units of 2^-27, min over classes of T - w)
+min of T - w at class 82 (rank 82): s=0000000 t=0011112 w=428588688
+max of T - w = 68534492
+bound: gamma_3 >= 0.676041827 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.03 s, total 0.03 s
+claimed r = 68534490: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+$ ./lowcheck 4 6 witness/k4_h6_w.bin 6 58317659
+lowcheck k=4 h=6 witness=witness/k4_h6_w.bin threads=6
+ranks: 700075 RGS of length 12 with at most 4 labels
+index memory: 0.1 MB (bitmap and block counts), built in 0.00 s
+classes computed: 350891 (Burnside orbit count of S_4 x swap: 350891, agrees)
+witness values: 350891 (equals the class count)
+r = 58317659 (units of 2^-27, min over classes of T - w)
+min of T - w at class 2514 (rank 2518): s=000001 t=223223 w=113259066
+max of T - w = 58317662
+bound: gamma_4 >= 0.605786394 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 0.04 s, total 0.04 s
+claimed r = 58317659: PASS (computed r - claimed r = 0)
+[exit status 0]
+
+=== TEST 1: brute force over all k^(2h) pairs for every witness
+$ ./lowcheck --brute 2 3 witness/k2_h3_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 80174305 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 64 pairs (k^(2h))
+rank test: 32 RGS found by scanning all strings (table says 32); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 2 of S_2 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 20  PASS
+orbits: brute-force orbits of S_2 x swap = 20, classes = 20, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 80174305, class-based r = 80174305  PASS
+max over all pairs of T - w = 80174307, class-based max = 80174307  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 2 6 witness/k2_h6_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 84071083 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 4096 pairs (k^(2h))
+rank test: 2048 RGS found by scanning all strings (table says 2048); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 2 of S_2 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 1056  PASS
+orbits: brute-force orbits of S_2 x swap = 1056, classes = 1056, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 84071083, class-based r = 84071083  PASS
+max over all pairs of T - w = 84071086, class-based max = 84071086  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 3 3 witness/k3_h3_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 63884749 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 729 pairs (k^(2h))
+rank test: 122 RGS found by scanning all strings (table says 122); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 6 of S_3 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 70  PASS
+orbits: brute-force orbits of S_3 x swap = 70, classes = 70, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 63884749, class-based r = 63884749  PASS
+max over all pairs of T - w = 63884750, class-based max = 63884750  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 3 5 witness/k3_h5_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 66989259 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 59049 pairs (k^(2h))
+rank test: 9842 RGS found by scanning all strings (table says 9842); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 6 of S_3 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 5002  PASS
+orbits: brute-force orbits of S_3 x swap = 5002, classes = 5002, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 66989259, class-based r = 66989259  PASS
+max over all pairs of T - w = 66989260, class-based max = 66989260  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 4 4 witness/k4_h4_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 56092496 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 65536 pairs (k^(2h))
+rank test: 2795 RGS found by scanning all strings (table says 2795); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 24 of S_4 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 1451  PASS
+orbits: brute-force orbits of S_4 x swap = 1451, classes = 1451, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 56092496, class-based r = 56092496  PASS
+max over all pairs of T - w = 56092498, class-based max = 56092498  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 5 4 witness/k5_h4_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 49532660 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 390625 pairs (k^(2h))
+rank test: 3845 RGS found by scanning all strings (table says 3845); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 120 of S_5 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 1993  PASS
+orbits: brute-force orbits of S_5 x swap = 1993, classes = 1993, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 49532660, class-based r = 49532660  PASS
+max over all pairs of T - w = 49532662, class-based max = 49532662  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 6 5 witness/k6_h5_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 46047816 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 60466176 pairs (k^(2h))
+rank test: 109299 RGS found by scanning all strings (table says 109299); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: 5 adjacent transpositions (they generate S_6) and 8 random ones on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 55091  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 46047816, class-based r = 46047816  PASS
+max over all pairs of T - w = 46047818, class-based max = 46047818  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 7 4 witness/k7_h4_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 40827678 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 5764801 pairs (k^(2h))
+rank test: 4139 RGS found by scanning all strings (table says 4139); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: 6 adjacent transpositions (they generate S_7) and 8 random ones on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 2151  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 40827678, class-based r = 40827678  PASS
+max over all pairs of T - w = 40827680, class-based max = 40827680  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 10 3 witness/k10_h3_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 30011715 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 1000000 pairs (k^(2h))
+rank test: 203 RGS found by scanning all strings (table says 203); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: 9 adjacent transpositions (they generate S_10) and 8 random ones on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 117  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 30011715, class-based r = 30011715  PASS
+max over all pairs of T - w = 30011716, class-based max = 30011716  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 3 7 witness/k3_h7_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 68534490 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 4782969 pairs (k^(2h))
+rank test: 797162 RGS found by scanning all strings (table says 797162); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 6 of S_3 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 399310  PASS
+orbits: brute-force orbits of S_3 x swap = 399310, classes = 399310, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 68534490, class-based r = 68534490  PASS
+max over all pairs of T - w = 68534492, class-based max = 68534492  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+$ ./lowcheck --brute 4 6 witness/k4_h6_w.bin 6 | sed -n '/^r = /p;/--brute:/,$p'
+r = 58317659 (units of 2^-27, min over classes of T - w)
+--brute: exhaustive cross-checks over all 16777216 pairs (k^(2h))
+rank test: 700075 RGS found by scanning all strings (table says 700075); rank, unrank and successor disagreements: 0  PASS
+class index: pairs whose class rank is not a set bit or out of range: 0  PASS
+swap: pairs whose swap lands in another class: 0  PASS
+permutations: all 24 of S_4 on every pair, class changes: 0  PASS
+surjective: classes hit by no pair: 0 of 350891  PASS
+orbits: brute-force orbits of S_4 x swap = 350891, classes = 350891, classes spanning two orbits = 0  PASS
+T per pair: pairs whose T differs from their class representative's T: 0  PASS
+min over all pairs of T - w = 58317659, class-based r = 58317659  PASS
+max over all pairs of T - w = 58317662, class-based max = 58317662  PASS
+--brute overall: PASS
+[exit status 0 0]
+
+=== TEST 2: class counts without a witness (k=6 h=7 claim, then the production sizes)
+$ ./lowcheck --count 6 7 6
+lowcheck k=6 h=7 threads=6
+ranks: 114700315 RGS of length 14 with at most 6 labels
+index memory: 15.4 MB (bitmap and block counts), built in 0.99 s
+classes computed: 57365191 (Burnside orbit count of S_6 x swap: 57365191, agrees)
+[exit status 0]
+
+$ ./lowcheck --count 15 7 6
+lowcheck k=15 h=7 threads=6
+ranks: 190899322 RGS of length 14 with at most 15 labels
+index memory: 25.6 MB (bitmap and block counts), built in 1.94 s
+classes computed: 95475556 (Burnside orbit count of S_15 x swap: 95475556, agrees)
+[exit status 0]
+
+$ ./lowcheck --count 5 8 6
+lowcheck k=5 h=8 threads=6
+ranks: 1275163905 RGS of length 16 with at most 5 labels
+index memory: 171.0 MB (bitmap and block counts), built in 13.03 s
+classes computed: 637624313 (Burnside orbit count of S_5 x swap: 637624313, agrees)
+[exit status 0]
+
+$ ./lowcheck --count 4 9 6
+lowcheck k=4 h=9 threads=6
+ranks: 2863377067 RGS of length 18 with at most 4 labels
+index memory: 384.0 MB (bitmap and block counts), built in 32.11 s
+classes computed: 1431743147 (Burnside orbit count of S_4 x swap: 1431743147, agrees)
+[exit status 0]
+
+$ ./lowcheck --count 3 11 6
+lowcheck k=3 h=11 threads=6
+ranks: 5230176602 RGS of length 22 with at most 3 labels
+index memory: 701.4 MB (bitmap and block counts), built in 70.25 s
+classes computed: 2615147350 (Burnside orbit count of S_3 x swap: 2615147350, agrees)
+[exit status 0]
+
+=== TEST 4: tamper tests on copies (TMP=/var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8)
+$ python3 -I -c 'import struct,sys; d=bytearray(open(sys.argv[1],"rb").read()); i=int(sys.argv[3]); v=struct.unpack_from("<I",d,4*i)[0]+int(sys.argv[4]); struct.pack_into("<I",d,4*i,v); open(sys.argv[2],"wb").write(bytes(d)); print("entry",i,"is now",v)' witness/k4_h6_w.bin /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/a.bin 2514 1048576 && ./lowcheck 4 6 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/a.bin 6 58317659 | grep -E '^r =|^min|^bound|^claimed'
+entry 2514 is now 114307642
+r = 57269083 (units of 2^-27, min over classes of T - w)
+min of T - w at class 2514 (rank 2518): s=000001 t=223223 w=114307642
+bound: gamma_4 >= 0.598151723 (2r/(2^27 + r) rounded down to 9 decimals)
+claimed r = 58317659: FAIL (computed r - claimed r = -1048576)
+[exit status 1 0]
+
+$ python3 -I -c 'import struct,sys; d=bytearray(open(sys.argv[1],"rb").read()); i=int(sys.argv[3]); v=struct.unpack_from("<I",d,4*i)[0]+int(sys.argv[4]); struct.pack_into("<I",d,4*i,v); open(sys.argv[2],"wb").write(bytes(d)); print("entry",i,"is now",v)' witness/k4_h6_w.bin /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/b.bin 9684 -1048576 && ./lowcheck 4 6 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/b.bin 6 58317659 | grep -E '^r =|^min|^bound|^claimed'
+entry 9684 is now 275224823
+r = 58055515 (units of 2^-27, min over classes of T - w)
+min of T - w at class 2514 (rank 2518): s=000001 t=223223 w=113259066
+bound: gamma_4 >= 0.603885533 (2r/(2^27 + r) rounded down to 9 decimals)
+claimed r = 58317659: FAIL (computed r - claimed r = -262144)
+[exit status 1 0]
+
+$ python3 -I -c 'import struct,sys; d=bytearray(open(sys.argv[1],"rb").read()); i=int(sys.argv[3]); v=struct.unpack_from("<I",d,4*i)[0]+int(sys.argv[4]); struct.pack_into("<I",d,4*i,v); open(sys.argv[2],"wb").write(bytes(d)); print("entry",i,"is now",v)' witness/k4_h6_w.bin /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/c.bin 2514 67108864 && ./lowcheck 4 6 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/c.bin 6 58317659 | grep -E '^r =|^min|^bound|^claimed'
+entry 2514 is now 180367930
+r = -8791205 (units of 2^-27, min over classes of T - w)
+min of T - w at class 2514 (rank 2518): s=000001 t=223223 w=180367930
+bound: none (r <= 0, no bound follows)
+claimed r = 58317659: FAIL (computed r - claimed r = -67108864)
+[exit status 1 0]
+
+$ python3 -I -c 'import struct,sys; d=bytearray(open(sys.argv[1],"rb").read()); i=int(sys.argv[3]); v=struct.unpack_from("<I",d,4*i)[0]+int(sys.argv[4]); struct.pack_into("<I",d,4*i,v); open(sys.argv[2],"wb").write(bytes(d)); print("entry",i,"is now",v)' witness/k2_h6_w.bin /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/d.bin 63 1048576 && ./lowcheck 2 6 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/d.bin 6 84071083 | grep -E '^r =|^min|^bound|^claimed'
+entry 63 is now 1048576
+r = 83546795 (units of 2^-27, min over classes of T - w)
+min of T - w at class 63 (rank 63): s=000000 t=111111 w=1048576
+bound: gamma_2 >= 0.767313186 (2r/(2^27 + r) rounded down to 9 decimals)
+claimed r = 84071083: FAIL (computed r - claimed r = -524288)
+[exit status 1 0]
+
+$ python3 -I -c 'import struct,sys; d=bytearray(open(sys.argv[1],"rb").read()); i=int(sys.argv[3]); v=struct.unpack_from("<I",d,4*i)[0]+int(sys.argv[4]); struct.pack_into("<I",d,4*i,v); open(sys.argv[2],"wb").write(bytes(d)); print("entry",i,"is now",v)' witness/k3_h7_w.bin /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/e.bin 82 1048576 && ./lowcheck 3 7 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/e.bin 6 68534490 | grep -E '^r =|^min|^bound|^claimed'
+entry 82 is now 429637264
+r = 67485914 (units of 2^-27, min over classes of T - w)
+min of T - w at class 82 (rank 82): s=0000000 t=0011112 w=429637264
+bound: gamma_3 >= 0.669159102 (2r/(2^27 + r) rounded down to 9 decimals)
+claimed r = 68534490: FAIL (computed r - claimed r = -1048576)
+[exit status 1 0]
+
+$ head -c $((4*350890)) witness/k4_h6_w.bin > /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/short.bin && ./lowcheck 4 6 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/short.bin 6 58317659
+lowcheck k=4 h=6 witness=/var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/short.bin threads=6
+ranks: 700075 RGS of length 12 with at most 4 labels
+index memory: 0.1 MB (bitmap and block counts), built in 0.01 s
+classes computed: 350891 (Burnside orbit count of S_4 x swap: 350891, agrees)
+claimed r = 58317659: FAIL (stopped on an error before r was computed)
+lowcheck: ERROR: witness /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/short.bin holds 1403560 bytes (350890 values), but there are 350891 classes for k=4 h=6
+[exit status 2]
+
+$ cat witness/k4_h6_w.bin witness/k2_h3_w.bin | head -c $((4*350892)) > /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/long.bin && ./lowcheck 4 6 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/long.bin 6 58317659
+lowcheck k=4 h=6 witness=/var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/long.bin threads=6
+ranks: 700075 RGS of length 12 with at most 4 labels
+index memory: 0.1 MB (bitmap and block counts), built in 0.01 s
+classes computed: 350891 (Burnside orbit count of S_4 x swap: 350891, agrees)
+claimed r = 58317659: FAIL (stopped on an error before r was computed)
+lowcheck: ERROR: witness /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/long.bin holds 1403568 bytes (350892 values), but there are 350891 classes for k=4 h=6
+[exit status 2]
+
+$ ./lowcheck 4 5 witness/k4_h6_w.bin 6
+lowcheck k=4 h=5 witness=witness/k4_h6_w.bin threads=6
+ranks: 43947 RGS of length 10 with at most 4 labels
+index memory: 0.0 MB (bitmap and block counts), built in 0.00 s
+classes computed: 22187 (Burnside orbit count of S_4 x swap: 22187, agrees)
+lowcheck: ERROR: witness witness/k4_h6_w.bin holds 1403564 bytes (350891 values), but there are 22187 classes for k=4 h=5
+[exit status 2]
+
+$ ./lowcheck 4 6 witness/k4_h6_w.bin 6 58317660 | tail -1
+claimed r = 58317660: FAIL (computed r - claimed r = -1)
+[exit status 1 0]
+
+=== TEST 5 extra: hand-derived h=1 witness w(match)=2^27, w(mismatch)=0; expect r = floor(2^27/k), bound 2/(k+1)
+$ python3 -I -c 'import struct,sys; open(sys.argv[1],"wb").write(struct.pack("<2I", 1<<27, 0))' /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/h1.bin
+[exit status 0]
+
+$ ./lowcheck 2 1 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/h1.bin 6 | grep -E '^classes|^r =|^bound'
+classes computed: 2 (Burnside orbit count of S_2 x swap: 2, agrees)
+r = 67108864 (units of 2^-27, min over classes of T - w)
+bound: gamma_2 >= 0.666666666 (2r/(2^27 + r) rounded down to 9 decimals)
+[exit status 0 0]
+
+$ ./lowcheck 3 1 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/h1.bin 6 | grep -E '^classes|^r =|^bound'
+classes computed: 2 (Burnside orbit count of S_3 x swap: 2, agrees)
+r = 44739242 (units of 2^-27, min over classes of T - w)
+bound: gamma_3 >= 0.499999994 (2r/(2^27 + r) rounded down to 9 decimals)
+[exit status 0 0]
+
+$ ./lowcheck 4 1 /var/folders/x1/fxybp2rn3kq0j0_dk7vkn1100000gn/T/tmp.Oulf2jSdV8/h1.bin 6 | grep -E '^classes|^r =|^bound'
+classes computed: 2 (Burnside orbit count of S_4 x swap: 2, agrees)
+r = 33554432 (units of 2^-27, min over classes of T - w)
+bound: gamma_4 >= 0.400000000 (2r/(2^27 + r) rounded down to 9 decimals)
+[exit status 0 0]
+
+$ python3 -I -c 'from fractions import Fraction as F
+for k in (2, 3, 4):
+    r = (1 << 27) // k; print(k, r, (F(2 * r, (1 << 27) + r) * 10**9).__floor__())'
+2 67108864 666666666
+3 44739242 499999994
+4 33554432 400000000
+[exit status 0]
+
+=== default thread count
+$ ./lowcheck 2 3 witness/k2_h3_w.bin | head -1
+lowcheck k=2 h=3 witness=witness/k2_h3_w.bin threads=8
+[exit status 0 0]
+
+=== EXTRA: naive Python reference (dictionary ranks, no bitmap, no shared code), all witnesses
+$ python3 -I tools/naive.py 2 3 witness/k2_h3_w.bin
+naive k=2 h=3: RGS 32, classes 20, r = 80174305 at class 7 rank 7 s=000 t=111, max T-w = 80174307
+[exit status 0]
+
+$ python3 -I tools/naive.py 2 6 witness/k2_h6_w.bin
+naive k=2 h=6: RGS 2048, classes 1056, r = 84071083 at class 63 rank 63 s=000000 t=111111, max T-w = 84071086
+[exit status 0]
+
+$ python3 -I tools/naive.py 3 3 witness/k3_h3_w.bin
+naive k=3 h=3: RGS 122, classes 70, r = 63884749 at class 0 rank 0 s=000 t=000, max T-w = 63884750
+[exit status 0]
+
+$ python3 -I tools/naive.py 3 5 witness/k3_h5_w.bin
+naive k=3 h=5: RGS 9842, classes 5002, r = 66989259 at class 0 rank 0 s=00000 t=00000, max T-w = 66989260
+[exit status 0]
+
+$ python3 -I tools/naive.py 4 4 witness/k4_h4_w.bin
+naive k=4 h=4: RGS 2795, classes 1451, r = 56092496 at class 0 rank 0 s=0000 t=0000, max T-w = 56092498
+[exit status 0]
+
+$ python3 -I tools/naive.py 5 4 witness/k5_h4_w.bin
+naive k=5 h=4: RGS 3845, classes 1993, r = 49532660 at class 25 rank 25 s=0000 t=1100, max T-w = 49532662
+[exit status 0]
+
+$ python3 -I tools/naive.py 6 5 witness/k6_h5_w.bin
+naive k=6 h=5: RGS 109299, classes 55091, r = 46047816 at class 22 rank 22 s=00000 t=01021, max T-w = 46047818
+[exit status 0]
+
+$ python3 -I tools/naive.py 7 4 witness/k7_h4_w.bin
+naive k=7 h=4: RGS 4139, classes 2151, r = 40827678 at class 29 rank 29 s=0000 t=1111, max T-w = 40827680
+[exit status 0]
+
+$ python3 -I tools/naive.py 10 3 witness/k10_h3_w.bin
+naive k=10 h=3: RGS 203, classes 117, r = 30011715 at class 6 rank 6 s=000 t=101, max T-w = 30011716
+[exit status 0]
+
+$ python3 -I tools/naive.py 3 7 witness/k3_h7_w.bin
+naive k=3 h=7: RGS 797162, classes 399310, r = 68534490 at class 82 rank 82 s=0000000 t=0011112, max T-w = 68534492
+[exit status 0]
+
+$ python3 -I tools/naive.py 4 6 witness/k4_h6_w.bin
+naive k=4 h=6: RGS 700075, classes 350891, r = 58317659 at class 2514 rank 2518 s=000001 t=223223, max T-w = 58317662
+[exit status 0]
+
+=== EXTRA: witness facts (value range, the zero entry, first-letter identity of match pairs)
+$ python3 -I tools/witness_facts.py 2 3 witness/k2_h3_w.bin
+k=2 h=3: min 0 at classes [7] (class of (0^h,1^h) is 7), max 447194463 = 3.332 units of 2^27; match-pair values that depend on the shared first letter: 0 of 16
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 2 6 witness/k2_h6_w.bin
+k=2 h=6: min 0 at classes [63] (class of (0^h,1^h) is 63), max 944995275 = 7.041 units of 2^27; match-pair values that depend on the shared first letter: 0 of 1024
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 3 3 witness/k3_h3_w.bin
+k=3 h=3: min 0 at classes [9] (class of (0^h,1^h) is 9), max 446409478 = 3.326 units of 2^27; match-pair values that depend on the shared first letter: 0 of 81
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 3 5 witness/k3_h5_w.bin
+k=3 h=5: min 0 at classes [81] (class of (0^h,1^h) is 81), max 789177431 = 5.880 units of 2^27; match-pair values that depend on the shared first letter: 0 of 6561
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 4 4 witness/k4_h4_w.bin
+k=4 h=4: min 0 at classes [29] (class of (0^h,1^h) is 29), max 615037285 = 4.582 units of 2^27; match-pair values that depend on the shared first letter: 0 of 4096
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 5 4 witness/k5_h4_w.bin
+k=5 h=4: min 0 at classes [29] (class of (0^h,1^h) is 29), max 612744691 = 4.565 units of 2^27; match-pair values that depend on the shared first letter: 0 of 15625
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 6 5 witness/k6_h5_w.bin
+k=6 h=5: min 0 at classes [103] (class of (0^h,1^h) is 103), max 780642731 = 5.816 units of 2^27; first-letter identity: skipped (too many suffix pairs)
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 7 4 witness/k7_h4_w.bin
+k=7 h=4: min 0 at classes [29] (class of (0^h,1^h) is 29), max 606814773 = 4.521 units of 2^27; match-pair values that depend on the shared first letter: 0 of 117649
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 10 3 witness/k10_h3_w.bin
+k=10 h=3: min 0 at classes [9] (class of (0^h,1^h) is 9), max 435352220 = 3.244 units of 2^27; match-pair values that depend on the shared first letter: 0 of 10000
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 3 7 witness/k3_h7_w.bin
+k=3 h=7: min 0 at classes [729] (class of (0^h,1^h) is 729), max 1145621908 = 8.536 units of 2^27; first-letter identity: skipped (too many suffix pairs)
+[exit status 0]
+
+$ python3 -I tools/witness_facts.py 4 6 witness/k4_h6_w.bin
+k=4 h=6: min 0 at classes [373] (class of (0^h,1^h) is 373), max 965838795 = 7.196 units of 2^27; first-letter identity: skipped (too many suffix pairs)
+[exit status 0]
+
+=== PERFORMANCE (run before the suite, with the same code except that the stderr progress
+percentage was then truncated instead of rounded; synthetic files deleted afterwards)
+
+$ cd tools && head -c $((4*89500331)) /dev/urandom > synth_k4_h8.bin
+$ ./lowcheck 4 8 tools/synth_k4_h8.bin 6   (under /usr/bin/time -l, filtered to these lines)
+r = -3916242400 (units of 2^-27, min over classes of T - w)
+min of T - w at class 61836502 (rank 79476376): s=01100201 t=31133231 w=4111688576
+max of T - w = 4199524163
+time: check 22.83 s, total 24.49 s
+       24.62 real        72.86 user         0.35 sys
+        508687474344  instructions retired
+
+$ cd tools && head -c $((4*1431743147)) /dev/urandom > synth_k4_h9.bin
+$ /usr/bin/time -l lowcheck 4 9 synth_k4_h9.bin 6 > perf_k4_h9.out 2> perf_k4_h9.err
+--- perf_k4_h9.out
+lowcheck k=4 h=9 witness=synth_k4_h9.bin threads=6
+ranks: 2863377067 RGS of length 18 with at most 4 labels
+index memory: 384.0 MB (bitmap and block counts), built in 29.69 s
+classes computed: 1431743147 (Burnside orbit count of S_4 x swap: 1431743147, agrees)
+witness values: 1431743147 (equals the class count)
+r = -3963985422 (units of 2^-27, min over classes of T - w)
+min of T - w at class 217191661 (rank 226117107): s=001011203 t=303231020 w=4231519605
+max of T - w = 4245201152
+bound: none (r <= 0, no bound follows)
+time: check 468.21 s, total 497.90 s
+exit=0
+--- perf_k4_h9.err
+lowcheck: 4% of ranks dispatched, 59 s
+lowcheck: 9% of ranks dispatched, 95 s
+lowcheck: 14% of ranks dispatched, 136 s
+lowcheck: 19% of ranks dispatched, 181 s
+lowcheck: 24% of ranks dispatched, 225 s
+lowcheck: 29% of ranks dispatched, 257 s
+lowcheck: 34% of ranks dispatched, 286 s
+lowcheck: 39% of ranks dispatched, 318 s
+lowcheck: 44% of ranks dispatched, 348 s
+lowcheck: 49% of ranks dispatched, 371 s
+lowcheck: 54% of ranks dispatched, 393 s
+lowcheck: 59% of ranks dispatched, 411 s
+lowcheck: 64% of ranks dispatched, 430 s
+lowcheck: 69% of ranks dispatched, 447 s
+lowcheck: 74% of ranks dispatched, 462 s
+lowcheck: 79% of ranks dispatched, 474 s
+lowcheck: 84% of ranks dispatched, 484 s
+lowcheck: 89% of ranks dispatched, 491 s
+lowcheck: 94% of ranks dispatched, 496 s
+lowcheck: 99% of ranks dispatched, 498 s
+      497.96 real      1390.96 user         5.08 sys
+          6131482624  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              365852  page reclaims
+                8714  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+              858089  involuntary context switches
+       9204299134602  instructions retired
+       2872441871443  cycles elapsed
+           407048896  peak memory footprint

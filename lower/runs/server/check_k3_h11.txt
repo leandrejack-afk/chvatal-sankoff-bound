@@ -1,0 +1,31 @@
+lowcheck: 5% of ranks dispatched, 18 s
+lowcheck: 10% of ranks dispatched, 26 s
+lowcheck: 15% of ranks dispatched, 35 s
+lowcheck: 20% of ranks dispatched, 46 s
+lowcheck: 25% of ranks dispatched, 56 s
+lowcheck: 30% of ranks dispatched, 68 s
+lowcheck: 35% of ranks dispatched, 80 s
+lowcheck: 40% of ranks dispatched, 91 s
+lowcheck: 45% of ranks dispatched, 100 s
+lowcheck: 50% of ranks dispatched, 109 s
+lowcheck: 55% of ranks dispatched, 119 s
+lowcheck: 60% of ranks dispatched, 126 s
+lowcheck: 65% of ranks dispatched, 132 s
+lowcheck: 70% of ranks dispatched, 136 s
+lowcheck: 75% of ranks dispatched, 140 s
+lowcheck: 80% of ranks dispatched, 144 s
+lowcheck: 85% of ranks dispatched, 148 s
+lowcheck: 90% of ranks dispatched, 150 s
+lowcheck: 95% of ranks dispatched, 151 s
+lowcheck: 100% of ranks dispatched, 151 s
+lowcheck k=3 h=11 witness=k3_h11_w.bin threads=16
+ranks: 5230176602 RGS of length 22 with at most 3 labels
+index memory: 701.4 MB (bitmap and block counts), built in 10.18 s
+classes computed: 2615147350 (Burnside orbit count of S_3 x swap: 2615147350, agrees)
+witness values: 2615147350 (equals the class count)
+r = 70150353 (units of 2^-27, min over classes of T - w)
+min of T - w at class 14 (rank 14): s=00000000000 t=00000001000 w=1750585624
+max of T - w = 70150355
+bound: gamma_3 >= 0.686509876 (2r/(2^27 + r) rounded down to 9 decimals)
+time: check 141.00 s, total 151.18 s
+claimed r = 70150353: PASS (computed r - claimed r = 0)
